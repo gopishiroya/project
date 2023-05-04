@@ -1,0 +1,47 @@
+@mixin text {
+  width: 280px;
+  height: 220px;
+  display: inline-flex;
+  text-align: center;
+  border: 2px solid black;
+  margin-left: 20px;
+  justify-content: center;
+  border-radius: 0px;
+}
+
+@mixin image {
+  width: 100px;     
+  height: 100px;
+  margin-bottom: 15px;
+}
+
+$size: 16px;
+
+.footer {
+    .container {
+        padding: 20px 70px;
+    }
+  .card {
+    @include text;
+    .image {
+        @include image;
+    }
+    .meta {
+      font-size: $size;
+      .ant-card-meta-title {
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .ant-card-meta-description {
+        color: black;
+      }
+    }
+  }
+  .title {
+    font-size: 20px;
+    background-color: #333;
+    color: white;
+    padding: 28px;
+    text-align: center;
+  }
+}
