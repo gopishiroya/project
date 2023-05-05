@@ -9,16 +9,18 @@
 }
 
 .about {
-  .containe1r {
+  .container1 {
     background-color: #333;
     padding: 42px;
-    height: 145px;
+    height: 160px;
     .atitle {
       font-size: 50px;
       text-align: center;
       color: white;
       margin-top: 30px;
       height: 40px;
+      padding-top: 32px;
+      padding-bottom: 40px
     }
     .home {
       @include link;
