@@ -32,7 +32,7 @@ const Footer = () => {
             <Meta className='meta' title="Our Number" description="123-456-7890" />
         </Card>
         </div>
-        <Typography.Title className='title'>&copy; Copyright @ 2023 By Yum-Yum 😋 | All Rights Reserved!</Typography.Title>
+        <Typography.Title className='ftitle'>&copy; Copyright @ 2023 By Yum-Yum 😋 | All Rights Reserved!</Typography.Title>
     </div>
   )
 }

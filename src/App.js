@@ -2,7 +2,7 @@ import React from 'react';
 import Home from './Components/Home/Home';
 import { Route, Routes } from 'react-router-dom';
 import About from './Components/About/About';
-import Menu from './Components/Menu/Menu';
+// import Menu from './Components/Menu/Menu';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />}/>
-        <Route path='/menu' element={<Menu />}/>
+        {/* <Route path='/menu' element={<Menu />}/> */}
       </Routes>
     </div>
   );
