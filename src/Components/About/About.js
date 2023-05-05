@@ -20,7 +20,7 @@ const About = () => {
   return (
     <div className="about">
       <Header />
-      <div className="container">
+      <div className="container1">
         <Typography.Title className="atitle">About Us</Typography.Title>
         <Link to="/" className="home">
           Home
