@@ -3,13 +3,18 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import "./Home.scss";
 import Typography from "antd/es/typography/Typography";
-import { Card, Image, Input } from "antd";
+import { Card, Image, Input, Carousel } from "antd";
 import cat1 from "../Image/cat-1.png";
 import cat2 from "../Image/cat-2.png";
 import cat3 from "../Image/cat-3.png";
 import cat4 from "../Image/cat-4.png";
 import pizza from "../Image/pizza-1.png";
 import { EyeFilled, ShoppingCartOutlined } from "@ant-design/icons";
+import image1 from "../Image/home-img-1.png";
+import image2 from "../Image/home-img-2.png";
+import image3 from "../Image/home-img-3.jpg";
+import image4 from "../Image/home-img-4.png";
+import image5 from "../Image/home-img-5.jpg";
 
 const { Meta } = Card;
 
@@ -21,6 +26,43 @@ const Home = () => {
       <div className="home">
         <div>
           <Header />
+        </div>
+        <div className="slider">
+          {/* <Carousel autoplay> */}
+          <div className="section1">
+            <Image className="islider" src={image1} preview={preview} />
+            <Typography.Paragraph className="paragraph">
+              Online Order
+            </Typography.Paragraph>
+            <Typography.Title className="stitle">
+              Delicious Pizza
+            </Typography.Title>
+          </div>
+          {/* <div className="section1">
+            <Typography.Paragraph className="paragraph">
+              Online Order
+            </Typography.Paragraph>
+            <Image className="islider" src={image2} preview={preview} />
+          </div> */}
+          {/* <div className="section1">
+            <Typography.Paragraph className="paragraph">
+              Online Order
+            </Typography.Paragraph>
+            <Image className="islider" src={image3} preview={preview} />
+          </div>
+          <div className="section1">
+            <Typography.Paragraph className="paragraph">
+              Online Order
+            </Typography.Paragraph>
+            <Image className="islider" src={image4} preview={preview} />
+          </div>
+          <div className="section1">
+            <Typography.Paragraph className="paragraph">
+              Online Order
+            </Typography.Paragraph>
+            <Image className="islider" src={image5} preview={preview} />
+          </div> */}
+          {/* </Carousel> */}
         </div>
         <div className="category">
           <Typography.Title className="title">FOOD CATEGORY</Typography.Title>

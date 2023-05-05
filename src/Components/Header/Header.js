@@ -16,7 +16,7 @@ const Header = () => {
         <Link className="pages" to="/about">About</Link>
         <Link className="pages" to="/menu">Menu</Link>
         <Link className="pages">Orders</Link>
-        <Link className="pages">Contact</Link>
+        <Link className="pages" to="/contect">Contact</Link>
         <SearchOutlined className="icon1" />
         <ShoppingCartOutlined className="icon2" />
         <UserOutlined className="icon3" />

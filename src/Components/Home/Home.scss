@@ -16,6 +16,28 @@
 }
 
 .home {
+  .slider {
+    .section1 {
+      display: flex;
+      margin-top: 90px;
+      .islider {
+        width: 550px;
+        height: 550px;
+        margin-left: 70px;
+      }
+      .paragraph {
+        font-size: 28px;
+        position: relative;
+        top: 180px;
+        left: 280px;
+      }
+      .stitle {
+        position: relative;
+        top: 150px;
+        font-size: 60px;
+      }
+    }
+  }
   .category {
     .title {
       margin-top: 90px;
@@ -127,7 +149,7 @@
     }
   }
   .button {
-    background-color: #EFD330;
+    background-color: #efd330;
     padding: 15px 50px;
     font-size: 20px;
     border: none;
