@@ -15,6 +15,15 @@
   margin-left: 20px;
 }
 
+@mixin button {
+  background-color: #edf11a;
+  font-size: 20px;
+  position: relative;
+  border-radius: 0px;
+}
+
+$hover: 2px;
+
 .home {
   .slider {
     .section1 {
@@ -26,21 +35,36 @@
         margin-left: 70px;
       }
       .paragraph {
-        font-size: 28px;
+        font-size: 25px;
         position: relative;
-        top: 180px;
-        left: 280px;
+        bottom: 370px;
+        left: 920px;
       }
       .stitle {
         position: relative;
-        top: 150px;
-        font-size: 60px;
+        bottom: 440px;
+        left: 810px;
+        font-size: 55px;
+      }
+      .btnmenu {
+        @include button;
+        bottom: 450px;
+        padding-top: 6px;
+        padding-bottom: 8px;
+        padding-left: 25px;
+        padding-right: 25px;
+        left: 920px;
+        color: black;
+      }
+      .btnmenu:hover {
+        letter-spacing: $hover;
       }
     }
   }
   .category {
+    position: relative;
+    bottom: 125px;
     .title {
-      margin-top: 90px;
       text-align: center;
       margin-bottom: 0px;
     }
@@ -82,8 +106,9 @@
     }
   }
   .dishes {
+    position: relative;
+    bottom: 45px;
     .dtitle {
-      margin-top: 40px;
       text-align: center;
       margin-bottom: 0px;
     }
@@ -149,18 +174,16 @@
     }
   }
   .button {
-    background-color: #efd330;
-    padding: 15px 50px;
-    font-size: 20px;
-    border: none;
-    cursor: pointer;
-    margin-left: 590px;
-    margin-top: 25px;
+    @include button;
+    padding-bottom: 38px;
+    padding-right: 30px;
+    padding-left: 30px;
+    left: 610px;
   }
   .button:hover {
-    letter-spacing: 2px;
+    letter-spacing: $hover;
   }
   .main {
-    margin-top: 50px;
+    position: relative;
   }
 }
