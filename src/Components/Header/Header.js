@@ -6,21 +6,52 @@ import {
   ShoppingCartOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import { Button, Dropdown, Space, Typography } from "antd";
+
+const items = [
+  {
+    key: "1",
+    label: (
+      <Typography.Paragraph className="dropdown">please login first!</Typography.Paragraph>
+    )
+  },
+  {
+    key: "2",
+    label: (
+      <Button>Login</Button>
+    )
+  }
+]
 
 const Header = () => {
   return (
     <>
       <div className="header">
-        <Link className="title" to='/'>yum-yum 😋</Link>
-        <Link className="pages" to="/">Home</Link>
-        <Link className="pages" to="/about">About</Link>
-        <Link className="pages" to="/menu">Menu</Link>
+        <Link className="title" to="/">
+          yum-yum 😋
+        </Link>
+        <Link className="pages" to="/">
+          Home
+        </Link>
+        <Link className="pages" to="/about">
+          About
+        </Link>
+        <Link className="pages" to="/menu">
+          Menu
+        </Link>
         <Link className="pages">Orders</Link>
-        <Link className="pages" to="/contect">Contact</Link>
+        <Link className="pages" to="/contect">
+          Contact
+        </Link>
         <SearchOutlined className="icon1" />
         <ShoppingCartOutlined className="icon2" />
-        <UserOutlined className="icon3" />
-        
+        <Dropdown menu = {{ items }}>
+          <Link onClick={(e) => e.preventDefault()}>
+            <Space>
+            <UserOutlined className="icon3" />
+            </Space>
+          </Link>
+        </Dropdown>
       </div>
     </>
   );

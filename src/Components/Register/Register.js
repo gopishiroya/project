@@ -2,36 +2,56 @@ import React from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Form, Typography, Input, Button } from "antd";
-import "./Login.scss";
 import { Link } from "react-router-dom";
+import './Register.scss'
 
-const Login = () => {
+const Register = () => {
   return (
-    <div className="login">
+    <div className="register">
       <div>
         <Header />
       </div>
       <div className="form">
         <Form className="form1">
-          <Typography.Title className="formtitle">LOGIN NOW</Typography.Title>
+          <Typography.Title className="formtitle">REGISTER NOW</Typography.Title>
           <div className="inputfield">
             <Input
               className="input"
               type="text"
+              placeholder="Enter your name"
+            />
+            <Input
+              className="input"
+              type="text"
               placeholder="Enter your email"
+            />
+            <Input
+              className="input"
+              type="text"
+              placeholder="Enter your number"
+              maxLength={10}
             />
             <Input.Password
               className="input"
               type="text"
               placeholder="Enter your password"
             />
+            <Input
+              className="input"
+              type="text"
+              dependencies={['password']}
+              placeholder="Confirm your password"
+            />
           </div>
           <br />
           <Button type="primary" htmlType="submit" className="btn">
-            Login Now
+            Register Now 
           </Button>
           <Typography.Paragraph className="lparagraph">
-            don't have an account? <Link className="llink" to="/register">register now</Link>
+            already have an account? {" "}
+            <Link className="llink" to="/login">
+              login now
+            </Link>
           </Typography.Paragraph>
         </Form>
       </div>
@@ -42,4 +62,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

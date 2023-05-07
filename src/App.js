@@ -5,6 +5,7 @@ import About from './Components/About/About';
 import Menu from './Components/Menu/Menu';
 import Contect from './Components/Contect/Contect';
 import Login from './Components/Login/Login';
+import Register from './Components/Register/Register';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/menu' element={<Menu />}/>
         <Route path='/contect' element={<Contect />} />
         <Route path="/login" element={<Login />}/>
+        <Route path='/register' element={<Register />} />
       </Routes>
     </div>
   );

@@ -1,14 +1,49 @@
 .login {
-    align-items: center;
-    .form {
-        margin-top: 90px;
-        border: 2px solid black;
-        width: 530px;
-        .formtitle {
-
-        }
-        .inputfield {
-            width: 200px;
-        }
+  .form {
+    margin-top: 90px;
+    border: 2px solid black;
+    width: 530px;
+    margin-left: 400px;
+    .formtitle {
+      text-align: center;
+      font-size: 30px;
+      margin-top: 15px;
+      margin-bottom: 20px;
     }
+    .inputfield {
+      width: 200px;
+      .input {
+        border: 2px solid black;
+        border-radius: 0px;
+        width: 485px;
+        margin-left: 20px;
+        height: 55px;
+        margin-bottom: 15px;
+        font-size: 20px;
+      }
+    }
+    .btn {
+      font-size: 20px;
+      position: relative;
+      bottom: 20px;
+      left: 190px;
+      padding-bottom: 35px;
+      padding-left: 25px;
+      padding-right: 25px;
+      border-radius: 0px;
+      background-color: #efd330;
+      color: black;
+    }
+    .lparagraph {
+      font-size: 20px;
+      margin-left: 97px;
+      color: #777;
+      .llink {
+        color: black;
+      }
+      .llink:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }
