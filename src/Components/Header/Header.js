@@ -6,7 +6,7 @@ import {
   ShoppingCartOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Button, Dropdown, Space, Typography } from "antd";
+import { Dropdown, Space, Typography } from "antd";
 
 const items = [
   {
@@ -18,12 +18,13 @@ const items = [
   {
     key: "2",
     label: (
-      <Button>Login</Button>
+      <Link className="btn" to="/login">Login</Link>
     )
   }
 ]
 
 const Header = () => {
+
   return (
     <>
       <div className="header">

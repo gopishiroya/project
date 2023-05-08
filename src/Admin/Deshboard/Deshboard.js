@@ -5,7 +5,7 @@ import Typography from "antd/es/typography/Typography";
 import { Button, Card, Input } from "antd";
 const { Meta } = Card;
 
-export const Deshboard = () => {
+const Deshboard = () => {
   return (
     <>
       <div className="home">
@@ -62,3 +62,5 @@ export const Deshboard = () => {
     </>
   );
 };
+
+export default Deshboard

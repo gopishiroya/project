@@ -1,0 +1,67 @@
+@mixin link {
+  font-size: 25px;
+  text-decoration: none;
+}
+
+.checkout {
+  .container1 {
+    background-color: #333;
+    padding: 42px;
+    height: 180px;
+    .atitle {
+      font-size: 50px;
+      text-align: center;
+      color: white;
+      margin-top: 35px;
+      height: 40px;
+      padding-top: 42px;
+      padding-bottom: 40px;
+    }
+    .home {
+      @include link;
+      color: #efd330;
+      padding-left: 560px;
+    }
+    .labout {
+      @include link;
+      color: white;
+    }
+  }
+  .row {
+    .column {
+      .title {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+    }
+    .box {
+      border: 2px solid black;
+      width: 35%;
+      margin-left: 435px;
+      .order {
+        background-color: black;
+        margin: 20px;
+        .item {
+          color: white;
+          font-size: 25px;
+          padding: 20px;
+        }
+        .name {
+          display: flex;
+          justify-content: space-between;
+          .items {
+            color: white;
+            font-size: 20px;
+            padding-left: 20px;
+          }
+          .price {
+            color: yellow;
+            padding-right: 20px;
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+}
