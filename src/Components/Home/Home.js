@@ -3,13 +3,19 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import "./Home.scss";
 import Typography from "antd/es/typography/Typography";
-import { Card, Image, Input } from "antd";
+import { Card, Image, Input, Carousel, Button } from "antd";
 import cat1 from "../Image/cat-1.png";
 import cat2 from "../Image/cat-2.png";
 import cat3 from "../Image/cat-3.png";
 import cat4 from "../Image/cat-4.png";
 import pizza from "../Image/pizza-1.png";
 import { EyeFilled, ShoppingCartOutlined } from "@ant-design/icons";
+import image1 from "../Image/home-img-1.png";
+import image2 from "../Image/home-img-2.png";
+import image3 from "../Image/home-img-3.jpg";
+import image4 from "../Image/home-img-4.png";
+import image5 from "../Image/home-img-5.jpg";
+import { Link } from "react-router-dom";
 
 const { Meta } = Card;
 
@@ -21,6 +27,40 @@ const Home = () => {
       <div className="home">
         <div>
           <Header />
+        </div>
+        <div className="slider">
+          <Carousel autoplay>
+            <div className="section1">
+              <Image className="islider" src={image1} preview={preview} />
+              <Typography.Paragraph className="paragraph">
+                Online Order
+              </Typography.Paragraph>
+              <Typography.Title className="stitle">
+                Delicious Pizza
+              </Typography.Title>
+              <Link className="btnmenu">See Menus</Link>
+            </div>
+            <div className="section1">
+              <Image className="islider" src={image2} preview={preview} />
+              <Typography.Paragraph className="paragraph">
+                Online Order
+              </Typography.Paragraph>
+              <Typography.Title className="stitle">
+                chezzy burger
+              </Typography.Title>
+              <Link className="btnmenu">See Menus</Link>
+            </div>
+            <div className="section1">
+              <Image className="islider" src={image3} preview={preview} />
+              <Typography.Paragraph className="paragraph">
+                Online Order
+              </Typography.Paragraph>
+              <Typography.Title className="stitle">
+                Mini sandwich
+              </Typography.Title>
+              <Link className="btnmenu">See Menus</Link>
+            </div>
+          </Carousel>
         </div>
         <div className="category">
           <Typography.Title className="title">FOOD CATEGORY</Typography.Title>
@@ -80,7 +120,7 @@ const Home = () => {
             </Card>
           </div>
         </div>
-        <button className="button">View All</button>
+        <Button className="button">View All</Button>
         <div className="main">
           <Footer />
         </div>
