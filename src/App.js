@@ -4,8 +4,8 @@ import { Route, Routes } from 'react-router-dom';
 import About from './Components/About/About';
 
 import { Deshboard } from './Admin/Deshboard/Deshboard';
-// import Menu from './Components/Menu/Menu';
 import Menu from './Components/Menu/Menu';
+
 import Contect from './Components/Contect/Contect';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
@@ -18,7 +18,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />}/>
 
-        {/* <Route path='/menu' element={<Menu />}/> */}
+        <Route path='/menu' element={<Menu />}/>
         <Route path='/deshboard' element={<Deshboard />} />
 
         <Route path='/menu' element={<Menu />}/>
