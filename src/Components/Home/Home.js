@@ -36,7 +36,9 @@ const Home = () => {
               <Typography.Title className="stitle">
                 Delicious Pizza
               </Typography.Title>
-              <Link className="btnmenu">See Menus</Link>
+              <Link className="btnmenu" to="/menu">
+                See Menus
+              </Link>
             </div>
             <div className="section1">
               <Image className="islider" src={image2} preview={preview} />
@@ -46,7 +48,9 @@ const Home = () => {
               <Typography.Title className="stitle">
                 chezzy burger
               </Typography.Title>
-              <Link className="btnmenu">See Menus</Link>
+              <Link className="btnmenu" to="/menu">
+                See Menus
+              </Link>
             </div>
             <div className="section1">
               <Image className="islider" src={image3} preview={preview} />
@@ -56,17 +60,21 @@ const Home = () => {
               <Typography.Title className="stitle">
                 Mini sandwich
               </Typography.Title>
-              <Link className="btnmenu">See Menus</Link>
+              <Link className="btnmenu" to="/menu">
+                See Menus
+              </Link>
             </div>
           </Carousel>
         </div>
         <div className="category">
           <Typography.Title className="title">FOOD CATEGORY</Typography.Title>
           <div className="container">
-            <Card className="card">
-              <Image src={cat1} className="image" preview={preview}></Image>
-              <Meta className="meta" title="Fast Food" />
-            </Card>
+            <Link to="/category">
+              <Card className="card">
+                <Image src={cat1} className="image" preview={preview}></Image>
+                <Meta className="meta" title="Fast Food" />
+              </Card>
+            </Link>
             <Card className="card">
               <Image src={cat2} className="image" preview={preview}></Image>
               <Meta className="meta" title="Main Dishes" />
@@ -118,7 +126,9 @@ const Home = () => {
             </Card>
           </div>
         </div>
-        <Button className="button">View All</Button>
+        <Link className="button" to="/menu">
+          View All
+        </Link>
         <div className="main">
           <Footer />
         </div>

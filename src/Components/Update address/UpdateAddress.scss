@@ -1,0 +1,42 @@
+.updateaddress {
+    .uForm {
+        margin-top: 100px;
+        border: 2px solid black;
+        width: 530px;
+        margin-left: 400px;
+        margin-bottom: 20px;
+        .updateaddresstitle {
+          text-align: center;
+          font-size: 30px;
+          margin-top: 15px;
+          margin-bottom: 20px;
+        }
+        .updateInputfield {
+          width: 200px;
+          .updateInput {
+            border: 2px solid black;
+            border-radius: 0px;
+            width: 485px;
+            margin-left: 20px;
+            height: 55px;
+            margin-bottom: 15px;
+            font-size: 20px;
+          }
+        }
+        .updateaddressnow {
+          width: 530px;
+          text-align: center;
+          margin-top: 10px;
+          margin-bottom: 25px;
+          .anow {
+            color: black;
+            font-size: 20px;
+            background-color: #efd330;
+            padding: 10px 50px;
+          }
+          .anow:hover {
+            letter-spacing: 2px;
+          }
+        }
+      }
+}

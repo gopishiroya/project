@@ -39,9 +39,11 @@
       border: 2px solid black;
       width: 35%;
       margin-left: 435px;
+      margin-bottom: 32px;
       .order {
         background-color: black;
         margin: 20px;
+        height: 250px;
         .item {
           color: white;
           font-size: 25px;
@@ -60,6 +62,164 @@
             padding-right: 20px;
             font-size: 20px;
           }
+        }
+        .grandtotal {
+          display: flex;
+          justify-content: space-between;
+          background-color: white;
+          margin: -9px 20px 0px;
+          margin-top: -9px;
+          margin-bottom: 30px;
+          .titems {
+            font-size: 20px;
+            margin-bottom: 5px;
+            margin-left: 11px;
+          }
+          .tprice {
+            font-size: 20px;
+            margin-bottom: 5px;
+            margin-right: 11px;
+            color: red;
+          }
+        }
+        .vcart {
+          text-decoration: none;
+          background-color: #efd330;
+          color: black;
+          margin-left: 20px;
+          font-size: 20px;
+          padding: 8px 30px;
+        }
+        .vcart:hover {
+          letter-spacing: 2px;
+        }
+      }
+      .info {
+        .infotitle {
+          font-size: 25px;
+          margin-left: 20px;
+          font-weight: bold;
+        }
+        .display {
+          .UserOutlined {
+            font-size: 25px;
+            margin-left: 18px;
+            margin-top: 10px;
+          }
+          .infoname {
+            display: inline;
+            font-size: 20px;
+            margin-left: 15px;
+          }
+        }
+        .phone {
+          .PhoneFilled {
+            font-size: 25px;
+            margin-top: 15px;
+            margin-left: 18px;
+          }
+          .infophone {
+            display: inline;
+            font-size: 20px;
+            margin-left: 15px;
+          }
+        }
+        .mail {
+          .MailFilled {
+            font-size: 25px;
+            margin-top: 15px;
+            margin-left: 18px;
+          }
+          .infomail {
+            display: inline;
+            font-size: 20px;
+            margin-left: 15px;
+          }
+        }
+        .update {
+          margin-top: 25px;
+          margin-bottom: 25px;
+          .updateinfo {
+            text-decoration: none;
+            background-color: #efd330;
+            color: black;
+            margin-left: 20px;
+            font-size: 20px;
+            padding: 8px 30px;
+          }
+          .updateinfo:hover {
+            letter-spacing: 2px;
+          }
+        }
+      }
+      .address {
+        .daddress {
+          font-size: 25px;
+          margin-left: 20px;
+          font-weight: bold;
+        }
+        .map {
+          .EnvironmentFilled {
+            font-size: 25px;
+            margin-left: 18px;
+            margin-top: 10px;
+          }
+          .paddress {
+            display: inline;
+            font-size: 20px;
+            margin-left: 15px;
+          }
+        }
+        .updateaddress {
+          margin-top: 25px;
+          margin-bottom: 25px;
+          .uaddress {
+            text-decoration: none;
+            background-color: #efd330;
+            color: black;
+            margin-left: 20px;
+            font-size: 20px;
+            padding: 8px 30px;
+          }
+          .uaddress:hover {
+            letter-spacing: 2px;
+          }
+        }
+      }
+      .inputField {
+        margin-left: 20px;
+        .ant-select-selector {
+          border-radius: 0px;
+          height: 48px;
+          font-size: 20px;
+          padding-top: 7px;
+        }
+        .ant-select-selection-placeholder {
+          color: black;
+        }
+        .ant-select-arrow {
+          color: black;
+        }
+        .select {
+          border: 2px solid black;
+          width: 430px;
+          height: 52px;
+          margin-bottom: 10px;
+        }
+      }
+      .Button {
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 17px;
+        .placeorder {
+          font-size: 20px;
+          border-radius: 0px;
+          padding: 5px 160px 40px 165px;
+          background-color: #e74c3c;
+          color: white;
+        }
+        .placeorder:hover {
+          letter-spacing: 2px;
         }
       }
     }

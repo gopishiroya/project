@@ -13,6 +13,9 @@ import Register from "./Components/Register/Register";
 import Deshboard from "./Admin/Deshboard/Deshboard";
 import Cart from "./Components/Cart/Cart";
 import Checkout from "./Components/Checkout/Checkout";
+import Update_profile from "./Components/Update Profile/UpdateProfile";
+import UpdateAddress from "./Components/Update address/UpdateAddress";
+import Category from "./Components/Category/Category";
 
 function App() {
   return (
@@ -28,6 +31,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/update_profile" element={<Update_profile />} />
+        <Route path="/update_address" element={<UpdateAddress />} />
+        <Route path="/category" element={<Category />} />
 
         {/* admin */}
         <Route path="/deshboard" element={<Deshboard />} />
