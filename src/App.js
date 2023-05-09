@@ -31,7 +31,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
-        <Route path="/update_profile" element={<Update_profile />} />
+        {/* <Route path="/update_profile" element={<Update_profile />} /> */}
         <Route path="/update_address" element={<UpdateAddress />} />
         <Route path="/category" element={<Category />} />
 
