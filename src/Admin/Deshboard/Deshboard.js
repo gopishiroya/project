@@ -2,59 +2,60 @@ import React from "react";
 import "./Deshboard.scss"
 import Header from "../Header/Header";
 import Typography from "antd/es/typography/Typography";
-import { Button, Card, Input } from "antd";
+import {Card} from "antd";
+import { Link } from "react-router-dom"; 
 const { Meta } = Card;
 
-export const Deshboard = () => {
+const Deshboard = () => {
   return (
     <>
-      <div className="home">
-        <div>
+    <div>
           <Header />
         </div>
+      <div className="deshboard">
+        
         <div className="facility">
           <Typography.Title className="title">Dashboard</Typography.Title>
           <div className="container">
             <Card className="card">
               <Meta className="meta" title="WELCOME!" />
-              <Typography.Paragraph >Dashboard</Typography.Paragraph>
-              <Input type="text" defaultValue="Ekta" disabled />
-              <Button>Update Profile</Button>
-            </Card>
-            <Card className="card">
-              <Meta className="meta" title="Total Orders" />
-              <Input type="text" defaultValue="2" disabled />
-              <Button>See Orders</Button>
+              <Typography.Paragraph className="Paragraph">Ekta</Typography.Paragraph>    
+              <Link className="link">Update Profile</Link>
             </Card>
             <Card className="card">
               <Meta className="meta" title="Add Products" />
-              <Input type="text" defaultValue="4" disabled />
-              <Button>See Products</Button>
+              <Typography.Paragraph className="Paragraph">4</Typography.Paragraph>
+              <Link to="/product" className="link">See Products</Link>
+            </Card>
+            <Card className="card">
+              <Meta className="meta" title="Total Orders" />
+              <Typography.Paragraph className="Paragraph">2</Typography.Paragraph>
+              <Link className="link">See Orders</Link>
             </Card>
             <Card className="card">
               <Meta className="meta" title="Total Users" />
-              <Input type="text" defaultValue="2" disabled />
-              <Button>See Users</Button>
+              <Typography.Paragraph className="Paragraph">2</Typography.Paragraph>
+              <Link className="link">See Users</Link>
             </Card>
             <Card className="card">
               <Meta className="meta" title="Total Admins" />
-              <Input type="text" defaultValue="2" disabled />
-              <Button>See Admins</Button>
+              <Typography.Paragraph className="Paragraph">2</Typography.Paragraph>
+              <Link className="link">See Admins</Link>
             </Card>
             <Card className="card">
               <Meta className="meta" title="User Messages" />
-              <Input type="text" defaultValue="3" disabled />
-              <Button>See Messages</Button>
+              <Typography.Paragraph className="Paragraph">3</Typography.Paragraph>
+              <Link className="link">See Messages</Link>
             </Card>
             <Card className="card">
               <Meta className="meta" title="Pending Orders" />
-              <Input type="text" defaultValue="2" disabled />
-              <Button>See Pending Orders</Button>
+              <Typography.Paragraph className="Paragraph">2</Typography.Paragraph>
+              <Link className="link">See Orders</Link>
             </Card>
             <Card className="card">
               <Meta className="meta" title="Compalted Orders" />
-              <Input type="text" defaultValue="5" disabled />
-              <Button>See Compalted Orders</Button>
+              <Typography.Paragraph className="Paragraph">5</Typography.Paragraph>
+              <Link className="link">See Orders</Link>  
             </Card>
           </div>
         </div>
@@ -62,3 +63,4 @@ export const Deshboard = () => {
     </>
   );
 };
+export default Deshboard

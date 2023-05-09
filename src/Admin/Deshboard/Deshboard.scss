@@ -1,40 +1,63 @@
-
-html {
-    background-color: #f5f5f5;
+* {
+    margin: 0%;
+    padding: 0%;
 }
 
-.home {
+.deshboard {
+    height: 87vh;
+    background-color: #f5f5f5;
+
     .facility {
         .title {
-            margin-top: 90px;
+            margin-top: 85px;
             text-align: center;
-            margin-bottom: 0px;
             color: #34495e;
+            padding-top: 15px;
         }
 
         .container {
-            padding: 0 70px;
-            margin-top: 20px;
-
+            padding: 0 60px;
+            margin-top: 22px;
             .card {
-                width: 280px;
+                width: 291px;
                 height: 200px;
-
                 display: inline-flex;
                 text-align: center;
                 border: 2px solid black;
                 margin-left: 15px;
-                margin-bottom: 20px;
+                margin-bottom: 25px;
                 justify-content: center;
                 border-radius: 15px;
 
                 .meta {
-                    .ant-card-meta-title{
+                    .ant-card-meta-title {
                         font-size: 1.5rem;
                         color: #34495e;
-                       padding: 5px;
+                        padding: 5px;
+                        width: 230px;
+                        padding-bottom: 16px;
                     }
-                   
+                }
+
+                .Paragraph {
+                    color: #777;
+                    border: 2px solid black;
+                    border-radius: 8px;
+                    // height: 35px;
+                    padding: 7px;
+                    font-size: 20px;
+                    background-color: #f5f5f5;
+                }
+
+                .link {
+                    color: black;
+                    font-weight: bold;
+                    font-size: 16px;
+                    background-color: #6b58c8;
+                    color: white;
+                    padding: 10px 62px;
+                    border-radius: 5px;
+                    border: 1px solid black;
                 }
             }
         }

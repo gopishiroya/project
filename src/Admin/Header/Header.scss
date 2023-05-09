@@ -1,0 +1,50 @@
+$color: #999;
+$position: right;
+
+@mixin header {
+    position: relative;
+    bottom: 0px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+.headeradmin {
+  top: 0px;
+  position: fixed;
+  overflow: hidden;
+  z-index: 1;
+  width: 100%;
+  margin-top: 0px;
+  padding-top: 20px;
+  // margin-bottom: 20px;
+  padding-bottom: 17px;
+  border-bottom: 2px solid black;
+  background-color: white;
+  .title {
+    text-decoration: none;
+    font-size: 25px;
+    color: #6b6060;
+    margin-left: 100px;
+    margin-right: 250px;
+    @include header;
+  }
+  .pages {
+    color: $color;
+    text-decoration: none;
+    padding: 12px;
+    font-size: 20px;
+    @include header;
+  }
+  .icon1{
+    float: $position;
+    font-size: 27px;
+    padding: 10px;
+    margin-right: 60px;
+    color: $color;
+  }
+ 
+}
