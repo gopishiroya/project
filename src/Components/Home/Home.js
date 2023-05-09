@@ -13,8 +13,6 @@ import { EyeFilled, ShoppingCartOutlined } from "@ant-design/icons";
 import image1 from "../Image/home-img-1.png";
 import image2 from "../Image/home-img-2.png";
 import image3 from "../Image/home-img-3.jpg";
-import image4 from "../Image/home-img-4.png";
-import image5 from "../Image/home-img-5.jpg";
 import { Link } from "react-router-dom";
 
 const { Meta } = Card;
