@@ -27,7 +27,7 @@ const Login = () => {
             />
           </div>
           <br />
-          <Button type="primary" htmlType="submit" className="btn">
+          <Button type="primary" htmlType="submit" className="loginbtn">
             Login Now
           </Button>
           <Typography.Paragraph className="lparagraph">

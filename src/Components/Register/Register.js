@@ -44,7 +44,7 @@ const Register = () => {
             />
           </div>
           <br />
-          <Button type="primary" htmlType="submit" className="btn">
+          <Button type="primary" htmlType="submit" className="registerbtn">
             Register Now 
           </Button>
           <Typography.Paragraph className="lparagraph">

@@ -57,7 +57,7 @@ const Contect = () => {
               />
             </div>
             <br />
-            <Button type="primary" htmlType="submit" className="btn">
+            <Button type="primary" htmlType="submit" className="contectbtn">
               Submit
             </Button>
           </Form>

@@ -174,16 +174,19 @@ $hover: 2px;
     }
   }
   .button {
-    @include button;
-    padding-bottom: 38px;
-    padding-right: 30px;
-    padding-left: 30px;
-    left: 610px;
+    font-size: 25px;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    margin-left: 600px;
+    background-color: #edf11a;
+    padding: 8px 30px;
   }
   .button:hover {
     letter-spacing: $hover;
   }
   .main {
     position: relative;
+    top: 10px;
   }
 }
