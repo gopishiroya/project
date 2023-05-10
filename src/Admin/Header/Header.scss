@@ -21,7 +21,7 @@ $position: right;
   margin-top: 0px;
   padding-top: 20px;
   // margin-bottom: 20px;
-  padding-bottom: 17px;
+  padding-bottom: 10px;
   border-bottom: 2px solid black;
   background-color: white;
   .title {
@@ -29,13 +29,13 @@ $position: right;
     font-size: 25px;
     color: #6b6060;
     margin-left: 100px;
-    margin-right: 250px;
+    margin-right: 210px;
     @include header;
   }
   .pages {
     color: $color;
     text-decoration: none;
-    padding: 12px;
+    padding: 14px;
     font-size: 20px;
     @include header;
   }

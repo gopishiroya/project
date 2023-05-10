@@ -5,8 +5,12 @@ html{
     background-color: #f5f5f5;
    
 }
-    .form {
-      margin-top: 150px;
+*{
+  margin: 0%;
+  padding: 0%;
+}
+    .productform {
+      margin-top: 110px;
       border: 2px solid black;
       width: 530px;
       margin-left: 400px;
@@ -16,6 +20,7 @@ html{
         font-size: 30px;
         margin-top: 15px;
         margin-bottom: 20px;
+        color: #34495e;
       }
       .inputfield {
         width: 200px;
@@ -37,10 +42,17 @@ html{
             margin-left: 20px;
             height: 55px;
             margin-bottom: 15px;
-            font-size: 20px;
-            background-color: #f5f5f5;
+            // align-items:center ;
+        }
+        .ant-select-selector{
+          width: 100%;
+          height: 51px;
+          padding: 0 11px;
+          background-color: #f5f5f5;
             color: #34495e;
-           
+            font-size: 20px;
+            padding-top: 9px;
+            
         }
         .upload-list-inline .ant-upload-list-item {
             float: left;
@@ -48,6 +60,7 @@ html{
             margin-left: 20px;
             margin-bottom: 5px;
             font-size: 18px;
+            color: #34495e;
           }
           
          
@@ -60,11 +73,12 @@ html{
             margin-bottom: 15px;
             font-size: 20px;
             background-color: #f5f5f5;
-            color: #404c57;
+            color: #34495e;
+            padding-right: 300px;
         }
         
       }
-      .btn {
+      .productbtn {
         font-size: 20px;
         height: 45px;
         bottom: 20px;
@@ -77,6 +91,82 @@ html{
         color: white;
       }
       
+    }
+    .product {
+      position: relative;
+      top: 20px;
+      bottom: 45px;
+      .container {
+        // margin-left: 100px;
+        margin-top: 10px;
+       padding-left: 150px;
+       padding-right: 100px;
+        .dcard {
+          width: 330px;
+          height: 400px;
+          display: inline-flex;
+          text-align: center;
+          border: 2px solid black;
+          justify-content: center;
+          border-radius: 0px;
+          margin-left: 20px;
+          padding: 0px 17px;
+          .diamge {
+            padding-bottom: 
+            10px;
+           margin-top: -15px;
+            // transition: 0.2s linear;
+          }
+          .ant-card-body{
+            padding: 0 10px 5px 10px;
+          }
+          .row{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 19px;
+
+            .ant-card-meta-title {
+              font-size: 18px;
+              margin-bottom: 0px;
+            }
+            .ant-card-meta-description {
+              font-size: 17px;
+              padding-right: 60px;
+              color: #4834d4;
+            }
+            .price{
+              font-size: 18px;
+              color: #999;
+            }
+          }
+          .linkrow{
+            display: flex;
+            justify-content: space-between;
+
+            .link1{
+              color: white;
+    background-color: #f39c12;
+    border-radius: 5px;
+    padding: 9px 40px;
+    font-size: 1.1rem;
+            }
+            .link2{
+              color: white;
+    background-color: #e74c3c;
+    border-radius: 5px;
+    padding: 0px 40px 42px 40px;
+    font-size: 1.1rem;
+            }
+            .ant-btn{
+              padding-top: 7px;
+            }
+          }
+          
+          
+        }
+      
+      }
     }
 
   

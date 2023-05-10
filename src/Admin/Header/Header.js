@@ -11,7 +11,7 @@ const Header = () => {
         <Link className="pages" to="/deshboard">Home</Link>
         <Link className="pages" to="/product">Products</Link>
         <Link className="pages" to="">Orders</Link>
-        <Link className="pages">Admins</Link>
+        <Link className="pages" to="/Totaladmin">Admins</Link>
         <Link className="pages">Users</Link>
         <Link className="pages">Messages</Link>
         <UserOutlined className="icon1" />

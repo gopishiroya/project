@@ -40,7 +40,7 @@ const Deshboard = () => {
             <Card className="card">
               <Meta className="meta" title="Total Admins" />
               <Typography.Paragraph className="Paragraph">2</Typography.Paragraph>
-              <Link className="link">See Admins</Link>
+              <Link to="/Totaladmin" className="link">See Admins</Link>
             </Card>
             <Card className="card">
               <Meta className="meta" title="User Messages" />
@@ -63,8 +63,6 @@ const Deshboard = () => {
     </>
   );
 };
-<<<<<<< HEAD
-=======
 
->>>>>>> 4a3cc7db300c5f52b9c41a8c5aa9282a916c67e8
+
 export default Deshboard
