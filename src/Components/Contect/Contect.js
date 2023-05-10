@@ -40,6 +40,7 @@ const Contect = () => {
                 className="input"
                 type="text"
                 placeholder="Enter your number"
+                maxLength={10}
               />
               <Input
                 className="input"
@@ -57,9 +58,11 @@ const Contect = () => {
               />
             </div>
             <br />
+            <div className="button1">
             <Button type="primary" htmlType="submit" className="contectbtn">
-              Submit
+              Send Message
             </Button>
+            </div>
           </Form>
         </div>
       </div>

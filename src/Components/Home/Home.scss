@@ -64,6 +64,7 @@ $hover: 2px;
   .category {
     position: relative;
     bottom: 125px;
+    
     .title {
       text-align: center;
       margin-bottom: 0px;
@@ -108,12 +109,11 @@ $hover: 2px;
   .dishes {
     position: relative;
     bottom: 45px;
+    text-align: center;
     .dtitle {
-      text-align: center;
       margin-bottom: 0px;
     }
     .container {
-      margin-left: 150px;
       margin-top: 10px;
       .dcard {
         width: 320px;
@@ -173,17 +173,20 @@ $hover: 2px;
       // }
     }
   }
-  .button {
-    font-size: 25px;
-    text-decoration: none;
-    color: black;
+  .Link {
     text-align: center;
-    margin-left: 600px;
-    background-color: #edf11a;
-    padding: 8px 30px;
-  }
-  .button:hover {
-    letter-spacing: $hover;
+    .button {
+      font-size: 25px;
+      text-decoration: none;
+      color: black;
+      text-align: center;
+      // margin-left: 600px;
+      background-color: #edf11a;
+      padding: 8px 30px;
+    }
+    .button:hover {
+      letter-spacing: $hover;
+    }
   }
   .main {
     position: relative;

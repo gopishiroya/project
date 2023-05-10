@@ -1,0 +1,90 @@
+.profile {
+  .border {
+    margin-top: 90px;
+    border: 2px solid black;
+    width: 500px;
+    margin-left: 430px;
+    .useroutlined {
+      font-size: 140px;
+      margin-top: 15px;
+      margin-bottom: 15px;
+      margin-left: 175px;
+    }
+    .Pname {
+      .UserAddOutlined {
+        font-size: 25px;
+        margin-left: 15px;
+        color: #777;
+      }
+      .ProfileName {
+        display: inline;
+        font-size: 20px;
+        margin-left: 15px;
+      }
+    }
+    .Pphone {
+      margin-top: 15px;
+      .phonefilled {
+        font-size: 25px;
+        margin-left: 15px;
+        color: #777;
+      }
+      .ProfilePhone {
+        display: inline;
+        font-size: 20px;
+        margin-left: 15px;
+      }
+    }
+    .Pmail {
+      margin-top: 15px;
+      .mailfilled {
+        font-size: 25px;
+        margin-left: 15px;
+        color: #777;
+      }
+      .ProfileMail {
+        display: inline;
+        font-size: 20px;
+        margin-left: 15px;
+      }
+    }
+    .ProfileLink {
+      margin: 25px 0px 25px 15px;
+      .updateProfileInfo {
+        text-decoration: none;
+        color: black;
+        font-size: 20px;
+        background-color: #efd330;
+        padding: 5px 25px 9px 25px;
+      }
+      .updateProfileInfo:hover {
+        letter-spacing: 2px;
+      }
+    }
+    .Map {
+      .environmentfilled {
+        font-size: 25px;
+        margin-left: 15px;
+        color: #777;
+      }
+      .ProfileAddress {
+        display: inline;
+        font-size: 20px;
+        margin-left: 15px;
+      }
+    }
+    .ProfileUpdateAddress {
+      margin: 25px 0px 25px 15px;
+      .PupdateAddress {
+        text-decoration: none;
+        color: black;
+        font-size: 20px;
+        background-color: #efd330;
+        padding: 5px 25px 9px 25px;
+      }
+      .PupdateAddress:hover {
+        letter-spacing: 2px;
+      }
+    }
+  }
+}

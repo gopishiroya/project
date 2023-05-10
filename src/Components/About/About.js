@@ -39,7 +39,9 @@ const About = () => {
             for the customer to reach out and make a call meanwhile disturbing
             their privacy or disrupting a meeting for a lunch order.
           </Typography.Paragraph>
-          <button className="button">Our Menu</button>
+          <div className="Alink">
+            <Link className="aboutLink" to="/menu">Our menu</Link>
+          </div>
         </div>
       </div>
       <div className="step">
@@ -75,26 +77,42 @@ const About = () => {
         <Typography.Title className="rtitle">
           CUSTOMER'S REIVEWS
         </Typography.Title>
-          <div className="card1">
-            <Card className="review">
-              <Image src={ekta} className="rimage" preview={preview}></Image>
-              <Typography.Paragraph className="rparagraph">"I recently switched my online meal ordering platform from a big company that was taking 13% of every order to your free online ordering platform."</Typography.Paragraph>
-              <Rate className="rate" allowHalf defaultValue={5} />
-              <Typography.Title className="rtitle">Ekta Rupareliya</Typography.Title>
-            </Card>
-            <Card className="review">
-              <Image src={gopi} className="rimage" preview={preview}></Image>
-              <Typography.Paragraph className="rparagraph">"It is fast and easy to edit the menu and that makes it easier for customers to order from our website. This had also a good impact on sales!"</Typography.Paragraph>
-              <Rate className="rate" allowHalf defaultValue={5} />
-              <Typography.Title className="rtitle">Gopi Shiroya</Typography.Title>
-            </Card>
-            <Card className="review">
-              <Image src={geera} className="rimage" preview={preview}></Image>
-              <Typography.Paragraph className="rparagraph">"We are very happy to have selected yum-yum Food." I am VERY PLEASED with your service. "It’s easy to use. And free, not like other platforms."</Typography.Paragraph>
-              <Rate className="rate" allowHalf defaultValue={5} />
-              <Typography.Title className="rtitle">Geera Godhani</Typography.Title>
-            </Card>
-          </div>
+        <div className="card1">
+          <Card className="review">
+            <Image src={ekta} className="rimage" preview={preview}></Image>
+            <Typography.Paragraph className="rparagraph">
+              "I recently switched my online meal ordering platform from a big
+              company that was taking 13% of every order to your free online
+              ordering platform."
+            </Typography.Paragraph>
+            <Rate className="rate" allowHalf defaultValue={5} />
+            <Typography.Title className="rtitle">
+              Ekta Rupareliya
+            </Typography.Title>
+          </Card>
+          <Card className="review">
+            <Image src={gopi} className="rimage" preview={preview}></Image>
+            <Typography.Paragraph className="rparagraph">
+              "It is fast and easy to edit the menu and that makes it easier for
+              customers to order from our website. This had also a good impact
+              on sales!"
+            </Typography.Paragraph>
+            <Rate className="rate" allowHalf defaultValue={5} />
+            <Typography.Title className="rtitle">Gopi Shiroya</Typography.Title>
+          </Card>
+          <Card className="review">
+            <Image src={geera} className="rimage" preview={preview}></Image>
+            <Typography.Paragraph className="rparagraph">
+              "We are very happy to have selected yum-yum Food." I am VERY
+              PLEASED with your service. "It’s easy to use. And free, not like
+              other platforms."
+            </Typography.Paragraph>
+            <Rate className="rate" allowHalf defaultValue={5} />
+            <Typography.Title className="rtitle">
+              Geera Godhani
+            </Typography.Title>
+          </Card>
+        </div>
       </div>
       <div className="footer">
         <Footer />

@@ -60,14 +60,18 @@
             margin-top: 10px;
           }
         }
-        .contectbtn {
-          margin-left: 225px;
-          background-color: #efd330;
-          width: 130px;
-          height: 45px;
-          font-size: 20px;
-          margin-bottom: 20px;
-          color: black;
+        .button1 {
+          text-align: center;
+          .contectbtn {
+            font-size: 20px;
+    background-color: #dfe330;
+    padding-bottom: 37px;
+    margin-bottom: 20px;
+    color: black;
+          }
+          .contectbtn:hover {
+            letter-spacing: 2px;
+          }
         }
       }
     }

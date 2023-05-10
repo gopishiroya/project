@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Form, Typography, Input, Button } from "antd";
 import { Link } from "react-router-dom";
-import './Register.scss'
+import "./Register.scss";
 
 const Register = () => {
   return (
@@ -13,7 +13,9 @@ const Register = () => {
       </div>
       <div className="form">
         <Form className="form1">
-          <Typography.Title className="formtitle">REGISTER NOW</Typography.Title>
+          <Typography.Title className="formtitle">
+            REGISTER NOW
+          </Typography.Title>
           <div className="inputfield">
             <Input
               className="input"
@@ -39,16 +41,17 @@ const Register = () => {
             <Input
               className="input"
               type="text"
-              dependencies={['password']}
+              dependencies={["password"]}
               placeholder="Confirm your password"
             />
           </div>
-          <br />
-          <Button type="primary" htmlType="submit" className="registerbtn">
-            Register Now 
-          </Button>
+          <div className="registerbutton">
+            <Button type="primary" htmlType="submit" className="registerbtn">
+              Register Now
+            </Button>
+          </div>
           <Typography.Paragraph className="lparagraph">
-            already have an account? {" "}
+            already have an account?{" "}
             <Link className="llink" to="/login">
               login now
             </Link>
