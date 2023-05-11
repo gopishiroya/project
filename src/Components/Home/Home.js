@@ -75,18 +75,24 @@ const Home = () => {
                 <Meta className="meta" title="Fast Food" />
               </Card>
             </Link>
-            <Card className="card">
-              <Image src={cat2} className="image" preview={preview}></Image>
-              <Meta className="meta" title="Main Dishes" />
-            </Card>
-            <Card className="card">
-              <Image src={cat3} className="image" preview={preview}></Image>
-              <Meta className="meta" title="Drinks" />
-            </Card>
-            <Card className="card">
-              <Image src={cat4} className="image" preview={preview}></Image>
-              <Meta className="meta" title="Desserts" />
-            </Card>
+            <Link to="/category">
+              <Card className="card">
+                <Image src={cat2} className="image" preview={preview}></Image>
+                <Meta className="meta" title="Main Dishes" />
+              </Card>
+            </Link>
+            <Link to="/category">
+              <Card className="card">
+                <Image src={cat3} className="image" preview={preview}></Image>
+                <Meta className="meta" title="Drinks" />
+              </Card>
+            </Link>
+            <Link to="/category">
+              <Card className="card">
+                <Image src={cat4} className="image" preview={preview}></Image>
+                <Meta className="meta" title="Desserts" />
+              </Card>
+            </Link>
           </div>
         </div>
         <div className="dishes">
@@ -126,9 +132,11 @@ const Home = () => {
             </Card>
           </div>
         </div>
-        <Link className="button" to="/menu">
-          View All
-        </Link>
+        <div className="Link">
+          <Link className="button" to="/menu">
+            View All
+          </Link>
+        </div>
         <div className="main">
           <Footer />
         </div>

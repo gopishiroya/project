@@ -22,17 +22,18 @@
         font-size: 20px;
       }
     }
-    .loginbtn {
-      font-size: 20px;
-      position: relative;
-      bottom: 20px;
-      left: 190px;
-      padding-bottom: 35px;
-      padding-left: 25px;
-      padding-right: 25px;
-      border-radius: 0px;
-      background-color: #efd330;
-      color: black;
+    .loginbutton {
+      text-align: center;
+      .loginbtn {
+        font-size: 20px;
+        color: black;
+        background-color: #def330;
+        padding: 2px 25px 35px 25px;
+        margin-bottom: 15px;
+      }
+      .loginbtn:hover {
+        letter-spacing: 2px;
+      }
     }
     .lparagraph {
       font-size: 20px;

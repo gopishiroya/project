@@ -45,13 +45,12 @@
     }
   }
   .dishes {
+    text-align: center;
     .dtitle {
-      margin-top: 40px;
-      text-align: center;
-      margin-bottom: 0px;
+      margin-top: 20px;
     }
     .container {
-      margin-left: 150px;
+      // margin-left: 150px;
       margin-top: 10px;
       .dcard {
         width: 320px;

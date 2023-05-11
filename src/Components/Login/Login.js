@@ -27,11 +27,16 @@ const Login = () => {
             />
           </div>
           <br />
-          <Button type="primary" htmlType="submit" className="loginbtn">
-            Login Now
-          </Button>
+          <div className="loginbutton">
+            <Button type="primary" htmlType="submit" className="loginbtn">
+              Login Now
+            </Button>
+          </div>
           <Typography.Paragraph className="lparagraph">
-            don't have an account? <Link className="llink" to="/register">register now</Link>
+            don't have an account?{" "}
+            <Link className="llink" to="/register">
+              register now
+            </Link>
           </Typography.Paragraph>
         </Form>
       </div>
