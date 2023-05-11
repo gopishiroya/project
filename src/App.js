@@ -19,8 +19,7 @@ import Product from './Admin/Product/Product';
 import TotalAdmin from './Admin/TotalAdmin/TotalAdmin';
 import User from './Admin/User/User';
 import Message from './Admin/Message/Message';
-import Updateprofile from './Admin/Updateprofile/Updateprofile';
-
+import Updateprofile from './Admin/Updateprofile/Updateprofile';  
 
 function App() {
   return (
