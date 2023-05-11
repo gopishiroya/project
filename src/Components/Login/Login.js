@@ -4,7 +4,6 @@ import Footer from "../Footer/Footer";
 import { Form, Typography, Input, Button } from "antd";
 import "./Login.scss";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
 
