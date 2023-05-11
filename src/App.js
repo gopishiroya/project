@@ -12,7 +12,7 @@ import Checkout from "./Components/Checkout/Checkout";
 import Update_profile from "./Components/Update Profile/UpdateProfile";
 import UpdateAddress from "./Components/Update address/UpdateAddress";
 import Category from "./Components/Category/Category";
-
+import Profile from './Components/Profile/Profile';
 // --------
 import  Deshboard  from './Admin/Deshboard/Deshboard';
 import Product from './Admin/Product/Product';

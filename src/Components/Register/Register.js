@@ -1,3 +1,5 @@
+
+import React, { useState } from "react";
 import React, { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -8,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerInitaiate } from "../../Action/Action";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -39,6 +42,7 @@ const Register = () => {
     setCpassword("");
     toast.success("data added success");
   }
+
 
   return (
     <div className="register">
@@ -75,14 +79,19 @@ const Register = () => {
               value={number}
               onChange={(e) => setNumber(e.target.value)}
               required
+
             />
             <Input.Password
               className="input"
               type="password"
               placeholder="Enter your password"
+
+             
+
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+
             />
             <Input.Password
               className="input"
