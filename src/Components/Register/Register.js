@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Form, Typography, Input, Button } from "antd";
 import { Link } from "react-router-dom";
 import "./Register.scss";
 
+
 const Register = () => {
+
   return (
     <div className="register">
       <div>
@@ -26,27 +28,29 @@ const Register = () => {
               className="input"
               type="text"
               placeholder="Enter your email"
+           
             />
             <Input
               className="input"
               type="text"
               placeholder="Enter your number"
               maxLength={10}
+           
             />
             <Input.Password
               className="input"
               type="text"
               placeholder="Enter your password"
+             
             />
             <Input
               className="input"
               type="text"
-              dependencies={["password"]}
               placeholder="Confirm your password"
             />
           </div>
           <div className="registerbutton">
-            <Button type="primary" htmlType="submit" className="registerbtn">
+            <Button type="primary" htmlType="submit" className="registerbtn" >
               Register Now
             </Button>
           </div>

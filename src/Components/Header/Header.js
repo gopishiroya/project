@@ -8,16 +8,20 @@ import {
 } from "@ant-design/icons";
 import { Button, Popover, Typography } from "antd";
 
-const text=<Typography.Title className="usertext">Please Login First!👇</Typography.Title>
+const text = (
+  <Typography.Title className="usertext">
+    Please Login First!👇
+  </Typography.Title>
+);
 const content = (
-  <div className="loginbtn">
-    <Link to='/login' className="loginbtninner">Login Now</Link>
+  <div className="loginbtnpopup">
+    <Link to="/login" className="loginbtninner">
+      Login Now
+    </Link>
   </div>
 );
 
-
 const Header = () => {
-
   return (
     <>
       <div className="header">
@@ -38,13 +42,17 @@ const Header = () => {
           Contact
         </Link>
 
-
-        <Popover placement="bottomRight" className="icon1" title={text} content={content}  trigger="click">
-        <UserOutlined className="icon1" />
-      </Popover>
-       <ShoppingCartOutlined className="icon2" />
+        <Popover
+          placement="bottomRight"
+          className="icon1"
+          title={text}
+          content={content}
+          trigger="click"
+        >
+          <UserOutlined className="icon1" />
+        </Popover>
+        <ShoppingCartOutlined className="icon2" />
         <SearchOutlined className="icon3" />
-    
       </div>
     </>
   );

@@ -12,18 +12,15 @@ import Checkout from "./Components/Checkout/Checkout";
 import Update_profile from "./Components/Update Profile/UpdateProfile";
 import UpdateAddress from "./Components/Update address/UpdateAddress";
 import Category from "./Components/Category/Category";
-
+import Profile from './Components/Profile/Profile';
 // --------
 import  Deshboard  from './Admin/Deshboard/Deshboard';
 import Product from './Admin/Product/Product';
 import TotalAdmin from './Admin/TotalAdmin/TotalAdmin';
-<<<<<<< HEAD
 import User from './Admin/User/User';
 import Message from './Admin/Message/Message';
 import Updateprofile from './Admin/Updateprofile/Updateprofile';
-=======
-import Profile from './Components/Profile/Profile';
->>>>>>> b12c7ed4ca2e30b08f330f3a4cabcbb460ab4428
+
 
 function App() {
   return (
