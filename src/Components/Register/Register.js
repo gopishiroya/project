@@ -1,12 +1,48 @@
+
 import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Form, Typography, Input, Button } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Register.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { registerInitaiate } from "../../Action/Action";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Register = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [number, setNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [cpassword, setCpassword] = useState("");
+
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/");
+    }
+  }, [currentUser, navigate]);
+
+  function handleRegister(e) {
+    e.preventDefault();
+    if (password !== cpassword) {
+      return;
+    }
+    dispatch(registerInitaiate(email, password));
+    setName("");
+    setEmail("");
+    setNumber("");
+    setPassword("");
+    setCpassword("");
+    toast.success("data added success");
+  }
+
 
   return (
     <div className="register">
@@ -23,34 +59,56 @@ const Register = () => {
               className="input"
               type="text"
               placeholder="Enter your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
             />
             <Input
               className="input"
-              type="text"
+              type="email"
               placeholder="Enter your email"
-           
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
             />
             <Input
               className="input"
               type="text"
               placeholder="Enter your number"
               maxLength={10}
-           
+              value={number}
+              onChange={(e) => setNumber(e.target.value)}
+              required
+
             />
             <Input.Password
               className="input"
-              type="text"
+              type="password"
               placeholder="Enter your password"
+
              
+
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+
             />
-            <Input
+            <Input.Password
               className="input"
-              type="text"
+              type="password"
               placeholder="Confirm your password"
+              value={cpassword}
+              onChange={(e) => setCpassword(e.target.value)}
+              required
             />
           </div>
           <div className="registerbutton">
-            <Button type="primary" htmlType="submit" className="registerbtn" >
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="registerbtn"
+              onClick={handleRegister}
+            >
               Register Now
             </Button>
           </div>
