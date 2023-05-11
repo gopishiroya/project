@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Form, Typography, Input, Button } from "antd";
 import "./Login.scss";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <div className="login">
       <div>
@@ -17,13 +22,19 @@ const Login = () => {
           <div className="inputfield">
             <Input
               className="input"
-              type="text"
+              type="email"
               placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
             />
             <Input.Password
               className="input"
-              type="text"
+              type="password"
               placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
           <br />

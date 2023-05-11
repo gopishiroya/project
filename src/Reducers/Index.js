@@ -1,10 +1,33 @@
-const initialState="";
+import * as types from "../Action/ActionTypes";
 
-export const LoginTheUser = (state=initialState, action) => {
-    switch(action.type) {
-        case "REGISTER" :
-            return 
-        default: 
-            return state;
-    }
-}
+const initialState = {
+  loading: false,
+  currentUser: null,
+  error: null,
+};
+
+const userReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case types.REGISTER_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.REGISTER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        currentUser: action.payload,
+      };
+    case types.REGISTER_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
+export default userReducer;
