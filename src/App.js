@@ -17,7 +17,13 @@ import Category from "./Components/Category/Category";
 import  Deshboard  from './Admin/Deshboard/Deshboard';
 import Product from './Admin/Product/Product';
 import TotalAdmin from './Admin/TotalAdmin/TotalAdmin';
+<<<<<<< HEAD
+import User from './Admin/User/User';
+import Message from './Admin/Message/Message';
+import Updateprofile from './Admin/Updateprofile/Updateprofile';
+=======
 import Profile from './Components/Profile/Profile';
+>>>>>>> b12c7ed4ca2e30b08f330f3a4cabcbb460ab4428
 
 function App() {
   return (
@@ -26,7 +32,6 @@ function App() {
 
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />}/>
-        <Route path='/menu' element={<Menu />}/>
         <Route path='/menu' element={<Menu />}/>
         <Route path='/contect' element={<Contect />} />
         <Route path="/login" element={<Login />}/>
@@ -42,6 +47,9 @@ function App() {
         <Route path='/deshboard' element={<Deshboard />} />
         <Route path='/product' element={<Product />} />
         <Route path='/Totaladmin' element={<TotalAdmin/>}/>
+        <Route path='/User' element={<User/>}/>
+        <Route path='/Message' element={<Message/>}/>
+        <Route path='/Updateprofile' element={<Updateprofile/>}/>
 
       </Routes>
     </div>

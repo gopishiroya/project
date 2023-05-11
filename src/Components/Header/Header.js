@@ -1,27 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./Header.scss";
 import {
   SearchOutlined,
   ShoppingCartOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Dropdown, Space, Typography } from "antd";
+import { Button, Popover, Typography } from "antd";
 
-const items = [
-  {
-    key: "1",
-    label: (
-      <Typography.Paragraph className="dropdown">please login first!</Typography.Paragraph>
-    )
-  },
-  {
-    key: "2",
-    label: (
-      <Link className="btn" to="/login">Login</Link>
-    )
-  }
-]
+const text=<Typography.Title className="usertext">Please Login First!👇</Typography.Title>
+const content = (
+  <div className="loginbtn">
+    <Link to='/login' className="loginbtninner">Login Now</Link>
+  </div>
+);
+
 
 const Header = () => {
 
@@ -44,15 +37,14 @@ const Header = () => {
         <Link className="pages" to="/contect">
           Contact
         </Link>
-        <SearchOutlined className="icon1" />
-        <ShoppingCartOutlined className="icon2" />
-        <Dropdown menu = {{ items }}>
-          <Link onClick={(e) => e.preventDefault()}>
-            <Space>
-            <UserOutlined className="icon3" />
-            </Space>
-          </Link>
-        </Dropdown>
+
+
+        <Popover placement="bottomRight" className="icon1" title={text} content={content}  trigger="click">
+        <UserOutlined className="icon1" />
+      </Popover>
+       <ShoppingCartOutlined className="icon2" />
+        <SearchOutlined className="icon3" />
+    
       </div>
     </>
   );

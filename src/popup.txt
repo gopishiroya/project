@@ -1,0 +1,41 @@
+import { Button, Popover } from 'antd';
+const text = <span>Title</span>;
+const content = (
+  <div>
+    <p>Content</p>
+    <p>Content</p>
+  </div>
+);
+const buttonWidth = 70;
+const App = () => (
+  <div>
+  
+    <div
+      style={{
+        width: buttonWidth,
+        marginLeft: buttonWidth * 4 + 24,
+      }}
+    >
+      <Popover placement="rightBottom" title={text} content={content} trigger="click">
+        <Button>RB</Button>
+      </Popover>
+    </div>
+
+  </div>
+);
+export default App;
+
+
+
+#components-popover-demo-placement .ant-btn {
+    margin-left: 0;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    width: 70px;
+    text-align: center;
+    padding: 0;
+  }
+  #components-popover-demo-placement .ant-btn {
+    margin-left: 8px;
+    margin-right: 0;
+  }
