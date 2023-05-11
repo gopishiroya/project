@@ -1,0 +1,70 @@
+@mixin card {
+    width: 310px;
+    height: 150px;
+    display: inline-flex;
+    text-align: center;
+    border: 2px solid #34495e;
+    justify-content: center;
+    border-radius: 0.5rem;
+    margin-left: 15px;
+    padding: 0px 17px;
+
+}
+
+.userbody {
+    position: relative;
+    top: 20px;
+    bottom: 45px;
+
+    .title {
+        text-align: center;
+        font-size: 2.4rem;
+        margin-top: 75px;
+        margin-bottom: 15px;
+        color: #34495e;
+    }
+
+    .container {
+        margin-top: 10px;
+        padding-left: 190px;
+        padding-right: 100px;
+
+        .usercard {
+            @include card;
+
+            .ant-card-body {
+                padding: 0 10px 5px 2px;
+            }
+
+            .usercardrow {
+                align-items: center;
+                margin-bottom: 15px;
+                margin-top: 18px;
+                margin-left: 20px;
+
+                .ant-card-meta-title {
+                    font-size: 18px;
+                    margin-bottom: 3px;
+                    color: #59728b;
+                }
+
+                .ant-card-meta-description {
+                    font-size: 18px;
+                    color: #59728b;
+                    margin-bottom: 10px;
+                }
+
+                .usercardbtn {
+                    color: white;
+                    background-color: #e74c3c;
+                    margin-top: 5px;
+                    border-radius: 5px;
+                    padding: 9px 100px;
+                    font-size: 1.1rem;
+                    height: 50px;
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+}

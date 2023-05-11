@@ -20,7 +20,7 @@ const Deshboard = () => {
             <Card className="card">
               <Meta className="meta" title="WELCOME!" />
               <Typography.Paragraph className="Paragraph">Ekta</Typography.Paragraph>    
-              <Link className="link">Update Profile</Link>
+              <Link to="/Updateprofile" className="link">Update Profile</Link>
             </Card>
             <Card className="card">
               <Meta className="meta" title="Add Products" />
@@ -33,19 +33,19 @@ const Deshboard = () => {
               <Link className="link">See Orders</Link>
             </Card>
             <Card className="card">
-              <Meta className="meta" title="Total Users" />
-              <Typography.Paragraph className="Paragraph">2</Typography.Paragraph>
-              <Link className="link">See Users</Link>
-            </Card>
-            <Card className="card">
               <Meta className="meta" title="Total Admins" />
               <Typography.Paragraph className="Paragraph">2</Typography.Paragraph>
               <Link to="/Totaladmin" className="link">See Admins</Link>
             </Card>
             <Card className="card">
+              <Meta className="meta" title="Total Users" />
+              <Typography.Paragraph className="Paragraph">2</Typography.Paragraph>
+              <Link to="/User" className="link">See Users</Link>
+            </Card>
+            <Card className="card">
               <Meta className="meta" title="User Messages" />
               <Typography.Paragraph className="Paragraph">3</Typography.Paragraph>
-              <Link className="link">See Messages</Link>
+              <Link to="/Message" className="link">See Messages</Link>
             </Card>
             <Card className="card">
               <Meta className="meta" title="Pending Orders" />

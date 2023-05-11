@@ -90,7 +90,10 @@ html{
         background-color: #4834d4;
         color: white;
       }
-      
+      .productbtn :hover {
+        letter-spacing: 2px;
+        color: lightblue;
+      }
     }
     .product {
       position: relative;
@@ -148,18 +151,18 @@ html{
               color: white;
     background-color: #f39c12;
     border-radius: 5px;
-    padding: 9px 40px;
+    padding: 5px 40px;
     font-size: 1.1rem;
             }
             .link2{
               color: white;
     background-color: #e74c3c;
     border-radius: 5px;
-    padding: 0px 40px 42px 40px;
+    padding: 0px 40px 37px 40px;
     font-size: 1.1rem;
             }
             .ant-btn{
-              padding-top: 7px;
+              padding-top: 4px;
             }
           }
           

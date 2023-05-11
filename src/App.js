@@ -17,6 +17,9 @@ import Category from "./Components/Category/Category";
 import  Deshboard  from './Admin/Deshboard/Deshboard';
 import Product from './Admin/Product/Product';
 import TotalAdmin from './Admin/TotalAdmin/TotalAdmin';
+import User from './Admin/User/User';
+import Message from './Admin/Message/Message';
+import Updateprofile from './Admin/Updateprofile/Updateprofile';
 
 function App() {
   return (
@@ -26,13 +29,12 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />}/>
         <Route path='/menu' element={<Menu />}/>
-        <Route path='/menu' element={<Menu />}/>
         <Route path='/contect' element={<Contect />} />
         <Route path="/login" element={<Login />}/>
         <Route path='/register' element={<Register />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
-        {/* <Route path="/update_profile" element={<Update_profile />} /> */}
+        <Route path="/update_profile" element={<Update_profile />} />
         <Route path="/update_address" element={<UpdateAddress />} />
         <Route path="/category" element={<Category />} />
 
@@ -40,6 +42,9 @@ function App() {
         <Route path='/deshboard' element={<Deshboard />} />
         <Route path='/product' element={<Product />} />
         <Route path='/Totaladmin' element={<TotalAdmin/>}/>
+        <Route path='/User' element={<User/>}/>
+        <Route path='/Message' element={<Message/>}/>
+        <Route path='/Updateprofile' element={<Updateprofile/>}/>
 
       </Routes>
     </div>

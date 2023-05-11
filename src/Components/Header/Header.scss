@@ -1,9 +1,8 @@
-$color: black;
 $position: right;
 
 @mixin header {
     position: relative;
-    bottom: 15px;
+    top: 8px;
 }
 
 * {
@@ -11,26 +10,36 @@ $position: right;
   padding: 0;
 }
 
-.dropdown {
-    font-size: 20px;
-    text-align: center;
-    margin-top: 15px;
-    padding-bottom: 0px;
-    margin: 0px;
-    padding: 0px;
-    height: 20px;
+
+.ant-popover-title{
+     margin-top: 6px;
+  text-align: center;
+  font-weight: bold;
+  .ant-typography{
+    margin-bottom: 20px;
+   }
+  .usertext{
+    color: #34495e;
+    font-size: 18px;
+    margin-bottom: 13px;
+  }
 }
 
-.btn { 
-  border-radius: 0px;
-  margin-left: 55px;
-  padding-left: 35px;
-  padding-right: 35px;
-  padding-bottom: 5px;
-  padding-top: 5px;
-  font-size: 20px;
-  background-color: #edf11a;
+.loginbtn{
+  display: flex;
+    text-align: center;
+    justify-content: center;
+  .loginbtninner{
+   padding: 0px 100px;
+   height: 35px;
+    background-color: #fed330;
+    color: black;
+    font-size: 17px;
+    border-radius: 8px;
+  }
+ 
 }
+
 
 .header {
   top: 0px;
@@ -47,15 +56,15 @@ $position: right;
   .title {
     text-decoration: none;
     font-size: 25px;
-    color: $color;
+    color: black;
     margin-left: 100px;
-    margin-right: 250px;
+    margin-right: 220px;
     @include header;
   }
   .pages {
-    color: $color;
+    color: #999;;
     text-decoration: none;
-    padding: 12px;
+    padding: 15px;
     font-size: 20px;
     @include header;
   }
@@ -64,13 +73,10 @@ $position: right;
   .icon3 {
     float: $position;
     font-size: 27px;
-    padding: 10px;
+    padding:12px 15px;
+    color: #999;
   }
   .icon1 {
-    margin-right: 90px;
-  }
-  .icon3 {
-    margin-left: 214px;
-    color: black;
+    margin-right: 80px;
   }
 }

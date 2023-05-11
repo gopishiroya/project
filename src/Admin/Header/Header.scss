@@ -10,7 +10,30 @@ $position: right;
   margin: 0;
   padding: 0;
 }
-
+.ant-popover-inner{
+  height: 100px;
+}
+.ant-popover-title{
+     margin-top: 6px;
+  text-align: center;
+  font-weight: bold;
+  .text{
+    color: #34495e;
+    font-size: 18px;
+  }
+}
+.logoutbtn{
+  display: flex;
+    text-align: center;
+    justify-content: center;
+  .logoutbtninner{
+   padding: 0px 75px;
+   height: 40px;
+    background-color: #e74c3c;
+    color: white;
+    font-size: 17px;
+  }
+}
 
 .headeradmin {
   top: 0px;
@@ -39,12 +62,14 @@ $position: right;
     font-size: 20px;
     @include header;
   }
-  .icon1{
+  .popup{
     float: $position;
     font-size: 27px;
     padding: 10px;
     margin-right: 60px;
-    color: $color;
+    color: $color;   
+   
   }
  
 }
+
