@@ -1,4 +1,6 @@
+
 import React, { useEffect, useState } from "react";
+
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Form, Typography, Input, Button } from "antd";
@@ -8,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerInitaiate } from "../../Action/Action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 
 const Register = () => {
   const [name, setName] = useState("");
