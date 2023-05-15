@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 
 import Header from "../Header/Header";
@@ -10,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerInitaiate } from "../../Action/Action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -33,6 +31,9 @@ const Register = () => {
     e.preventDefault();
     if (password !== cpassword) {
       return toast.error("please enter correct password");
+    } 
+    if (password >= 6) {
+      return toast.error("password atlist 6 character");
     }
     dispatch(registerInitaiate(email, password));
     setName("");

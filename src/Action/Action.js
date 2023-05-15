@@ -1,10 +1,12 @@
 import * as types from "./ActionTypes";
-import { app } from "../Firebase/FIrebase";
+import { app, firestore, storage } from "../Firebase/FIrebase";
 import {
   createUserWithEmailAndPassword,
   getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { addDoc, collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { ref, uploadBytes } from "firebase/storage";
 
 const auth = getAuth(app);
 
@@ -36,6 +38,18 @@ const loginFail = (error) => ({
   payload: error,
 });
 
+const put_data = () => ({
+  type: types.PUT_DATA,
+});
+
+const put_data_storage = () => ({
+  type: types.STORAGE,
+});
+
+const get_data = () => ({
+  type: types.GET_DATA,
+});
+
 export const registerInitaiate = (email, password) => {
   return function (dispatch) {
     dispatch(registerStart());
@@ -51,5 +65,39 @@ export const loginInitaiate = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((user) => dispatch(loginSuccess(user)))
       .catch((error) => dispatch(loginFail(error.message)));
+  };
+};
+
+export const PutDataInitaiate = (email, password) => {
+  return function (dispatch) {
+    setDoc(doc(firestore, "user", "login"), {
+      email,
+      password,
+    })
+      .then(() => dispatch(put_data))
+      .catch((error) => dispatch(put_data(error)));
+  };
+};
+
+export const StorageInitaiate = (name, price, category, pic) => {
+  return async function (dispatch) {
+    const imageRef = ref(storage, `uploads/images/${Date.now()}-${pic.name}`);
+    const uploadResult = await uploadBytes(imageRef, pic);
+    return await addDoc(collection(firestore, "products"), {
+      name,
+      price,
+      category,
+      imageURL: uploadResult.ref.fullPath,
+    })
+      .then(() => dispatch(put_data_storage))
+      .catch((error) => dispatch(put_data_storage(error)));
+  };
+};
+
+export const getDataInitaiate = () => {
+  return function (dispatch) {
+    getDocs(collection(firestore, "products"))
+      .then(() => dispatch(get_data))
+      .catch((error) => dispatch(get_data(error)));
   };
 };
