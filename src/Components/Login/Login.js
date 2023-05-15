@@ -1,14 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Form, Typography, Input, Button } from "antd";
 import "./Login.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginInitaiate } from "../../Action/Action";
 
-const Login = () => {
-
+const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.user)
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(currentUser) {
+      navigate("/");
+    }
+  }, [currentUser, navigate])
+
+  function handleLogin(e) {
+    e.preventDefault();
+    dispatch(loginInitaiate(email, password));
+    setEmail("");
+    setPassword("");
+  }
 
   return (
     <div className="login">
@@ -38,7 +56,7 @@ const Login = () => {
           </div>
           <br />
           <div className="loginbutton">
-            <Button type="primary" htmlType="submit" className="loginbtn">
+            <Button type="primary" htmlType="submit" className="loginbtn" onClick={handleLogin}>
               Login Now
             </Button>
           </div>

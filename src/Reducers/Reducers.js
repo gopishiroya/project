@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import userReducer from "./Index"
 
 const rootReducers = combineReducers({
-    user: userReducer
+    user: userReducer,
 })
 
 export default rootReducers
