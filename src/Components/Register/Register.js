@@ -31,6 +31,9 @@ const Register = () => {
     e.preventDefault();
     if (password !== cpassword) {
       return toast.error("please enter correct password");
+    } 
+    if (password >= 6) {
+      return toast.error("password atlist 6 character");
     }
     dispatch(registerInitaiate(email, password));
     setName("");
