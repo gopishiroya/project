@@ -47,7 +47,7 @@ const Header = () => {
           className="icon1"
           title={text}
           content={content}
-          trigger="click"
+          trigger="hover"
         >
           <UserOutlined className="icon1" />
         </Popover>

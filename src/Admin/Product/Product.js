@@ -7,18 +7,6 @@ import drink from '../../Components/Image/drink-1.png';
 import { UploadOutlined } from "@ant-design/icons";
 
 const { Meta } = Card;
-const handleChange = (value) => {
-     console.log(`${value}`);
-};
-const uploadChange = (value) => {
-  console.log(`upload ${value.file.name}`);
-};
-const inputname = (value) => {
-  console.log(`input  ${value.data}`);
-};
-const inputprice = (value) => {
-  console.log(`input  ${value.data}`);
-};
 
 const Product = () => {
   const [preview, setPreview] = useState(false);
@@ -37,13 +25,13 @@ const Product = () => {
           <div className="inputfield">
             <Input
               className="input"      
-              onChange={inputname} 
+           
               type="text"
               placeholder="Enter Product Name"
             />
             <Input
               className="input"
-              onBeforeInput={inputprice} 
+            
               type="text"
               placeholder="Enter Product Price"
             />
@@ -51,7 +39,7 @@ const Product = () => {
             <Select
               placeholder="-- Select Category --"
               className="select"
-              onChange={handleChange}
+          
               options={[
                 {
                   value: "full-dish",
@@ -73,7 +61,6 @@ const Product = () => {
             />
 
             <Upload listType="picture"
-              onChange={uploadChange} 
             className="upload-list-inline">
               <Button className="upload" icon={<UploadOutlined />}>Choose Product</Button>
             </Upload>
