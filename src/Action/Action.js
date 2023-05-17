@@ -5,7 +5,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { addDoc, collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { addDoc, collection, getDocs} from "firebase/firestore";
 import { ref, uploadBytes } from "firebase/storage";
 
 const auth = getAuth(app);
@@ -101,7 +101,6 @@ export const StorageInitaiate = (name, price, category, pic) => {
       .catch((error) => dispatch(put_data_storage(error)));
   };
 };
-
 export const getDataInitaiate = () => {
   return function (dispatch) {
     getDocs(collection(firestore, "products"))
