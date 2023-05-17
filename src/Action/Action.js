@@ -50,6 +50,14 @@ const get_data = () => ({
   type: types.GET_DATA,
 });
 
+const contect_put_data = () => ({
+  type: types.CONTECT_PUT_DATA
+}) 
+
+const contect_get_data = () => ({
+  typr: types.CONTECT_GET_DATA
+})
+
 export const registerInitaiate = (email, password) => {
   return function (dispatch) {
     dispatch(registerStart());
@@ -70,7 +78,7 @@ export const loginInitaiate = (email, password) => {
 
 export const PutDataInitaiate = (email, password) => {
   return function (dispatch) {
-    setDoc(doc(firestore, "user", "login"), {
+    addDoc(collection(firestore, "user"), {
       email,
       password,
     })
@@ -101,3 +109,21 @@ export const getDataInitaiate = () => {
       .catch((error) => dispatch(get_data(error)));
   };
 };
+
+export const contectPutDataInitaiate = (name, number, email, message) => {
+  return function (dispatch) {
+    addDoc(collection(firestore, "contect"), {
+      name, number, email, message
+    })
+      .then(() => dispatch(contect_put_data))
+      .catch((error) => dispatch(contect_put_data(error)));
+  }
+}
+
+export const contectGetDataInitaiate = () => {
+  return function (dispatch) {
+    getDocs(collection(firestore, "contect"))
+    .then(() => dispatch(contect_get_data))
+    .catch((error) => dispatch(contect_get_data(error)));
+  }
+}

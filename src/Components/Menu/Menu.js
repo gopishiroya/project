@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Typography } from "antd";
@@ -14,6 +14,9 @@ const { Meta } = Card;
 const Menu = () => {
 
   const [preview, setPreview] = useState(false);
+
+  useEffect(() => {
+  }, [])
 
   return (
     <div className="menu">

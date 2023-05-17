@@ -11,3 +11,7 @@ export const PUT_DATA = "PUT_DATA";
 export const STORAGE = "STORAGE";
 
 export const GET_DATA = "GET_DATA";
+
+export const CONTECT_PUT_DATA = "CONTECT_PUT_DATA";
+
+export const CONTECT_GET_DATA = "CONTECT_GET_DATA";

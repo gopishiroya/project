@@ -6,13 +6,34 @@ import { Link } from "react-router-dom";
 import "./Contect.scss";
 import contect from "../Image/contact-img.svg";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { contectPutDataInitaiate } from "../../Action/Action";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const { TextArea } = Input;
 const Contect = () => {
   const [preview, setPreview] = useState(false);
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const dispatch = useDispatch();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(contectPutDataInitaiate(name, number, email, message));
+    toast.success("data added successfully");
+    setName("");
+    setNumber("");
+    setEmail("");
+    setMessage("");
+  }
 
   return (
     <div className="contect">
+      <ToastContainer />
       <Header />
       <div className="phone">
         <Typography.Title className="ctitle">Contect Us</Typography.Title>
@@ -35,17 +56,23 @@ const Contect = () => {
                 className="input"
                 type="text"
                 placeholder="Enter your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
               <Input
                 className="input"
                 type="text"
                 placeholder="Enter your number"
                 maxLength={10}
+                value={number}
+                onChange={(e) => setNumber(e.target.value)}
               />
               <Input
                 className="input"
                 type="email"
                 placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
               {/* <Input className="input" type="text" placeholder="Enter your message" /> */}
               <TextArea
@@ -55,13 +82,20 @@ const Contect = () => {
                 maxLength={500}
                 cols={30}
                 rows={10}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
               />
             </div>
             <br />
             <div className="button1">
-            <Button type="primary" htmlType="submit" className="contectbtn">
-              Send Message
-            </Button>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="contectbtn"
+                onClick={handleSubmit}
+              >
+                Send Message
+              </Button>
             </div>
           </Form>
         </div>

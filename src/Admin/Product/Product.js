@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import "./Product.scss";
 import { Link } from "react-router-dom";
@@ -12,13 +12,13 @@ import {
   Card,
   Image,
 } from "antd";
-import drink from "../../Components/Image/drink-1.png";
 import { UploadOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { StorageInitaiate, getDataInitaiate } from "../../Action/Action";
-import { firestore } from "../../Firebase/FIrebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { collection, getDocs } from "firebase/firestore";
+import { firestore } from "../../Firebase/FIrebase";
 
 const { Meta } = Card;
 
@@ -30,22 +30,32 @@ const Product = () => {
   const [pic, setPic] = useState("");
   const [products, setProducts] = useState([]);
 
+  const getData = collection(firestore, "products");
+
+  useEffect(() => {
+    const getDocuments = async () => {
+      const result = await getDocs(getData);
+      setProducts(result.docs.map((doc) => ({...doc.data(), id: doc.id})))
+    }
+    getDocuments();
+  }, []);
+
   const dispatch = useDispatch();
   const props = {
     name: "file",
     beforeUpload: (file) => {
       setPic(file);
-
       return false;
     },
   };
+
   function handleAddProducts(e) {
     e.preventDefault();
     dispatch(StorageInitaiate(pname, price, category, pic));
     setPname("");
     setPrice("");
-    setCategory("");
-    setPic("");
+    // setPic("");
+    // setCategory("");
     toast.success("product added successfully");
   }
 
@@ -99,7 +109,6 @@ const Product = () => {
                 },
               ]}
             />
-
             <Upload
               listType="picture"
               className="upload-list-inline"
@@ -120,21 +129,21 @@ const Product = () => {
           </Button>
         </Form>
       </div>
-
+      
       <div className="product">
         <div className="container">
-          {products.map(({ id, data }) => {
+          {products.map((data) => {
             return (
               <Card className="dcard">
                 <Image
-                  src={data.pic}
+                  src={data.imageURL}
                   className="dimage"
                   preview={preview}
                 ></Image>
                 <div className="row">
                   <Meta
                     className="meta"
-                    title={data.pname}
+                    title={data.name}
                     description={data.category}
                   />
                   <Typography.Paragraph className="price">
