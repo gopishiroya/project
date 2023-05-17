@@ -94,10 +94,4 @@ export const StorageInitaiate = (name, price, category, pic) => {
   };
 };
 
-export const getDataInitaiate = () => {
-  return function (dispatch) {
-    getDocs(collection(firestore, "products"))
-      .then(() => dispatch(get_data))
-      .catch((error) => dispatch(get_data(error)));
-  };
-};
+
