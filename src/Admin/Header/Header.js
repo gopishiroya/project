@@ -37,17 +37,17 @@ const Header = () => {
         <Link className="pages" to="/Message">
           Messages
         </Link>
-        {/* <div className="popup"> */}
+
         <Popover
           placement="bottomRight"
           className="popup"
           title={text}
           content={content}
-          trigger="click"
+          trigger="hover"
         >
           <UserOutlined className="icon1" />
         </Popover>
-        {/* </div> */}
+     
       </div>
     </>
   );
