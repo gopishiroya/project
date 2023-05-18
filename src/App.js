@@ -20,6 +20,8 @@ import TotalAdmin from './Admin/TotalAdmin/TotalAdmin';
 import User from './Admin/User/User';
 import Message from './Admin/Message/Message';
 import Updateprofile from './Admin/Updateprofile/Updateprofile';  
+import QuickView from './Components/QuickView/QuickView';
+import UpdateProduct from './Admin/UpdateProduct/UpdateProduct';
 
 function App() {
   return (
@@ -38,6 +40,7 @@ function App() {
         <Route path="/update_address" element={<UpdateAddress />} />
         <Route path="/category" element={<Category />} />
         <Route path='profile' element={<Profile />} />
+        <Route path='/quickview' element={<QuickView />} />
 
         {/* -------- */}
         <Route path='/deshboard' element={<Deshboard />} />
@@ -46,6 +49,7 @@ function App() {
         <Route path='/User' element={<User/>}/>
         <Route path='/Message' element={<Message/>}/>
         <Route path='/Updateprofile' element={<Updateprofile/>}/>
+        <Route path='/updateproducts/:id' element={<UpdateProduct />}/>
 
       </Routes>
     </div>
