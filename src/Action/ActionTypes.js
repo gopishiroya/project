@@ -15,7 +15,3 @@ export const GET_DATA = "GET_DATA";
 export const CONTECT_PUT_DATA = "CONTECT_PUT_DATA";
 
 export const CONTECT_GET_DATA = "CONTECT_GET_DATA";
-
-export const GET_IMAGE_URL = "GET_IMAGE_URL";
-
-export const DELETE_DOC = "DELETE_DOC";

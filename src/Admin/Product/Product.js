@@ -18,11 +18,9 @@ import { StorageInitaiate } from "../../Action/Action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
-import { firestore, storage } from "../../Firebase/FIrebase";
+import { firestore, getImage, storage } from "../../Firebase/FIrebase";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
-
 const { Meta } = Card;
-
 const Product = () => {
   const [preview, setPreview] = useState(false);
   const [pname, setPname] = useState("");
@@ -31,9 +29,7 @@ const Product = () => {
   const [pic, setPic] = useState("");
   const [products, setProducts] = useState([]);
   const [url, setUrl] = useState([]);
-
   const getData = collection(firestore, "products");
-
   useEffect(() => {
     getDocuments();
   }, [handleAddProducts]);
@@ -42,12 +38,10 @@ const Product = () => {
   useEffect(() => {
     listAll(imageRef).then((res) => {
       res.items.map((item) => {
-        return (
-          getDownloadURL(item).then((url) => {
-            setUrl((prev) => [...prev, url]);
-          })
-        )
-      })
+        return getDownloadURL(item).then((url) => {
+          setUrl((prev) => [...prev, url]);
+        });
+      });
     });
   }, []);
 
@@ -55,6 +49,7 @@ const Product = () => {
     const result = await getDocs(getData);
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
+
   const dispatch = useDispatch();
   const props = {
     name: "file",
@@ -63,7 +58,6 @@ const Product = () => {
       return false;
     },
   };
-
   function handleAddProducts(e) {
     e.preventDefault();
     dispatch(StorageInitaiate(pname, price, category, pic));
@@ -74,12 +68,10 @@ const Product = () => {
     toast.success("product added successfully");
     getDocuments();
   }
-
   async function handleDelete(products) {
     await deleteDoc(doc(firestore, "products", products.id));
     toast.success("products delete successfully");
   }
-
   return (
     <>
       <div>
@@ -106,7 +98,6 @@ const Product = () => {
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />
-
             <Select
               placeholder="-- Select Category --"
               className="select"
@@ -150,13 +141,16 @@ const Product = () => {
           </Button>
         </Form>
       </div>
-
       <div className="product">
         <div className="container">
           {products.map((products, id) => {
             return (
               <Card className="dcard" key={id}>
-                <Image src={url} className="dimage" preview={preview}></Image>
+                <Image
+                  src={url}
+                  className="dimage"
+                  preview={preview}
+                ></Image>
                 <div className="row">
                   <Meta
                     className="meta"
@@ -168,7 +162,9 @@ const Product = () => {
                   </Typography.Paragraph>
                 </div>
                 <div className="linkrow">
-                  <Link className="link1" to={"/updateproducts/" + products.id}>Update</Link>
+                  <Link className="link1" to={"/updateproducts/" + products.id}>
+                    Update
+                  </Link>
                   <Button
                     className="link2"
                     onClick={() => handleDelete(products)}
@@ -184,5 +180,4 @@ const Product = () => {
     </>
   );
 };
-
 export default Product;
