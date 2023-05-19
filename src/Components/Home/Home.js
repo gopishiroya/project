@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import "./Home.scss";
@@ -13,12 +13,47 @@ import { EyeFilled, ShoppingCartOutlined } from "@ant-design/icons";
 import image1 from "../Image/home-img-1.png";
 import image2 from "../Image/home-img-2.png";
 import image3 from "../Image/home-img-3.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { collection, getDocs } from "firebase/firestore";
+import { firestore, storage } from "../../Firebase/FIrebase";
+import { getDownloadURL, listAll, ref } from "firebase/storage";
+import Category from './../Category/Category';
 
 const { Meta } = Card;
 
 const Home = () => {
   const [preview, setPreview] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [url, setUrl] = useState([]);
+
+  const getData = collection(firestore, "products");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getDocuments();
+  }, []);
+  
+  const imageRef = ref(storage, "uploads/images/");
+  useEffect(() => {
+    listAll(imageRef).then((res) => {
+      res.items.map((item) => {
+        return (
+          getDownloadURL(item).then((url) => {
+            setUrl((prev) => [...prev, url]);
+          })
+        )
+      })
+    });
+  }, []);
+
+  const getDocuments = async () => {
+    const result = await getDocs(getData);
+    setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+
+  function handleQUick() {
+    navigate('/quickview');
+  }
 
   return (
     <>
@@ -98,38 +133,18 @@ const Home = () => {
         <div className="dishes">
           <Typography.Title className="dtitle">LATEST DISHES</Typography.Title>
           <div className="container">
-            <Card className="dcard">
-              <Image src={pizza} className="dimage" preview={preview}></Image>
-              <Meta className="meta" title="fast food" description="pizza" />
-              <Typography.Title className="price">Rs. 100</Typography.Title>
+          {products.map((products, id) => {
+            return (
+              <Card className="dcard">
+              <Image src={url} className="dimage" preview={preview}></Image>
+              <Meta className="meta" title={products.category} description={products.name} />
+              <Typography.Title className="price">Rs. {products.price}</Typography.Title>
               <Input className="input" type="number" defaultValue={1} min={1} />
-              <EyeFilled className="eyefilled" />
+              <EyeFilled className="eyefilled" onClick={handleQUick}/>
               <ShoppingCartOutlined className="ShoppingCartOutlined" />
             </Card>
-            <Card className="dcard">
-              <Image src={pizza} className="dimage" preview={preview}></Image>
-              <Meta className="meta" title="fast food" description="pizza" />
-              <Typography.Title className="price">Rs. 100</Typography.Title>
-              <Input className="input" type="number" defaultValue={1} min={1} />
-              <EyeFilled className="eyefilled" />
-              <ShoppingCartOutlined className="ShoppingCartOutlined" />
-            </Card>
-            <Card className="dcard">
-              <Image src={pizza} className="dimage" preview={preview}></Image>
-              <Meta className="meta" title="fast food" description="pizza" />
-              <Typography.Title className="price">Rs. 100</Typography.Title>
-              <Input className="input" type="number" defaultValue={1} min={1} />
-              <EyeFilled className="eyefilled" />
-              <ShoppingCartOutlined className="ShoppingCartOutlined" />
-            </Card>
-            <Card className="dcard">
-              <Image src={pizza} className="dimage" preview={preview}></Image>
-              <Meta className="meta" title="fast food" description="pizza" />
-              <Typography.Title className="price">Rs. 100</Typography.Title>
-              <Input className="input" type="number" defaultValue={1} min={1} />
-              <EyeFilled className="eyefilled" />
-              <ShoppingCartOutlined className="ShoppingCartOutlined" />
-            </Card>
+            );
+          })}
           </div>
         </div>
         <div className="Link">

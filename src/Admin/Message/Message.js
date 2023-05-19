@@ -2,17 +2,20 @@ import React, { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import "./Message.scss";
 import { Typography, Card, Button } from "antd";
-import { useDispatch } from "react-redux";
-import { contectGetDataInitaiate } from "../../Action/Action";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { firestore } from "../../Firebase/FIrebase";
-const { Meta } = Card;
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Message = () => {
-  // const dispatch = useDispatch();
   const [data, setData] = useState([]);
 
   const postCollectionRef = collection(firestore, "contect");
+
+  const handleDelete = async (data) => {
+    await deleteDoc(doc(firestore, "contect", data.id));
+    toast.success("delete successfully");
+  };
 
   useEffect(() => {
     const getDocuments = async () => {
@@ -20,60 +23,45 @@ const Message = () => {
       setData(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getDocuments();
-  }, []);
+  }, [handleDelete]);
+
+  
 
   return (
     <>
       <div>
+        <ToastContainer />
         <Header />
       </div>
       <div className="messagebody">
         <Typography.Title className="title">Messages</Typography.Title>
-        {data.map((data) => {
-          return (
-            <Typography.Title>
-              {data.name}
-              {data.number}
-            </Typography.Title>
-          );
-        })}
         <div className="container">
-          <Card className="msgcard">
-            <div className="msgcardrow">
-              <Meta className="meta" description="User Name : ekta" />
-              <Meta className="meta" description="Number : 1234567890" />
-              <Meta className="meta" description="Email : ekta@email.com" />
-              <Meta
-                className="meta"
-                description="Message : Hey i amjsxjsanxnanmlkmkn m,niknk mkkksxd"
-              />
-              <Button className="msgcardbtn">Delete</Button>
-            </div>
-          </Card>
-          {/* <Card className="msgcard">
-            <div className="msgcardrow">
-              <Meta className="meta" description="User Name : ekta" />
-              <Meta className="meta" description="Number : 1234567890" />
-              <Meta className="meta" description="Email : ekta@email.com" />
-              <Meta
-                className="meta"
-                description="Message : Hey i amjsxjsanxnanmlkmkn m,niknk mkkksxd"
-              />
-              <Button className="msgcardbtn">Delete</Button>
-            </div>
-          </Card>
-          <Card className="msgcard">
-            <div className="msgcardrow">
-              <Meta className="meta" description="User Name : ekta" />
-              <Meta className="meta" description="Number : 1234567890" />
-              <Meta className="meta" description="Email : ekta@email.com" />
-              <Meta
-                className="meta"
-                description="Message : Hey i amjsxjsanxnanmlkmkn m,niknk mkkksxd"
-              />
-              <Button className="msgcardbtn">Delete</Button>
-            </div>
-          </Card> */}
+          {data.map((data, id) => {
+            return (
+              <Card className="msgcard" key={id}>
+                <div className="msgcardrow">
+                  <Typography.Paragraph className="msgName">
+                    Name : {data.name}
+                  </Typography.Paragraph>
+                  <Typography.Paragraph className="msgName">
+                    Number : {data.number}
+                  </Typography.Paragraph>
+                  <Typography.Paragraph className="msgName">
+                    Email : {data.email}
+                  </Typography.Paragraph>
+                  <Typography.Paragraph className="msgName">
+                    Message : {data.message}
+                  </Typography.Paragraph>
+                  <Button
+                    className="msgcardbtn"
+                    onClick={() => handleDelete(data)}
+                  >
+                    Delete
+                  </Button>
+                </div>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </>

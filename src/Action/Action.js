@@ -55,8 +55,9 @@ const contect_put_data = () => ({
 }) 
 
 const contect_get_data = () => ({
-  typr: types.CONTECT_GET_DATA
+  type: types.CONTECT_GET_DATA
 })
+
 
 export const registerInitaiate = (email, password) => {
   return function (dispatch) {

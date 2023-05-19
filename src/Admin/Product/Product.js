@@ -14,11 +14,20 @@ import {
 } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
+<<<<<<< HEAD
 import { StorageInitaiate, getDataInitaiate } from "../../Action/Action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { collection, getDocs } from "firebase/firestore";
 import { firestore} from "../../Firebase/FIrebase";
+=======
+import { StorageInitaiate } from "../../Action/Action";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { firestore, storage } from "../../Firebase/FIrebase";
+import { getDownloadURL, listAll, ref } from "firebase/storage";
+>>>>>>> f6e9def0802f6287ca2f8e9da263316f9ea7d76f
 
 const { Meta } = Card;
 
@@ -29,6 +38,7 @@ const Product = () => {
   const [category, setCategory] = useState("");
   const [pic, setPic] = useState("");
   const [products, setProducts] = useState([]);
+<<<<<<< HEAD
 
   const getData = collection(firestore, "products");
 
@@ -44,6 +54,33 @@ const getDocuments = async () => {
 
   }
 
+=======
+  const [url, setUrl] = useState([]);
+
+  const getData = collection(firestore, "products");
+
+  useEffect(() => {
+    getDocuments();
+  }, [handleAddProducts]);
+
+  const imageRef = ref(storage, "uploads/images/");
+  useEffect(() => {
+    listAll(imageRef).then((res) => {
+      res.items.map((item) => {
+        return (
+          getDownloadURL(item).then((url) => {
+            setUrl((prev) => [...prev, url]);
+          })
+        )
+      })
+    });
+  }, []);
+
+  const getDocuments = async () => {
+    const result = await getDocs(getData);
+    setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+>>>>>>> f6e9def0802f6287ca2f8e9da263316f9ea7d76f
   const dispatch = useDispatch();
   const props = {
     name: "file",
@@ -61,9 +98,19 @@ const getDocuments = async () => {
     // setPic("");
     // setCategory("");
     toast.success("product added successfully");
+<<<<<<< HEAD
    
   }
 
+=======
+    getDocuments();
+  }
+
+  async function handleDelete(products) {
+    await deleteDoc(doc(firestore, "products", products.id));
+    toast.success("products delete successfully");
+  }
+>>>>>>> f6e9def0802f6287ca2f8e9da263316f9ea7d76f
 
   return (
     <>
@@ -130,12 +177,16 @@ const getDocuments = async () => {
             htmlType="submit"
             className="productbtn"
             onClick={handleAddProducts}
+<<<<<<< HEAD
             id="btn"
+=======
+>>>>>>> f6e9def0802f6287ca2f8e9da263316f9ea7d76f
           >
             Add Products
           </Button>
         </Form>
       </div>
+<<<<<<< HEAD
       
       <div className="product">
         <div className="container">
@@ -161,6 +212,33 @@ const getDocuments = async () => {
                 <div className="linkrow">
                   <Link className="link1">Update</Link>
                   <Button className="link2">Delete</Button>
+=======
+
+      <div className="product">
+        <div className="container">
+          {products.map((products, id) => {
+            return (
+              <Card className="dcard" key={id}>
+                <Image src={url} className="dimage" preview={preview}></Image>
+                <div className="row">
+                  <Meta
+                    className="meta"
+                    title={products.name}
+                    description={products.category}
+                  />
+                  <Typography.Paragraph className="price">
+                    {products.price}
+                  </Typography.Paragraph>
+                </div>
+                <div className="linkrow">
+                  <Link className="link1" to={"/updateproducts/" + products.id}>Update</Link>
+                  <Button
+                    className="link2"
+                    onClick={() => handleDelete(products)}
+                  >
+                    Delete
+                  </Button>
+>>>>>>> f6e9def0802f6287ca2f8e9da263316f9ea7d76f
                 </div>
               </Card>
             );
@@ -171,5 +249,8 @@ const getDocuments = async () => {
   );
 };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f6e9def0802f6287ca2f8e9da263316f9ea7d76f
 export default Product;
