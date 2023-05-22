@@ -25,8 +25,6 @@ const Message = () => {
     getDocuments();
   }, [handleDelete]);
 
-  
-
   return (
     <>
       <div>
