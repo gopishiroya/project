@@ -6,24 +6,24 @@ import { Select } from "antd";
 import { Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import "./UpdateProduct.scss";
-import cake from "../../Components/Image/home-img-3.jpg";
-import { Link, useParams } from "react-router-dom";
-import { getData } from "../../Firebase/FIrebase";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { firestore, getData } from "../../Firebase/FIrebase";
+import { doc, setDoc } from "firebase/firestore";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UpdateProduct = (props) => {
   const [preview, setPreview] = useState(false);
-  const [products, setProducts] = useState([]);
-  const [pname, setPname] = useState("");
-  const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("");
+  const [products, setProducts] = useState("");
   const [pic, setPic] = useState("");
-  
-  const params = useParams();
-  // console.log(params);
 
+  const navigate = useNavigate(); 
+
+  const params = useParams();
   useEffect(() => {
     getData(params.id).then((value) => setProducts(value.data()));
   }, []);
+  // console.log(products);
   const prop = {
     name: "file",
     beforeUpload: (file) => {
@@ -31,7 +31,22 @@ const UpdateProduct = (props) => {
       return false;
     },
   };
-  
+
+  const path = doc(firestore, "products", params.id);
+  async function handleUpdate(e) {
+    e.preventDefault();
+    const data = {
+      name: products.name,
+      price: products.price,
+      category: products.category, 
+    };
+    setDoc(path, data)
+      .then((path) => console.log(path))
+      .catch((error) => console.log(error));
+    toast.success("updated successfully");
+    navigate("/product");
+  }
+
   return (
     <div>
       <Header />
@@ -41,17 +56,26 @@ const UpdateProduct = (props) => {
         </Typography.Title>
         <Form className="form1">
           <div className="uImage">
-            <Image src={products.imageURL} preview={preview} className="images" />
+            <Image
+              src={products?.imageURL}
+              preview={preview}
+              className="images"
+            />
           </div>
           <div className="inputfield">
             <Typography.Title className="updateParagraph">
-              Update Name :{" "}
+              Update Name :
             </Typography.Title>
             <Input
               className="input"
               type="text"
+              placeholder="Product Name"
               value={products.name}
-              onChange={(e) => setPname(e.target.value)}
+              onChange={(e) => {
+                setProducts((pre) => {
+                  return { ...pre, name: e.target.value };
+                });
+              }}
             />
             <Typography.Title className="updateParagraph">
               Update Price :{" "}
@@ -59,9 +83,13 @@ const UpdateProduct = (props) => {
             <Input
               className="input"
               type="text"
-              placeholder="Enter Product Price"
+              placeholder="Product Price"
               value={products.price}
-              onChange={(e) => setPrice(e.target.value)}
+              onChange={(e) => {
+                setProducts((pre) => {
+                  return { ...pre, price: e.target.value };
+                });
+              }}
             />
             <Typography.Title className="updateParagraph">
               Update Category :{" "}
@@ -70,7 +98,11 @@ const UpdateProduct = (props) => {
               placeholder="-- Select Category --"
               className="select"
               value={products.category}
-              onChange={(value) => setCategory(value)}
+              onChange={(value) => {
+                setProducts((pre) => {
+                  return { ...pre, category: value };
+                });
+              }}
               options={[
                 {
                   value: "full-dish",
@@ -100,7 +132,9 @@ const UpdateProduct = (props) => {
             </Upload>
           </div>
           <div className="link">
-            <Button className="productbtn">Update</Button>
+            <Button className="productbtn" onClick={handleUpdate}>
+              Update
+            </Button>
             <Link to="/product" className="productbtngoback">
               Go Back
             </Link>
