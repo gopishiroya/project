@@ -38,10 +38,19 @@ const Product = () => {
   useEffect(() => {
     listAll(imageRef).then((res) => {
       res.items.map((item) => {
+<<<<<<< HEAD
+        return (
+          getDownloadURL(item).then((url) => {
+            setUrl((prev) => [...prev ,url]);
+          })
+        )
+      })
+=======
         return getDownloadURL(item).then((url) => {
           setUrl((prev) => [...prev, url]);
         });
       });
+>>>>>>> 5cbb14146a40829af92dad2d92a1eb69ac0d9454
     });
   }, []);
 
@@ -72,6 +81,12 @@ const Product = () => {
     await deleteDoc(doc(firestore, "products", products.id));
     toast.success("products delete successfully");
   }
+<<<<<<< HEAD
+
+ console.log(products)
+ console.log(url)
+=======
+>>>>>>> 5cbb14146a40829af92dad2d92a1eb69ac0d9454
   return (
     <>
       <div>
@@ -140,7 +155,13 @@ const Product = () => {
             Add Products
           </Button>
         </Form>
+
       </div>
+<<<<<<< HEAD
+    
+
+=======
+>>>>>>> 5cbb14146a40829af92dad2d92a1eb69ac0d9454
       <div className="product">
         <div className="container">
           {products.map((products, id) => {
@@ -155,7 +176,7 @@ const Product = () => {
                   <Meta
                     className="meta"
                     title={products.name}
-                    description={products.category}
+                    description={products.category} 
                   />
                   <Typography.Paragraph className="price">
                     {products.price}
@@ -177,7 +198,13 @@ const Product = () => {
           })}
         </div>
       </div>
+
+    
     </>
   );
 };
+<<<<<<< HEAD
 export default Product;
+=======
+export default Product;
+>>>>>>> 5cbb14146a40829af92dad2d92a1eb69ac0d9454

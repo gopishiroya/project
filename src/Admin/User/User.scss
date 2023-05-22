@@ -1,6 +1,6 @@
 @mixin card {
     width: 310px;
-    height: 150px;
+    height: auto;
     display: inline-flex;
     text-align: center;
     border: 2px solid #34495e;
@@ -28,6 +28,7 @@
         margin-top: 10px;
         padding-left: 190px;
         padding-right: 100px;
+     
 
         .usercard {
             @include card;
@@ -42,18 +43,12 @@
                 margin-top: 18px;
                 margin-left: 20px;
 
-                .ant-card-meta-title {
-                    font-size: 18px;
-                    margin-bottom: 3px;
-                    color: #59728b;
-                }
-
-                .ant-card-meta-description {
-                    font-size: 18px;
-                    color: #59728b;
-                    margin-bottom: 10px;
-                }
-
+             .meta{
+                font-size: 18px;
+                color: #59728b;
+                margin-bottom: 8px;
+                margin-right: 14px;
+             }
                 .usercardbtn {
                     color: white;
                     background-color: #e74c3c;
