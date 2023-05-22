@@ -9,7 +9,7 @@ import "./UpdateProduct.scss";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { firestore, getData } from "../../Firebase/FIrebase";
 import { doc, setDoc } from "firebase/firestore";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const UpdateProduct = (props) => {

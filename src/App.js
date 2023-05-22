@@ -39,8 +39,8 @@ function App() {
         <Route path="/update_profile" element={<Update_profile />} />
         <Route path="/update_address" element={<UpdateAddress />} />
         <Route path="/category" element={<Category />} />
-        <Route path='profile' element={<Profile />} />
-        <Route path='/quickview' element={<QuickView />} />
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/quickview/:id' element={<QuickView />} />
 
         {/* -------- */}
         <Route path='/deshboard' element={<Deshboard />} />
