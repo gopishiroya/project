@@ -18,7 +18,7 @@ import { StorageInitaiate } from "../../Action/Action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
-import { firestore, storage } from "../../Firebase/FIrebase";
+import { firestore, getImage, storage } from "../../Firebase/FIrebase";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 const { Meta } = Card;
 const Product = () => {
@@ -38,12 +38,19 @@ const Product = () => {
   useEffect(() => {
     listAll(imageRef).then((res) => {
       res.items.map((item) => {
+<<<<<<< HEAD
         return (
           getDownloadURL(item).then((url) => {
             setUrl((prev) => [...prev ,url]);
           })
         )
       })
+=======
+        return getDownloadURL(item).then((url) => {
+          setUrl((prev) => [...prev, url]);
+        });
+      });
+>>>>>>> 5cbb14146a40829af92dad2d92a1eb69ac0d9454
     });
   }, []);
 
@@ -51,6 +58,7 @@ const Product = () => {
     const result = await getDocs(getData);
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
+
   const dispatch = useDispatch();
   const props = {
     name: "file",
@@ -73,9 +81,12 @@ const Product = () => {
     await deleteDoc(doc(firestore, "products", products.id));
     toast.success("products delete successfully");
   }
+<<<<<<< HEAD
 
  console.log(products)
  console.log(url)
+=======
+>>>>>>> 5cbb14146a40829af92dad2d92a1eb69ac0d9454
   return (
     <>
       <div>
@@ -146,14 +157,21 @@ const Product = () => {
         </Form>
 
       </div>
+<<<<<<< HEAD
     
 
+=======
+>>>>>>> 5cbb14146a40829af92dad2d92a1eb69ac0d9454
       <div className="product">
         <div className="container">
           {products.map((products, id) => {
             return (
               <Card className="dcard" key={id}>
-                <Image src={url} className="dimage" preview={preview}></Image>
+                <Image
+                  src={url}
+                  className="dimage"
+                  preview={preview}
+                ></Image>
                 <div className="row">
                   <Meta
                     className="meta"
@@ -165,7 +183,9 @@ const Product = () => {
                   </Typography.Paragraph>
                 </div>
                 <div className="linkrow">
-                  <Link className="link1" to={"/updateproducts/" + products.id}>Update</Link>
+                  <Link className="link1" to={"/updateproducts/" + products.id}>
+                    Update
+                  </Link>
                   <Button
                     className="link2"
                     onClick={() => handleDelete(products)}
@@ -183,4 +203,8 @@ const Product = () => {
     </>
   );
 };
+<<<<<<< HEAD
 export default Product;
+=======
+export default Product;
+>>>>>>> 5cbb14146a40829af92dad2d92a1eb69ac0d9454

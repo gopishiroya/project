@@ -6,14 +6,23 @@ import { Select } from "antd";
 import { Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import "./UpdateProduct.scss";
+<<<<<<< HEAD
 import cake from "../../Components/Image/home-img-3.jpg";
 import { Link, useParams } from "react-router-dom";
 import { firestore, getData } from "../../Firebase/FIrebase";
 import { doc, setDoc } from "firebase/firestore";
+=======
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { firestore, getData } from "../../Firebase/FIrebase";
+import { doc, setDoc } from "firebase/firestore";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+>>>>>>> 5cbb14146a40829af92dad2d92a1eb69ac0d9454
 
 const UpdateProduct = (props) => {
   const [preview, setPreview] = useState(false);
   const [products, setProducts] = useState("");
+<<<<<<< HEAD
   const [pname, setPname] = useState("");
   const [price, setPrice] = useState("");
   const [category, setCategory] = useState("");
@@ -28,6 +37,17 @@ const UpdateProduct = (props) => {
     getData(params.id).then((value) => setProducts(value.data()));
   }, []);
   
+=======
+  const [pic, setPic] = useState("");
+
+  const navigate = useNavigate(); 
+
+  const params = useParams();
+  useEffect(() => {
+    getData(params.id).then((value) => setProducts(value.data()));
+  }, []);
+  // console.log(products);
+>>>>>>> 5cbb14146a40829af92dad2d92a1eb69ac0d9454
   const prop = {
     name: "file",
     beforeUpload: (file) => {
@@ -36,7 +56,24 @@ const UpdateProduct = (props) => {
     },
   };
 
+<<<<<<< HEAD
   
+=======
+  const path = doc(firestore, "products", params.id);
+  async function handleUpdate(e) {
+    e.preventDefault();
+    const data = {
+      name: products.name,
+      price: products.price,
+      category: products.category, 
+    };
+    setDoc(path, data)
+      .then((path) => console.log(path))
+      .catch((error) => console.log(error));
+    toast.success("updated successfully");
+    navigate("/product");
+  }
+>>>>>>> 5cbb14146a40829af92dad2d92a1eb69ac0d9454
 
   return (
     <div>
@@ -47,21 +84,38 @@ const UpdateProduct = (props) => {
         </Typography.Title>
         <Form className="form1">
           <div className="uImage">
-            <Image src={cake} preview={preview} className="images" />
+            <Image
+              src={products?.imageURL}
+              preview={preview}
+              className="images"
+            />
           </div>
           <div className="inputfield">
             <Typography.Title className="updateParagraph">
+<<<<<<< HEAD
               Update Name :{" "}
+=======
+              Update Name :
+>>>>>>> 5cbb14146a40829af92dad2d92a1eb69ac0d9454
             </Typography.Title>
             <Input
               className="input"
               type="text"
+<<<<<<< HEAD
               value={products.name}
               placeholder="Enter Product Name"
               onChange={(e) => {
                 setProducts((pre) => {
                   return {...pre, name: e.target.value}
                 })
+=======
+              placeholder="Product Name"
+              value={products.name}
+              onChange={(e) => {
+                setProducts((pre) => {
+                  return { ...pre, name: e.target.value };
+                });
+>>>>>>> 5cbb14146a40829af92dad2d92a1eb69ac0d9454
               }}
             />
             <Typography.Title className="updateParagraph">
@@ -70,12 +124,21 @@ const UpdateProduct = (props) => {
             <Input
               className="input"
               type="text"
+<<<<<<< HEAD
               placeholder="Enter Product Price"
               value={products.price}
                 onChange={(e) => {
                 setProducts((pre) => {
                   return {...pre, price: e.target.value}
                 })
+=======
+              placeholder="Product Price"
+              value={products.price}
+              onChange={(e) => {
+                setProducts((pre) => {
+                  return { ...pre, price: e.target.value };
+                });
+>>>>>>> 5cbb14146a40829af92dad2d92a1eb69ac0d9454
               }}
             />
             <Typography.Title className="updateParagraph">
@@ -87,8 +150,13 @@ const UpdateProduct = (props) => {
               value={products.category}
               onChange={(value) => {
                 setProducts((pre) => {
+<<<<<<< HEAD
                   return {...pre, category: value}
                 })
+=======
+                  return { ...pre, category: value };
+                });
+>>>>>>> 5cbb14146a40829af92dad2d92a1eb69ac0d9454
               }}
               options={[
                 {
@@ -119,7 +187,13 @@ const UpdateProduct = (props) => {
             </Upload>
           </div>
           <div className="link">
+<<<<<<< HEAD
             <Button className="productbtn">Update</Button>
+=======
+            <Button className="productbtn" onClick={handleUpdate}>
+              Update
+            </Button>
+>>>>>>> 5cbb14146a40829af92dad2d92a1eb69ac0d9454
             <Link to="/product" className="productbtngoback">
               Go Back
             </Link>

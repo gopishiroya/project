@@ -18,13 +18,18 @@ const Message = () => {
   };
 
   useEffect(() => {
-    const getDocuments = async () => {
-      const result = await getDocs(postCollectionRef);
-      setData(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
     getDocuments();
   }, [handleDelete]);
 
+<<<<<<< HEAD
+=======
+  const getDocuments = async () => {
+    const result = await getDocs(postCollectionRef);
+    setData(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+  
+
+>>>>>>> 5cbb14146a40829af92dad2d92a1eb69ac0d9454
   return (
     <>
       <div>
