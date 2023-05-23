@@ -13,7 +13,7 @@ import image1 from "../Image/home-img-1.png";
 import image2 from "../Image/home-img-2.png";
 import image3 from "../Image/home-img-3.jpg";
 import { Link } from "react-router-dom";
-import { addDoc, collection, getDoc, getDocs } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { firestore, storage } from "../../Firebase/FIrebase";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 
@@ -47,8 +47,8 @@ const Home = () => {
     const result = await getDocs(getData);
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
-
-  async function handleChange() {
+  
+  async function handleChange(id) {
     setCount(count + 1);
     // const docRef = await addDoc(collection(firestore, "cart"), {
     //   name: products.name,
@@ -57,7 +57,7 @@ const Home = () => {
     // })
     // console.log(docRef);
     console.log(products);
-    console.log(products.id);
+    console.log();
   }
 
   return (
@@ -161,7 +161,7 @@ const Home = () => {
                   </Link>
                   <ShoppingCartOutlined
                     className="ShoppingCartOutlined"
-                    onClick={() => handleChange(products.id)}
+                    onClick={() => handleChange(id)}
                   />
                 </Card>
               );
