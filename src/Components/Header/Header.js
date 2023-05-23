@@ -52,9 +52,10 @@ const Header = (props) => {
             <UserOutlined className="icon1" />
           </Popover>
           <div className="cart">
+            <Link to="/cart"> 
             <Badge count={props.count} size="large" className="notification">
               <ShoppingCartOutlined className="icon2" />
-            </Badge>
+            </Badge></Link>
           </div>
           <SearchOutlined className="icon3" />
         </div>
