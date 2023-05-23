@@ -92,7 +92,7 @@ export const PutDataInitaiate = (email, password, name, number) => {
 
 export const StorageInitaiate = (name, price, category, pic) => {
   return async function (dispatch) {
-    const imageRef = ref(storage, `uploads/images/${Date.now()}-${pic.name}`);
+    const imageRef = ref(storage, `uploads/images/${pic.name}`);
     const uploadResult = await uploadBytes(imageRef, pic);
     return await addDoc(collection(firestore, "products"), {
       name,
