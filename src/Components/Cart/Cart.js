@@ -3,7 +3,7 @@ import "./Cart.scss";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Typography, Card, Image, Input, Button } from "antd";
-import { EyeFilled, ShoppingCartOutlined, EditFilled } from "@ant-design/icons";
+import { EyeFilled, ShoppingCartOutlined, EditFilled ,DeleteTwoTone} from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import pizza from "../Image/pizza-1.png";
 
@@ -36,7 +36,8 @@ const Cart = () => {
             <Input className="input" type="number" defaultValue={1} min={1} />
             <EditFilled className="EditFilled" /> 
             <EyeFilled className="eyefilled" />
-            <ShoppingCartOutlined className="ShoppingCartOutlined" />
+            <DeleteTwoTone   className="ShoppingCartOutlined"/>
+          
             <Typography.Paragraph className="paragraph">sub total : Rs. 100/-</Typography.Paragraph>
           </Card>
         </div>

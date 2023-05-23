@@ -38,10 +38,19 @@ const Product = () => {
   useEffect(() => {
     listAll(imageRef).then((res) => {
       res.items.map((item) => {
+<<<<<<< HEAD
         return getDownloadURL(item).then((url) => {
           setUrl((prev) => [...prev, url]);
         });
       });
+=======
+        return (
+          getDownloadURL(item).then((url) => {
+            setUrl((prev) => [...prev ,url]);
+          })
+        )
+      })
+>>>>>>> d2748f31584df044c43542701739662db2b1c3fa
     });
   }, []);
 
@@ -73,8 +82,13 @@ const Product = () => {
     toast.success("products delete successfully");
   }
 
+<<<<<<< HEAD
   console.log(products);
   console.log(url);
+=======
+ console.log(products)
+ console.log(url)
+>>>>>>> d2748f31584df044c43542701739662db2b1c3fa
   return (
     <>
       <div>
@@ -144,6 +158,10 @@ const Product = () => {
           </Button>
         </Form>
       </div>
+<<<<<<< HEAD
+=======
+    
+>>>>>>> d2748f31584df044c43542701739662db2b1c3fa
       <div className="product">
         <div className="container">
           {products.map((products, id) => {
@@ -178,6 +196,12 @@ const Product = () => {
       </div>
     </>
   );
+<<<<<<< HEAD
 };
 
 export default Product;
+=======
+        }
+export default Product;
+
+>>>>>>> d2748f31584df044c43542701739662db2b1c3fa
