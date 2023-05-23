@@ -1,27 +1,26 @@
-import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Header.scss";
 import {
   SearchOutlined,
   ShoppingCartOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Button, Popover, Typography } from "antd";
+import { Badge, Popover, Typography } from "antd";
 
-const text = (
-  <Typography.Title className="usertext">
-    Please Login First!👇
-  </Typography.Title>
-);
-const content = (
-  <div className="loginbtnpopup">
-    <Link to="/login" className="loginbtninner">
-      Login Now
-    </Link>
-  </div>
-);
-
-const Header = () => {
+const Header = (props) => {
+  const text = (
+    <Typography.Title className="usertext">
+      Please Login First!👇
+    </Typography.Title>
+  );
+  const content = (
+    <div className="loginbtnpopup">
+      <Link to="/login" className="loginbtninner">
+        Login Now
+      </Link>
+    </div>
+  );
   return (
     <>
       <div className="header">
@@ -42,17 +41,23 @@ const Header = () => {
           Contact
         </Link>
 
-        <Popover
-          placement="bottomRight"
-          className="icon1"
-          title={text}
-          content={content}
-          trigger="hover"
-        >
-          <UserOutlined className="icon1" />
-        </Popover>
-        <ShoppingCartOutlined className="icon2" />
-        <SearchOutlined className="icon3" />
+        <div className="icon">
+          <Popover
+            placement="bottomRight"
+            className="icon1"
+            title={text}
+            content={content}
+            trigger="hover"
+          >
+            <UserOutlined className="icon1" />
+          </Popover>
+          <div className="cart">
+            <Badge count={props.count} size="large" className="notification">
+              <ShoppingCartOutlined className="icon2" />
+            </Badge>
+          </div>
+          <SearchOutlined className="icon3" />
+        </div>
       </div>
     </>
   );

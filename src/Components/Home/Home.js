@@ -3,21 +3,19 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import "./Home.scss";
 import Typography from "antd/es/typography/Typography";
-import { Card, Image, Input, Carousel, Button } from "antd";
+import { Card, Image, Input, Carousel } from "antd";
 import cat1 from "../Image/cat-1.png";
 import cat2 from "../Image/cat-2.png";
 import cat3 from "../Image/cat-3.png";
 import cat4 from "../Image/cat-4.png";
-import pizza from "../Image/pizza-1.png";
 import { EyeFilled, ShoppingCartOutlined } from "@ant-design/icons";
 import image1 from "../Image/home-img-1.png";
 import image2 from "../Image/home-img-2.png";
 import image3 from "../Image/home-img-3.jpg";
-import { Link, useNavigate } from "react-router-dom";
-import { collection, getDocs } from "firebase/firestore";
+import { Link } from "react-router-dom";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { firestore, storage } from "../../Firebase/FIrebase";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
-import Category from './../Category/Category';
 
 const { Meta } = Card;
 
@@ -25,9 +23,9 @@ const Home = () => {
   const [preview, setPreview] = useState(false);
   const [products, setProducts] = useState([]);
   const [url, setUrl] = useState([]);
+  const [count, setCount] = useState(0);
 
   const getData = collection(firestore, "products");
-  const navigate = useNavigate();
 
   useEffect(() => {
     getDocuments();
@@ -50,16 +48,23 @@ const Home = () => {
     const result = await getDocs(getData);
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
-
-  function handleQUick() {
-    navigate('/quickview');
+  async function handleChange() {
+    setCount(count + 1);
+    // const docRef = await addDoc(collection(firestore, "cart"), {
+    //   name: products.name,
+    //   price: products.price,
+    //   category: products.category
+    // })
+    // console.log(docRef);
+    
   }
 
+  
   return (
     <>
       <div className="home">
         <div>
-          <Header />
+          <Header count={count} />
         </div>
         <div className="slider">
           <Carousel autoplay>
@@ -135,13 +140,15 @@ const Home = () => {
           <div className="container">
           {products.map((products, id) => {
             return (
-              <Card className="dcard">
+              <Card className="dcard" key={id}>
               <Image src={url} className="dimage" preview={preview}></Image>
               <Meta className="meta" title={products.category} description={products.name} />
               <Typography.Title className="price">Rs. {products.price}</Typography.Title>
               <Input className="input" type="number" defaultValue={1} min={1} />
-              <EyeFilled className="eyefilled" onClick={handleQUick}/>
-              <ShoppingCartOutlined className="ShoppingCartOutlined" />
+              <Link to={"/quickview/" + products.id}>
+              <EyeFilled className="eyefilled"/>
+              </Link>
+              <ShoppingCartOutlined className="ShoppingCartOutlined" onClick={() => handleChange()} />
             </Card>
             );
           })}
