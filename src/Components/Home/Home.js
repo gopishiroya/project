@@ -12,10 +12,11 @@ import { EyeFilled, ShoppingCartOutlined } from "@ant-design/icons";
 import image1 from "../Image/home-img-1.png";
 import image2 from "../Image/home-img-2.png";
 import image3 from "../Image/home-img-3.jpg";
-import { Link } from "react-router-dom";
-import { addDoc, collection, getDocs } from "firebase/firestore";
-import { firestore, storage } from "../../Firebase/FIrebase";
+import { Link, useNavigate } from "react-router-dom";
+import { addDoc, collection, getDocs} from "firebase/firestore";
+import { auth, firestore, storage } from "../../Firebase/FIrebase";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
+import { onAuthStateChanged } from "firebase/auth";
 
 const { Meta } = Card;
 
@@ -26,6 +27,7 @@ const Home = () => {
   const [count, setCount] = useState(0);
 
   const getData = collection(firestore, "products");
+  const navigate = useNavigate();
 
   useEffect(() => {
     getDocuments();
@@ -48,23 +50,44 @@ const Home = () => {
     const result = await getDocs(getData);
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
-  async function handleChange() {
-    setCount(count + 1);
-    // const docRef = await addDoc(collection(firestore, "cart"), {
-    //   name: products.name,
-    //   price: products.price,
-    //   category: products.category
-    // })
-    // console.log(docRef);
-    
+  
+  function Getuserid(){
+    const[uid,setuid]=useState(null)
+    useEffect(()=>{
+      auth.onAuthStateChanged(user=>{
+        if(user){
+          setuid(user.uid)
+        }
+        else{
+          navigate('/');
+        }
+      })
+    },[])
+    return uid;
   }
+  const uid=Getuserid()  
+    console.log(uid)
+  
 
+  async function handleChange(product) {
+    setCount(count + 1);
+    Addtocart(products)
+  }
+  const Addtocart=(product)=>{
+    console.log(product)
+  }
+  // if(uid!==null){
+  //   console.log(product)
+  // }
+  // else{
+  //   navigate('/login');
+  // }
   
   return (
     <>
       <div className="home">
         <div>
-          <Header count={count} />
+          <Header count={count} user={uid} />
         </div>
         <div className="slider">
           <Carousel autoplay>
