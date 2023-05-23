@@ -77,13 +77,10 @@ export const loginInitaiate = (email, password) => {
   };
 };
 
-export const PutDataInitaiate = (email, password, name, number) => {
+export const PutDataInitaiate = (name, email, password, number) => {
   return function (dispatch) {
     addDoc(collection(firestore, "user"), {
-      email,
-      password,
-      name,
-      number
+      name, email, password, number
     })
       .then(() => dispatch(put_data))
       .catch((error) => dispatch(put_data(error)));

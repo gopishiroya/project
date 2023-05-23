@@ -12,17 +12,10 @@ import { EyeFilled, ShoppingCartOutlined } from "@ant-design/icons";
 import image1 from "../Image/home-img-1.png";
 import image2 from "../Image/home-img-2.png";
 import image3 from "../Image/home-img-3.jpg";
-<<<<<<< HEAD
 import { Link, useNavigate } from "react-router-dom";
 import { auth, firestore, storage } from "../../Firebase/FIrebase";
-import { addDoc, collection, getDoc, getDocs } from "firebase/firestore";
-=======
-import { Link } from "react-router-dom";
-import { addDoc, collection, doc, getDoc, getDocs } from "firebase/firestore";
-import { firestore, storage } from "../../Firebase/FIrebase";
->>>>>>> 7d6685bdf815c2f2d39e37984520fbc7cbd9b98b
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
-import { onAuthStateChanged } from "firebase/auth";
 
 const { Meta } = Card;
 
@@ -31,7 +24,6 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const [url, setUrl] = useState([]);
   const [count, setCount] = useState(0);
-  const [cart, setCart] = useState([]);
 
   const getData = collection(firestore, "products");
   const navigate = useNavigate();
@@ -55,51 +47,34 @@ const Home = () => {
     const result = await getDocs(getData);
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
-  
-<<<<<<< HEAD
-  function Getuserid(){
-    const[uid,setuid]=useState(null)
-    useEffect(()=>{
-      auth.onAuthStateChanged(user=>{
-        if(user){
-          setuid(user.uid)
-        }
-        else{
-          navigate('/');
-        }
-      })
-    },[])
-    return uid;
-=======
-  async function handleChange(id) {
-    setCount(count + 1);
-    // const docRef = await addDoc(collection(firestore, "cart"), {
-    //   name: products.name,
-    //   price: products.price,
-    //   category: products.category
-    // })
-    // console.log(docRef);
-    console.log(products);
-    console.log();
->>>>>>> 7d6685bdf815c2f2d39e37984520fbc7cbd9b98b
-  }
-  const uid=Getuserid()  
-    console.log(uid)
-  
 
-  async function handleChange(product) {
+  function Getuserid() {
+    const [uid, setuid] = useState(null);
+    useEffect(() => {
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          setuid(user.uid);
+        } else {
+          navigate("/");
+        }
+      });
+    }, []);
+    return uid;
+  }
+  const uid = Getuserid();
+  console.log(uid);
+
+  async function handleChange(name) {
+    if (uid !== null) {
+      console.log(products);
+    } else {
+      navigate("/login");
+    }
     setCount(count + 1);
-    Addtocart(products)
+    addDoc(collection(firestore, "cart" + uid), name)
+      .then(() => console.log("success"))
+      .catch((error) => console.log(error));
   }
-  const Addtocart=(product)=>{
-    console.log(product)
-  }
-  // if(uid!==null){
-  //   console.log(product)
-  // }
-  // else{
-  //   navigate('/login');
-  // }
 
   return (
     <>
@@ -197,12 +172,13 @@ const Home = () => {
                     defaultValue={1}
                     min={1}
                   />
+
                   <Link to={"/quickview/" + products.id}>
                     <EyeFilled className="eyefilled" />
                   </Link>
                   <ShoppingCartOutlined
                     className="ShoppingCartOutlined"
-                    onClick={() => handleChange(id)}
+                    onClick={() => handleChange(products)}
                   />
                 </Card>
               );
