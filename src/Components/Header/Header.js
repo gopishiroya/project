@@ -1,17 +1,30 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.scss";
 import {
   SearchOutlined,
   ShoppingCartOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Badge, Popover, Typography } from "antd";
+import { Badge, Button, Popover, Typography } from "antd";
+import { auth } from "../../Firebase/FIrebase";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Header = (props) => {
+
+  console.log(props.user);
+  function handleLogout() {
+    auth
+      .signOut()
+      .then(() => console.log("success"))
+      .catch((error) => console.log(error));
+      toast.success("Logout");
+  }
+  
   const text = (
     <Typography.Title className="usertext">
-      Please Login First!👇
+      Please Login First! 👇
     </Typography.Title>
   );
   const content = (
@@ -21,8 +34,20 @@ const Header = (props) => {
       </Link>
     </div>
   );
+
+  const text1 = (
+    <Typography.Title className="usertext">profile</Typography.Title>
+  );
+  const content1 = (
+    <div className="loginbtnpopup">
+      <Button className="loginbtninner" onClick={handleLogout}>
+        Logout
+      </Button>
+    </div>
+  );
   return (
     <>
+    <ToastContainer />
       <div className="header">
         <Link className="title" to="/">
           yum-yum 😋
@@ -42,15 +67,29 @@ const Header = (props) => {
         </Link>
 
         <div className="icon">
-          <Popover
-            placement="bottomRight"
-            className="icon1"
-            title={text}
-            content={content}
-            trigger="hover"
-          >
-            <UserOutlined className="icon1" />
-          </Popover>
+        {props.user && (
+            <Popover
+              placement="bottomRight"
+              className="icon1"
+              title={text1}
+              content={content1}
+              trigger="hover"
+            >
+              <UserOutlined className="icon1" />
+            </Popover>
+          )}
+          {!props.user && (
+            <Popover
+              placement="bottomRight"
+              className="icon1"
+              title={text}
+              content={content}
+              trigger="hover"
+            >
+              <UserOutlined className="icon1" />
+            </Popover>
+          )}
+          
           <div className="cart">
             <Link to="/cart"> 
             <Badge count={props.count} size="large" className="notification">

@@ -5,7 +5,7 @@ import { Form, Typography, Input, Button } from "antd";
 import "./Login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginInitaiate, PutDataInitaiate } from "../../Action/Action";
+import { loginInitaiate } from "../../Action/Action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -28,7 +28,6 @@ const Login = (props) => {
     dispatch(loginInitaiate(email, password));
     setEmail("");
     setPassword("");
-    dispatch(PutDataInitaiate(email, password));
     toast.success("Login successfully");
   }
 

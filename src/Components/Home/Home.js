@@ -12,10 +12,17 @@ import { EyeFilled, ShoppingCartOutlined } from "@ant-design/icons";
 import image1 from "../Image/home-img-1.png";
 import image2 from "../Image/home-img-2.png";
 import image3 from "../Image/home-img-3.jpg";
+<<<<<<< HEAD
+import { Link, useNavigate } from "react-router-dom";
+import { auth, firestore, storage } from "../../Firebase/FIrebase";
+import { addDoc, collection, getDoc, getDocs } from "firebase/firestore";
+=======
 import { Link } from "react-router-dom";
 import { addDoc, collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { firestore, storage } from "../../Firebase/FIrebase";
+>>>>>>> 7d6685bdf815c2f2d39e37984520fbc7cbd9b98b
 import { getDownloadURL, listAll, ref } from "firebase/storage";
+import { onAuthStateChanged } from "firebase/auth";
 
 const { Meta } = Card;
 
@@ -27,6 +34,7 @@ const Home = () => {
   const [cart, setCart] = useState([]);
 
   const getData = collection(firestore, "products");
+  const navigate = useNavigate();
 
   useEffect(() => {
     getDocuments();
@@ -48,6 +56,21 @@ const Home = () => {
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
   
+<<<<<<< HEAD
+  function Getuserid(){
+    const[uid,setuid]=useState(null)
+    useEffect(()=>{
+      auth.onAuthStateChanged(user=>{
+        if(user){
+          setuid(user.uid)
+        }
+        else{
+          navigate('/');
+        }
+      })
+    },[])
+    return uid;
+=======
   async function handleChange(id) {
     setCount(count + 1);
     // const docRef = await addDoc(collection(firestore, "cart"), {
@@ -58,13 +81,31 @@ const Home = () => {
     // console.log(docRef);
     console.log(products);
     console.log();
+>>>>>>> 7d6685bdf815c2f2d39e37984520fbc7cbd9b98b
   }
+  const uid=Getuserid()  
+    console.log(uid)
+  
+
+  async function handleChange(product) {
+    setCount(count + 1);
+    Addtocart(products)
+  }
+  const Addtocart=(product)=>{
+    console.log(product)
+  }
+  // if(uid!==null){
+  //   console.log(product)
+  // }
+  // else{
+  //   navigate('/login');
+  // }
 
   return (
     <>
       <div className="home">
         <div>
-          <Header count={count} />
+          <Header count={count} user={uid} />
         </div>
         <div className="slider">
           <Carousel autoplay>

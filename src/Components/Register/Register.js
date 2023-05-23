@@ -6,7 +6,7 @@ import { Form, Typography, Input, Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import "./Register.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { registerInitaiate } from "../../Action/Action";
+import { registerInitaiate, PutDataInitaiate } from "../../Action/Action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -42,6 +42,7 @@ const Register = () => {
     setPassword("");
     setCpassword("");
     toast.success("data added success");
+    dispatch(PutDataInitaiate(name, email, number ,password));
   }
 
   return (

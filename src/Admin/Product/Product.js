@@ -37,12 +37,20 @@ const Product = () => {
   useEffect(() => {
     listAll(imageRef).then((res) => {
       res.items.map((item) => {
+<<<<<<< HEAD
+        return getDownloadURL(item).then((url) => {
+          setUrl((prev) => [...prev, url]);
+        });
+      });
+       
+=======
         return (
           getDownloadURL(item).then((url) => {
             setUrl((prev) => [...prev ,url]);
           })
         )
       })
+>>>>>>> 7d6685bdf815c2f2d39e37984520fbc7cbd9b98b
     });
   }, []);
   const getDocuments = async () => {
@@ -71,8 +79,14 @@ const Product = () => {
     await deleteDoc(doc(firestore, "products", products.id));
     toast.success("products delete successfully");
   }
+<<<<<<< HEAD
+
+  console.log(products);
+  console.log(url);
+=======
  console.log(products)
  console.log(url)
+>>>>>>> 7d6685bdf815c2f2d39e37984520fbc7cbd9b98b
   return (
     <>
       <div>
@@ -181,5 +195,14 @@ const Product = () => {
       </div>
     </>
   );
+<<<<<<< HEAD
+};
+
+
+        
+export default Product;
+
+=======
         }
 export default Product;
+>>>>>>> 7d6685bdf815c2f2d39e37984520fbc7cbd9b98b
