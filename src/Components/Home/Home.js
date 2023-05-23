@@ -15,6 +15,9 @@ import image3 from "../Image/home-img-3.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { addDoc, collection, getDocs} from "firebase/firestore";
 import { auth, firestore, storage } from "../../Firebase/FIrebase";
+import { Link } from "react-router-dom";
+import { addDoc, collection, getDoc, getDocs } from "firebase/firestore";
+import { firestore, storage } from "../../Firebase/FIrebase";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -25,6 +28,7 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const [url, setUrl] = useState([]);
   const [count, setCount] = useState(0);
+  const [cart, setCart] = useState([]);
 
   const getData = collection(firestore, "products");
   const navigate = useNavigate();
@@ -32,17 +36,15 @@ const Home = () => {
   useEffect(() => {
     getDocuments();
   }, []);
-  
+
   const imageRef = ref(storage, "uploads/images/");
   useEffect(() => {
     listAll(imageRef).then((res) => {
       res.items.map((item) => {
-        return (
-          getDownloadURL(item).then((url) => {
-            setUrl((prev) => [...prev, url]);
-          })
-        )
-      })
+        return getDownloadURL(item).then((url) => {
+          setUrl((prev) => [...prev, url]);
+        });
+      });
     });
   }, []);
 
@@ -64,6 +66,17 @@ const Home = () => {
       })
     },[])
     return uid;
+
+  async function handleChange() {
+    setCount(count + 1);
+    // const docRef = await addDoc(collection(firestore, "cart"), {
+    //   name: products.name,
+    //   price: products.price,
+    //   category: products.category
+    // })
+    // console.log(docRef);
+    console.log(products);
+    console.log(products.id);
   }
   const uid=Getuserid()  
     console.log(uid)
@@ -82,7 +95,7 @@ const Home = () => {
   // else{
   //   navigate('/login');
   // }
-  
+
   return (
     <>
       <div className="home">
@@ -161,20 +174,34 @@ const Home = () => {
         <div className="dishes">
           <Typography.Title className="dtitle">LATEST DISHES</Typography.Title>
           <div className="container">
-          {products.map((products, id) => {
-            return (
-              <Card className="dcard" key={id}>
-              <Image src={url} className="dimage" preview={preview}></Image>
-              <Meta className="meta" title={products.category} description={products.name} />
-              <Typography.Title className="price">Rs. {products.price}</Typography.Title>
-              <Input className="input" type="number" defaultValue={1} min={1} />
-              <Link to={"/quickview/" + products.id}>
-              <EyeFilled className="eyefilled"/>
-              </Link>
-              <ShoppingCartOutlined className="ShoppingCartOutlined" onClick={() => handleChange()} />
-            </Card>
-            );
-          })}
+            {products.map((products, id) => {
+              return (
+                <Card className="dcard" key={id}>
+                  <Image src={url} className="dimage" preview={preview}></Image>
+                  <Meta
+                    className="meta"
+                    title={products.category}
+                    description={products.name}
+                  />
+                  <Typography.Title className="price">
+                    Rs. {products.price}
+                  </Typography.Title>
+                  <Input
+                    className="input"
+                    type="number"
+                    defaultValue={1}
+                    min={1}
+                  />
+                  <Link to={"/quickview/" + products.id}>
+                    <EyeFilled className="eyefilled" />
+                  </Link>
+                  <ShoppingCartOutlined
+                    className="ShoppingCartOutlined"
+                    onClick={() => handleChange(products.id)}
+                  />
+                </Card>
+              );
+            })}
           </div>
         </div>
         <div className="Link">
