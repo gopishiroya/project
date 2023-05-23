@@ -13,11 +13,8 @@ import image1 from "../Image/home-img-1.png";
 import image2 from "../Image/home-img-2.png";
 import image3 from "../Image/home-img-3.jpg";
 import { Link, useNavigate } from "react-router-dom";
-import { addDoc, collection, getDocs} from "firebase/firestore";
 import { auth, firestore, storage } from "../../Firebase/FIrebase";
-import { Link } from "react-router-dom";
 import { addDoc, collection, getDoc, getDocs } from "firebase/firestore";
-import { firestore, storage } from "../../Firebase/FIrebase";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -66,17 +63,6 @@ const Home = () => {
       })
     },[])
     return uid;
-
-  async function handleChange() {
-    setCount(count + 1);
-    // const docRef = await addDoc(collection(firestore, "cart"), {
-    //   name: products.name,
-    //   price: products.price,
-    //   category: products.category
-    // })
-    // console.log(docRef);
-    console.log(products);
-    console.log(products.id);
   }
   const uid=Getuserid()  
     console.log(uid)
