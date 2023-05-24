@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Header from "../Header/Header";
-import { Image, Typography, Card, Carousel, Rate } from "antd";
+import { Image, Typography, Card,Rate } from "antd";
 import "./About.scss";
 import { Link } from "react-router-dom";
 import about from "../Image/about-img.svg";
@@ -11,15 +11,34 @@ import ekta from "../Image/ekta.png";
 import gopi from "../Image/gopi.png";
 import geera from "../Image/geera.png";
 import Footer from "../Footer/Footer";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../Firebase/FIrebase";
 
 const { Meta } = Card;
 
 const About = () => {
   const [preview, setPreview] = useState(false);
+  const navigate = useNavigate(null);
+
+  function Getuserid() {
+    const [uid, setuid] = useState(null);
+    useEffect(() => {
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          setuid(user.email);
+        } else {
+          navigate("/");
+        }
+      });
+    }, []);
+    return uid;
+  }
+  const uid = Getuserid();
+  console.log(uid);
 
   return (
     <div className="about">
-      <Header />
+      <Header  user={uid}/>
       <div className="container1">
         <Typography.Title className="atitle">About Us</Typography.Title>
         <Link to="/" className="home">

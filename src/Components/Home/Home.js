@@ -14,9 +14,8 @@ import image2 from "../Image/home-img-2.png";
 import image3 from "../Image/home-img-3.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, firestore, storage } from "../../Firebase/FIrebase";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs,doc, getDoc } from "firebase/firestore";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
-
 const { Meta } = Card;
 
 const Home = () => {
@@ -24,14 +23,13 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const [url, setUrl] = useState([]);
   const [count, setCount] = useState(0);
-
   const getData = collection(firestore, "products");
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     getDocuments();
   }, []);
-
   const imageRef = ref(storage, "uploads/images/");
   useEffect(() => {
     listAll(imageRef).then((res) => {
@@ -42,18 +40,16 @@ const Home = () => {
       });
     });
   }, []);
-
   const getDocuments = async () => {
     const result = await getDocs(getData);
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
-
   function Getuserid() {
     const [uid, setuid] = useState(null);
     useEffect(() => {
       auth.onAuthStateChanged((user) => {
         if (user) {
-          setuid(user.uid);
+          setuid(user.email);
         } else {
           navigate("/");
         }
@@ -71,11 +67,10 @@ const Home = () => {
       navigate("/login");
     }
     setCount(count + 1);
-    addDoc(collection(firestore, "cart" + uid), name)
+    addDoc(collection(firestore, "cart " + uid),name)
       .then(() => console.log("success"))
       .catch((error) => console.log(error));
   }
-
   return (
     <>
       <div className="home">
@@ -197,5 +192,4 @@ const Home = () => {
     </>
   );
 };
-
 export default Home;

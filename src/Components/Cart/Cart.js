@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState ,useEffect} from "react";
 import "./Cart.scss";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Typography, Card, Image, Input, Button } from "antd";
+<<<<<<< HEAD
 import {
   EditFilled,
   DeleteTwoTone,
@@ -13,6 +14,13 @@ import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { auth, firestore } from "../../Firebase/FIrebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+=======
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { EyeFilled, ShoppingCartOutlined, EditFilled ,DeleteTwoTone} from "@ant-design/icons";
+import { Link, useNavigate } from "react-router-dom";
+import pizza from "../Image/pizza-1.png";
+import { auth ,firestore} from "../../Firebase/FIrebase";
+>>>>>>> 88daca7840655731b11f65260a32910796bf2f60
 
 const { Meta } = Card;
 
@@ -29,7 +37,7 @@ const Cart = () => {
     useEffect(() => {
       auth.onAuthStateChanged((user) => {
         if (user) {
-          setuid(user.uid);
+          setuid(user.email);
         } else {
           navigate("/");
         }
@@ -40,6 +48,7 @@ const Cart = () => {
   const uid = Getuserid();
   // console.log(uid);
 
+<<<<<<< HEAD
   useEffect(() => {
     
   }, []);
@@ -61,6 +70,17 @@ const Cart = () => {
    setTotal(Total)
   } 
 
+=======
+  
+  const getData = collection(firestore, "cart" + uid );
+  const getDocuments = async () => {
+    const result = await getDocs(getData);
+    setCart(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+  console.log(cart);
+getDocuments()
+  
+>>>>>>> 88daca7840655731b11f65260a32910796bf2f60
   return (
     <div className="cart">
       <ToastContainer />

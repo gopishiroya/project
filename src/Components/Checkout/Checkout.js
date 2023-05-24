@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import "./Checkout.scss";
 import Header from "../Header/Header";
 import { Typography, Select, Button } from "antd";
@@ -10,12 +10,31 @@ import {
   EnvironmentFilled,
 } from "@ant-design/icons";
 import Footer from "../Footer/Footer";
+import { auth } from "../../Firebase/FIrebase";
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
+  const navigate = useNavigate(null);
+
+  function Getuserid() {
+    const [uid, setuid] = useState(null);
+    useEffect(() => {
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          setuid(user.email);
+        } else {
+          navigate("/");
+        }
+      });
+    }, []);
+    return uid;
+  }
+  const uid = Getuserid();
+  console.log(uid);
   return (
     <div className="checkout">
       <div>
-        <Header />
+        <Header  user={uid}/>
       </div>
       <div className="container1">
         <Typography.Title className="atitle">Checkout</Typography.Title>

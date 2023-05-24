@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Typography } from "antd";
@@ -6,10 +6,11 @@ import { Link } from "react-router-dom";
 import "./Menu.scss";
 import { Card, Image, Input } from "antd";
 import { EyeFilled, ShoppingCartOutlined } from "@ant-design/icons";
-import { useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { firestore, storage } from "../../Firebase/FIrebase";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
+import { auth } from "../../Firebase/FIrebase";
+import { useNavigate } from "react-router-dom";
 
 const { Meta } = Card;
 
@@ -17,6 +18,22 @@ const Menu = () => {
   const [preview, setPreview] = useState(false);
   const [products, setProducts] = useState([]);
   const [url, setUrl] = useState([]);
+  const navigate = useNavigate(null);
+  function Getuserid() {
+    const [uid, setuid] = useState(null);
+    useEffect(() => {
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          setuid(user.email);
+        } else {
+          navigate("/");
+        }
+      });
+    }, []);
+    return uid;
+  }
+  const uid = Getuserid();
+  console.log(uid);
 
   const getData = collection(firestore, "products");
 
@@ -44,7 +61,7 @@ const Menu = () => {
 
   return (
     <div className="menu">
-      <Header />
+      <Header  user={uid}/>
       <div className="menutitle">
         <Typography.Title className="mtitle">Our Menu</Typography.Title>
         <Link to="/" className="home">

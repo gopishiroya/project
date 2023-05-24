@@ -9,21 +9,26 @@ import {
 import { Badge, Button, Popover, Typography } from "antd";
 import { auth, firestore } from "../../Firebase/FIrebase";
 import { ToastContainer, toast } from "react-toastify";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import "react-toastify/dist/ReactToastify.css";
-import { collection, getDocs } from "firebase/firestore";
-
 const Header = (props) => {
+  
 
+<<<<<<< HEAD
   const [user, setUser] = useState([]);
   const navigate = useNavigate();
 
   // console.log(props.user);
+=======
+  // const [user,setUser]=useState(null)
+>>>>>>> 88daca7840655731b11f65260a32910796bf2f60
   function handleLogout() {
     auth
       .signOut()
       .then(() => console.log("success"))
       .catch((error) => console.log(error));
       toast.success("Logout");
+     
   }
   
   const text = (
@@ -39,18 +44,30 @@ const Header = (props) => {
     </div>
   );
 
-  useEffect(() => {
-    getDocuments();
-  }, [])
+  // useEffect(() => {
+  //   getDocuments();
+  // }, [])
 
+<<<<<<< HEAD
   const getData = collection(firestore, "user");
   const getDocuments = async () => {
     const result = await getDocs(getData);
     setUser(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
   // console.log(user.name);
+=======
+
+  // const getData = collection(firestore, "user");
+  // const getDocuments = async () => {
+  //   const result = await getDocs(getData);
+  //   setUser(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  // };
+  // console.log(user);
+
+  
+>>>>>>> 88daca7840655731b11f65260a32910796bf2f60
   const text1 = (
-    <Typography.Title className="usertext">{user.name}</Typography.Title>
+    <Typography.Title className="usertext">{props.user}</Typography.Title>
   );
   const content1 = (
     <div className="loginbtnpopup">

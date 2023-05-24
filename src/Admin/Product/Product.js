@@ -41,6 +41,7 @@ const Product = () => {
           setUrl((prev) => [...prev, url]);
         });
       });
+ 
     });
   }, []);
   const getDocuments = async () => {
@@ -72,6 +73,7 @@ const Product = () => {
 
   console.log(products);
   console.log(url);
+ 
   return (
     <>
       <div>

@@ -5,11 +5,13 @@ import { Typography, Image, Form, Input, Button } from "antd";
 import { Link } from "react-router-dom";
 import "./Contect.scss";
 import contect from "../Image/contact-img.svg";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { contectPutDataInitaiate } from "../../Action/Action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../Firebase/FIrebase";
 
 const { TextArea } = Input;
 const Contect = () => {
@@ -20,6 +22,23 @@ const Contect = () => {
   const [message, setMessage] = useState("");
 
   const dispatch = useDispatch();
+  const navigate = useNavigate(null);
+
+  function Getuserid() {
+    const [uid, setuid] = useState(null);
+    useEffect(() => {
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          setuid(user.email);
+        } else {
+          navigate("/");
+        }
+      });
+    }, []);
+    return uid;
+  }
+  const uid = Getuserid();
+  console.log(uid);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -34,7 +53,7 @@ const Contect = () => {
   return (
     <div className="contect">
       <ToastContainer />
-      <Header />
+      <Header user={uid}/>
       <div className="phone">
         <Typography.Title className="ctitle">Contect Us</Typography.Title>
         <Link to="/" className="home">
