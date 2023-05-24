@@ -15,8 +15,9 @@ import { collection, getDocs } from "firebase/firestore";
 const Header = (props) => {
 
   const [user, setUser] = useState([]);
+  const navigate = useNavigate();
 
-  console.log(props.user);
+  // console.log(props.user);
   function handleLogout() {
     auth
       .signOut()
@@ -47,7 +48,7 @@ const Header = (props) => {
     const result = await getDocs(getData);
     setUser(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
-  console.log(user.name);
+  // console.log(user.name);
   const text1 = (
     <Typography.Title className="usertext">{user.name}</Typography.Title>
   );
