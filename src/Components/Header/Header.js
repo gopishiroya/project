@@ -49,6 +49,7 @@ const Header = (props) => {
   // };
   // console.log(user);
 
+  
   const text1 = (
     <Typography.Title className="usertext">{props.user}</Typography.Title>
   );
