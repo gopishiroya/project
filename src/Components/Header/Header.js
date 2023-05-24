@@ -7,13 +7,23 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Badge, Button, Popover, Typography } from "antd";
-import { auth } from "../../Firebase/FIrebase";
+import { auth, firestore } from "../../Firebase/FIrebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+<<<<<<< HEAD
 import { useDispatch } from "react-redux";
 import { PutDataInitaiate } from "../../Action/Action";
 
 const Header = (props) => {
+=======
+import { collection, getDocs } from "firebase/firestore";
+
+const Header = (props) => {
+
+  const [user, setUser] = useState([]);
+
+  console.log(props.user);
+>>>>>>> da399629c48becce5a01a476b197623364e26f77
   function handleLogout() {
     auth
       .signOut()
@@ -36,8 +46,22 @@ const Header = (props) => {
     </div>
   );
 
+  useEffect(() => {
+    getDocuments();
+  }, [])
+
+  const getData = collection(firestore, "user");
+  const getDocuments = async () => {
+    const result = await getDocs(getData);
+    setUser(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+  console.log(user);
   const text1 = (
+<<<<<<< HEAD
     <Typography.Title className="usertext">user</Typography.Title>
+=======
+    <Typography.Title className="usertext">{user.name}</Typography.Title>
+>>>>>>> da399629c48becce5a01a476b197623364e26f77
   );
   const content1 = (
     <div className="loginbtnpopup">

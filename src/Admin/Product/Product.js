@@ -41,7 +41,10 @@ const Product = () => {
           setUrl((prev) => [...prev, url]);
         });
       });
+<<<<<<< HEAD
  
+=======
+>>>>>>> da399629c48becce5a01a476b197623364e26f77
     });
   }, []);
   const getDocuments = async () => {
@@ -73,7 +76,10 @@ const Product = () => {
 
   console.log(products);
   console.log(url);
+<<<<<<< HEAD
  
+=======
+>>>>>>> da399629c48becce5a01a476b197623364e26f77
   return (
     <>
       <div>
@@ -149,11 +155,7 @@ const Product = () => {
           {products.map((products, id) => {
             return (
               <Card className="dcard" key={id}>
-                <Image
-                  src={url}
-                  className="dimage"
-                  preview={preview}
-                ></Image>
+                <Image src={url} className="dimage" preview={preview}></Image>
                 <div className="row">
                   <Meta
                     className="meta"
@@ -184,6 +186,4 @@ const Product = () => {
   );
 };
 
-
-        
 export default Product;

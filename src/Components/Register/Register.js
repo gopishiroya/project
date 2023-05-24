@@ -42,7 +42,7 @@ const Register = () => {
     setPassword("");
     setCpassword("");
     toast.success("data added success");
-    dispatch(PutDataInitaiate(name, email, number ,password));
+    dispatch(PutDataInitaiate(name, email, password, number));
   }
 
   return (
