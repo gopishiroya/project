@@ -1,15 +1,35 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import { Form, Typography, Input } from 'antd'
 import './UpdatePofile.scss'
 import { Link } from 'react-router-dom'
+import { auth } from '../../Firebase/FIrebase'
+import { useNavigate } from 'react-router-dom'
 
 const Update_profile = () => {
+  const navigate = useNavigate(null);
+
+  function Getuserid() {
+    const [uid, setuid] = useState(null);
+    useEffect(() => {
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          setuid(user.email);
+        } else {
+          navigate("/");
+        }
+      });
+    }, []);
+    return uid;
+  }
+  const uid = Getuserid();
+  console.log(uid);
+
   return (
     <div className='update_profile'>
       <div>
-        <Header />
+        <Header user={uid}/>
       </div>
       <div className="Form">
         <Form className="Form1">

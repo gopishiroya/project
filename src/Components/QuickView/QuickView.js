@@ -1,22 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import { Button, Typography } from "antd";
+import { Button, Typography , Card, Image, Input} from "antd";
 import "./QuickView.scss";
-import { Card, Image, Input } from "antd";
-import { useState } from "react";
 import pizza from "../Image/Pizza.jpg";
 import { useParams } from "react-router-dom";
 import { getData } from "../../Firebase/FIrebase";
+import { auth } from "../../Firebase/FIrebase";
+import { useNavigate } from "react-router-dom";
 
 const { Meta } = Card;
 
 const QuickView = () => {
+  
   const [preview, setPreview] = useState(false);
   const [products, setProducts] = useState("");
+  const navigate = useNavigate(null);
 
   const params = useParams();
   console.log(params);
+
+  function Getuserid() {
+    const [uid, setuid] = useState(null);
+    useEffect(() => {
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          setuid(user.email);
+        } else {
+          navigate("/");
+        }
+      });
+    }, []);
+    return uid;
+  }
+  const uid = Getuserid();
+  console.log(uid);
 
   useEffect(() => {
     getData(params.id).then((value) => setProducts(value.data()));
@@ -25,7 +43,7 @@ const QuickView = () => {
 
   return (
     <div className="quickview">
-      <Header />
+      <Header  user={uid} />
       <div className="qdishes">
         <Typography.Title className="qtitle">QUICK VIEW</Typography.Title>
         <div className="qcontainer">

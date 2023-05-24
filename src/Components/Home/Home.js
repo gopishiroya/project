@@ -14,24 +14,19 @@ import image2 from "../Image/home-img-2.png";
 import image3 from "../Image/home-img-3.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, firestore, storage } from "../../Firebase/FIrebase";
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs,doc, getDoc } from "firebase/firestore";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
-<<<<<<< HEAD
-=======
-
->>>>>>> da399629c48becce5a01a476b197623364e26f77
 const { Meta } = Card;
+
 const Home = () => {
   const [preview, setPreview] = useState(false);
   const [products, setProducts] = useState([]);
   const [url, setUrl] = useState([]);
   const [count, setCount] = useState(0);
-<<<<<<< HEAD
-=======
-
->>>>>>> da399629c48becce5a01a476b197623364e26f77
   const getData = collection(firestore, "products");
   const navigate = useNavigate();
+  
+
   useEffect(() => {
     getDocuments();
   }, []);
@@ -49,16 +44,12 @@ const Home = () => {
     const result = await getDocs(getData);
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
-<<<<<<< HEAD
-=======
-
->>>>>>> da399629c48becce5a01a476b197623364e26f77
   function Getuserid() {
     const [uid, setuid] = useState(null);
     useEffect(() => {
       auth.onAuthStateChanged((user) => {
         if (user) {
-          setuid(user.uid);
+          setuid(user.email);
         } else {
           navigate("/");
         }
@@ -68,10 +59,7 @@ const Home = () => {
   }
   const uid = Getuserid();
   console.log(uid);
-<<<<<<< HEAD
-=======
 
->>>>>>> da399629c48becce5a01a476b197623364e26f77
   async function handleChange(name) {
     if (uid !== null) {
       console.log(products);
@@ -79,20 +67,10 @@ const Home = () => {
       navigate("/login");
     }
     setCount(count + 1);
-<<<<<<< HEAD
-    addDoc(collection(firestore, "cart " + uid), {
-      name
-    })
+    addDoc(collection(firestore, "cart " + uid),name)
       .then(() => console.log("success"))
       .catch((error) => console.log(error));
   }
-=======
-    addDoc(collection(firestore, "cart" + uid), name)
-      .then(() => console.log("success"))
-      .catch((error) => console.log(error));
-  }
-
->>>>>>> da399629c48becce5a01a476b197623364e26f77
   return (
     <>
       <div className="home">

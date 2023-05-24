@@ -41,10 +41,7 @@ const Product = () => {
           setUrl((prev) => [...prev, url]);
         });
       });
-<<<<<<< HEAD
  
-=======
->>>>>>> da399629c48becce5a01a476b197623364e26f77
     });
   }, []);
   const getDocuments = async () => {
@@ -76,10 +73,7 @@ const Product = () => {
 
   console.log(products);
   console.log(url);
-<<<<<<< HEAD
  
-=======
->>>>>>> da399629c48becce5a01a476b197623364e26f77
   return (
     <>
       <div>

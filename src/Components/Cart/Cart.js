@@ -1,29 +1,13 @@
-<<<<<<< HEAD
 import React, { useState ,useEffect} from "react";
-=======
-import React, { useEffect, useState } from "react";
->>>>>>> da399629c48becce5a01a476b197623364e26f77
 import "./Cart.scss";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Typography, Card, Image, Input, Button } from "antd";
-<<<<<<< HEAD
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { EyeFilled, ShoppingCartOutlined, EditFilled ,DeleteTwoTone} from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import pizza from "../Image/pizza-1.png";
-import { auth } from "../../Firebase/FIrebase";
-=======
-import {
-  EyeFilled,
-  ShoppingCartOutlined,
-  EditFilled,
-  DeleteTwoTone,
-} from "@ant-design/icons";
-import { Link, useNavigate } from "react-router-dom";
-import pizza from "../Image/pizza-1.png";
-import { collection, getDocs } from "firebase/firestore";
-import { auth, firestore } from "../../Firebase/FIrebase";
->>>>>>> da399629c48becce5a01a476b197623364e26f77
+import { auth ,firestore} from "../../Firebase/FIrebase";
 
 const { Meta } = Card;
 
@@ -38,7 +22,7 @@ const Cart = () => {
     useEffect(() => {
       auth.onAuthStateChanged((user) => {
         if (user) {
-          setuid(user.uid);
+          setuid(user.email);
         } else {
           navigate("/");
         }
@@ -49,47 +33,15 @@ const Cart = () => {
   const uid = Getuserid();
   console.log(uid);
 
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        // collection(firestore,"cart" + user.id).onSnapshot(snapshot => {
-        //   const newCartProducts = snapshot.docs.map((doc) => ({
-        //     id: doc.id,
-        //     ...doc.data()
-        //   }))
-        //   setCart(newCartProducts);
-        // })
-
-        getDocuments();
-      }
-    });
-  }, []);
-
-  const getData = collection(firestore, "cart" + uid);
+  
+  const getData = collection(firestore, "cart" + uid );
   const getDocuments = async () => {
     const result = await getDocs(getData);
     setCart(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
   console.log(cart);
-
-  const navigate = useNavigate();
-
-  function Getuserid() {
-    const [uid, setuid] = useState(null);
-    useEffect(() => {
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          setuid(user.uid);
-        } else {
-          navigate("/");
-        }
-      });
-    }, []);
-    return uid;
-  }
-  const uid = Getuserid();
-  console.log(uid);
-
+getDocuments()
+  
   return (
     <div className="cart">
       <div>
