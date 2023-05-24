@@ -47,7 +47,7 @@ const Header = (props) => {
     const result = await getDocs(getData);
     setUser(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
-  console.log(user);
+  console.log(user.name);
   const text1 = (
     <Typography.Title className="usertext">{user.name}</Typography.Title>
   );
