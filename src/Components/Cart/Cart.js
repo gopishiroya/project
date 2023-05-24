@@ -1,16 +1,35 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import "./Cart.scss";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Typography, Card, Image, Input, Button } from "antd";
 import { EyeFilled, ShoppingCartOutlined, EditFilled ,DeleteTwoTone} from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import pizza from "../Image/pizza-1.png";
+import { auth } from "../../Firebase/FIrebase";
 
 const { Meta } = Card;
 
 const Cart = () => {
   const [preview, setPreview] = useState(false);
+
+  const navigate = useNavigate();
+
+  function Getuserid() {
+    const [uid, setuid] = useState(null);
+    useEffect(() => {
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          setuid(user.uid);
+        } else {
+          navigate("/");
+        }
+      });
+    }, []);
+    return uid;
+  }
+  const uid = Getuserid();
+  console.log(uid);
 
   return (
     <div className="cart">

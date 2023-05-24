@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { collection, doc, getDoc, getFirestore } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 const firebaseConfig = {
   apiKey: "AIzaSyDwKiF0IsVa0DgzYaIdmn4plc7mLjUyHAk",
@@ -19,11 +19,8 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const firestore = getFirestore(app);
 export const storage = getStorage(app);
-<<<<<<< HEAD
 export const auth = getAuth(app);
 
-=======
->>>>>>> 7d6685bdf815c2f2d39e37984520fbc7cbd9b98b
 export const getData = async (id) => {
   const docRef = doc(firestore, "products", id);
   const result = await getDoc(docRef);

@@ -10,16 +10,17 @@ import { Badge, Button, Popover, Typography } from "antd";
 import { auth } from "../../Firebase/FIrebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { PutDataInitaiate } from "../../Action/Action";
 
 const Header = (props) => {
-
-  console.log(props.user);
   function handleLogout() {
     auth
       .signOut()
       .then(() => console.log("success"))
       .catch((error) => console.log(error));
       toast.success("Logout");
+     
   }
   
   const text = (
@@ -36,7 +37,7 @@ const Header = (props) => {
   );
 
   const text1 = (
-    <Typography.Title className="usertext">profile</Typography.Title>
+    <Typography.Title className="usertext">user</Typography.Title>
   );
   const content1 = (
     <div className="loginbtnpopup">
