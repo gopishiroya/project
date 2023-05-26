@@ -21,6 +21,7 @@ import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { firestore, getImage, storage } from "../../Firebase/FIrebase";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 const { Meta } = Card;
+
 const Product = () => {
   const [preview, setPreview] = useState(false);
   const [pname, setPname] = useState("");
@@ -29,10 +30,11 @@ const Product = () => {
   const [pic, setPic] = useState("");
   const [products, setProducts] = useState([]);
   const [url, setUrl] = useState([]);
-  const getData = collection(firestore, "products");
+
   useEffect(() => {
     getDocuments();
   }, [handleAddProducts]);
+  
   const imageRef = ref(storage, "uploads/images/");
   useEffect(() => {
     listAll(imageRef).then((res) => {
@@ -41,13 +43,15 @@ const Product = () => {
           setUrl((prev) => [...prev, url]);
         });
       });
- 
     });
   }, []);
+
+  const getData = collection(firestore, "products");
   const getDocuments = async () => {
     const result = await getDocs(getData);
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
+
   const dispatch = useDispatch();
   const props = {
     name: "file",
@@ -56,6 +60,7 @@ const Product = () => {
       return false;
     },
   };
+
   function handleAddProducts(e) {
     e.preventDefault();
     dispatch(StorageInitaiate(pname, price, category, pic));
@@ -66,13 +71,14 @@ const Product = () => {
     toast.success("product added successfully");
     getDocuments();
   }
+
   async function handleDelete(products) {
     await deleteDoc(doc(firestore, "products", products.id));
     toast.success("products delete successfully");
   }
 
-  console.log(products);
-  console.log(url);
+  // console.log(products);
+  // console.log(url);
  
   return (
     <>

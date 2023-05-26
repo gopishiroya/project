@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import "./Menu.scss";
 import { Card, Image, Input } from "antd";
 import { EyeFilled, ShoppingCartOutlined } from "@ant-design/icons";
-import { collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, getDocs } from "firebase/firestore";
 import { firestore, storage } from "../../Firebase/FIrebase";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 import { auth } from "../../Firebase/FIrebase";
@@ -18,23 +18,27 @@ const Menu = () => {
   const [preview, setPreview] = useState(false);
   const [products, setProducts] = useState([]);
   const [url, setUrl] = useState([]);
+  const [uid, setuid] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+  const [count, setCount] = useState(0);
+
   const navigate = useNavigate(null);
+  
+  useEffect(() => {
+    Getuserid();
+  }, []);
   function Getuserid() {
-    const [uid, setuid] = useState(null);
-    useEffect(() => {
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          setuid(user.email);
-        } else {
-          navigate("/");
-        }
-      });
-    }, []);
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setuid(user.email);
+      } else {
+        navigate("/");
+      }
+    });
     return uid;
   }
-  const uid = Getuserid();
-  console.log(uid);
-
+  const name = Getuserid();
+  
   const getData = collection(firestore, "products");
 
   useEffect(() => {
@@ -59,9 +63,28 @@ const Menu = () => {
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
+  async function handleChange(name) {
+    if (uid !== null) {
+      console.log(products);
+    } else {
+      navigate("/login");
+    }
+    setCount(count + 1);
+    addDoc(collection(firestore, "cart " + uid), {
+      id: name.id,
+      category: name.category,
+      imageURL: name.imageURL,
+      name: name.name,
+      price: name.price,
+      quantity: quantity,
+    })
+      .then(() => console.log("success"))
+      .catch((error) => console.log(error));
+  }
+
   return (
     <div className="menu">
-      <Header  user={uid}/>
+      <Header count={count} user={name}/>
       <div className="menutitle">
         <Typography.Title className="mtitle">Our Menu</Typography.Title>
         <Link to="/" className="home">
@@ -74,23 +97,36 @@ const Menu = () => {
       <div className="dishes">
         <Typography.Title className="dtitle">LATEST DISHES</Typography.Title>
         <div className="container">
-          {products.map((products, id) => {
-            return (
-              <Card className="dcard" key={id}>
-                <Image src={url} className="dimage" preview={preview}></Image>
-                <Meta className="meta" title={products.category} description={products.name} />
-                <Typography.Title className="price">Rs. {products.price}</Typography.Title>
-                <Input
-                  className="input"
-                  type="number"
-                  defaultValue={1}
-                  min={1}
-                />
-                <EyeFilled className="eyefilled" />
-                <ShoppingCartOutlined className="ShoppingCartOutlined" />
-              </Card>
-            );
-          })}
+        {products.map((products, id) => {
+              return (
+                <Card className="dcard" key={id}>
+                  <Image src={url} className="dimage" preview={preview}></Image>
+                  <Meta
+                    className="meta"
+                    title={products.category}
+                    description={products.name}
+                  />
+                  <Typography.Title className="price">
+                    Rs. {products.price}
+                  </Typography.Title>
+                  <Input
+                    className="input"
+                    type="number"
+                    defaultValue={1}
+                    min={1}
+                    onChange={(e) => setQuantity(e.target.value)}
+                  />
+
+                  <Link to={"/quickview/" + products.id}>
+                    <EyeFilled className="eyefilled" />
+                  </Link>
+                  <ShoppingCartOutlined
+                    className="ShoppingCartOutlined"
+                    onClick={() => handleChange(products)}
+                  />
+                </Card>
+              );
+            })}
         </div>
       </div>
       <Footer />

@@ -9,19 +9,19 @@ import { loginInitaiate } from "../../Action/Action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Login = (props) => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user)
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     if(currentUser) {
       navigate("/");
     }
-  }, [currentUser, navigate])
+  }, [currentUser])
 
   async function handleLogin() {
     e.preventDefault();

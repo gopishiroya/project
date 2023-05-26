@@ -11,16 +11,19 @@ import { firestore, getData } from "../../Firebase/FIrebase";
 import { doc, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 const UpdateProduct = (props) => {
   const [preview, setPreview] = useState(false);
   const [products, setProducts] = useState("");
   const [pic, setPic] = useState("");
+
   const navigate = useNavigate();
   const params = useParams();
+
   useEffect(() => {
     getData(params.id).then((value) => setProducts(value.data()));
   }, []);
-  // console.log(products);
+  
   const prop = {
     name: "file",
     beforeUpload: (file) => {
@@ -28,8 +31,9 @@ const UpdateProduct = (props) => {
       return false;
     },
   };
+
   const path = doc(firestore, "products", params.id);
-  async function handleUpdate(e) {
+  function handleUpdate(e) {
     e.preventDefault();
     const data = {
       name: products.name,

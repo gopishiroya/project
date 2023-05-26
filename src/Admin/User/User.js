@@ -11,22 +11,21 @@ const User = () => {
 
   const [data, setData] = useState([]);
 
+  useEffect(() => {
+    getDocuments();
+  }, [handleDelete]);
+
   const postCollectionRef = collection(firestore, "user");
+  const getDocuments = async () => {
+    const result = await getDocs(postCollectionRef);
+    setData(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
 
   const handleDelete = async (data) => {
     await deleteDoc(doc(firestore, "user", data.id));
     toast.success("delete successfully");
   };
-
-  useEffect(() => {
-    getDocuments();
-  }, [handleDelete]);
-
-  const getDocuments = async () => {
-    const result = await getDocs(postCollectionRef);
-    setData(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  };
-  console.log(data)
+  
   return (
     <>
       <div>

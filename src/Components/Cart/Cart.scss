@@ -6,7 +6,6 @@
   position: relative;
   height: 40px;
   width: 50px;
-  border: 2px solid black;
   background-color: white;
   color: black;
   transition: 0.2s linear;
@@ -54,7 +53,7 @@
       margin-top: 10px;
       .dcard {
         width: 320px;
-        height: 430px;
+        height: 415px;
         display: inline-flex;
         text-align: center;
         border: 2px solid black;
@@ -73,24 +72,23 @@
         }
         .ant-card-meta-description {
           font-size: 20px;
-          padding-right: 35px;
           color: black;
         }
-        .price {
-          margin-top: 28px;
-          padding-right: 197px;
-          padding-top: 15px;
-          font-size: 23px;
-        }
-        .input {
-          border: 2px solid black;
-          border-radius: 0px;
-          height: 45px;
-          width: 85px;
-          float: right;
-          position: relative;
-          bottom: 45px;
-          right: 45px;
+        .row {
+          display: flex;
+          justify-content: space-between;
+          .price {
+            margin-top: 15px;
+            font-size: 20px;
+            position: relative;
+            right: 40px;
+            color: #999;
+          }
+          .quantity {
+            font-size: 20px;
+            margin-top: 15px;
+            color: #999;
+          }
         }
         .EditFilled {
           border: 2px solid black;
@@ -101,16 +99,6 @@
           padding: 10px;
           background-color: #EFD330;
           cursor: pointer;
-        }
-        .EditFilled:hover {
-          offset: 1;
-          background-color: black;
-          color: white;
-        }
-        .eyefilled {
-          @include card;
-          right: 110px;
-          bottom: 364px;
         }
         .ShoppingCartOutlined {
           @include card;

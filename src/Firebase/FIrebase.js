@@ -1,7 +1,7 @@
 import { firebase, initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { collection, doc, getDoc, getFirestore } from "firebase/firestore";
-import { getDownloadURL, getStorage, ref } from "firebase/storage";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 const firebaseConfig = {
   apiKey: "AIzaSyDwKiF0IsVa0DgzYaIdmn4plc7mLjUyHAk",
   authDomain: "online-food-ordering-8ffb1.firebaseapp.com",
@@ -26,6 +26,3 @@ export const getData = async (id) => {
   const result = await getDoc(docRef);
   return result;
 };
-export const getImage = (path) => {
-  return getDownloadURL(ref(storage, path))
-}

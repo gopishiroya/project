@@ -46,16 +46,8 @@ const put_data_storage = () => ({
   type: types.STORAGE,
 });
 
-const get_data = () => ({
-  type: types.GET_DATA,
-});
-
 const contect_put_data = () => ({
   type: types.CONTECT_PUT_DATA
-}) 
-
-const contect_get_data = () => ({
-  type: types.CONTECT_GET_DATA
 })
 
 
@@ -102,13 +94,6 @@ export const StorageInitaiate = (name, price, category, pic) => {
       .catch((error) => dispatch(put_data_storage(error)));
   };
 };
-export const getDataInitaiate = () => {
-  return function (dispatch) {
-    getDocs(collection(firestore, "products"))
-      .then(() => dispatch(get_data))
-      .catch((error) => dispatch(get_data(error)));
-  };
-};
 
 export const contectPutDataInitaiate = (name, number, email, message) => {
   return function (dispatch) {
@@ -117,13 +102,5 @@ export const contectPutDataInitaiate = (name, number, email, message) => {
     })
       .then(() => dispatch(contect_put_data))
       .catch((error) => dispatch(contect_put_data(error)));
-  }
-}
-
-export const contectGetDataInitaiate = () => {
-  return function (dispatch) {
-    getDocs(collection(firestore, "contect"))
-    .then(() => dispatch(contect_get_data))
-    .catch((error) => dispatch(contect_get_data(error)));
   }
 }

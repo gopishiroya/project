@@ -20,7 +20,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     if (currentUser) {
       navigate("/");
@@ -28,11 +28,10 @@ const Register = () => {
   }, [currentUser, navigate]);
   console.log(currentUser)
 
-  function handleRegister(e) {
-    e.preventDefault();
+  function handleRegister() {
     if (password !== cpassword) {
       return toast.error("please enter correct password");
-    } 
+    }
     if (password >= 6) {
       return toast.error("password atlist 6 character");
     }

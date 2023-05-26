@@ -18,16 +18,13 @@ const Cart = () => {
   const [total, setTotal] = useState([]);
   const navigate = useNavigate(null);
   function Getuserid() {
-    const [uid, setuid] = useState(null);
-    useEffect(() => {
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          setuid(user.email);
-        } else {
-          navigate("/");
-        }
-      });
-    }, []);
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setuid(user.email);
+      } else {
+        navigate("/");
+      }
+    });
     return uid;
   }
   const uid = Getuserid();
@@ -52,7 +49,7 @@ const Cart = () => {
     <div className="cart">
       <ToastContainer />
       <div>
-        <Header user={uid} />
+        <Header user={name} />
       </div>
       <div className="container1">
         <Typography.Title className="atitle">Shopping Cart</Typography.Title>
@@ -102,7 +99,7 @@ const Cart = () => {
         <Typography.Paragraph className="price">
           cart total :
         </Typography.Paragraph>
-        <Link className="checkout" to="/checkout">
+        <Link className="checkout" to="/checkout" total={grandtotal()}>
           Proceed To Checkout
         </Link>
       </div>

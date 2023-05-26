@@ -7,22 +7,19 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Badge, Button, Popover, Typography } from "antd";
-import { auth, firestore } from "../../Firebase/FIrebase";
+import { auth } from "../../Firebase/FIrebase";
 import { ToastContainer, toast } from "react-toastify";
-import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import "react-toastify/dist/ReactToastify.css";
 const Header = (props) => {
-  
-  // const [user,setUser]=useState(null)
+
+  const [user, setUser] = useState([]);
   function handleLogout() {
     auth
       .signOut()
       .then(() => console.log("success"))
       .catch((error) => console.log(error));
-      toast.success("Logout");
-     
+      toast.success("Logout");    
   }
-  
   const text = (
     <Typography.Title className="usertext">
       Please Login First! 👇
@@ -40,15 +37,12 @@ const Header = (props) => {
   //   getDocuments();
   // }, [])
 
-
   // const getData = collection(firestore, "user");
   // const getDocuments = async () => {
   //   const result = await getDocs(getData);
   //   setUser(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   // };
-  // console.log(user);
-
-  
+  // console.log(user.name);
   const text1 = (
     <Typography.Title className="usertext">{props.user}</Typography.Title>
   );
