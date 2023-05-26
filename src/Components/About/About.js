@@ -19,6 +19,7 @@ const { Meta } = Card;
 const About = () => {
   const [preview, setPreview] = useState(false);
   const navigate = useNavigate(null);
+  const [uid,setuid]=useState(null)
 
   useEffect(() => {
     Getuserid();

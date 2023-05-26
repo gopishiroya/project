@@ -66,8 +66,8 @@ const Home = () => {
     }, []);
     return uid;
   }
-  const uid = Getuserid();
-  console.log(uid);
+  const name = Getuserid();
+  console.log(name);
 
 
   async function handleChange(name) {
