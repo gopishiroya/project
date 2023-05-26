@@ -6,17 +6,23 @@ import { Typography, Card, Image, Input, Button } from "antd";
 import { EditFilled, DeleteTwoTone } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import pizza from "../Image/pizza-1.png";
-import { addDoc, collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { auth, firestore } from "../../Firebase/FIrebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 const { Meta } = Card;
+
 const Cart = () => {
   const [preview, setPreview] = useState(false);
   const [cart, setCart] = useState([]);
-  const [quantity, setQuantity] = useState(1);
-  const [total, setTotal] = useState([]);
+  const [uid, setuid] = useState(null);
+
   const navigate = useNavigate(null);
+
+  useEffect(() => {
+    Getuserid();
+  }, []);
   function Getuserid() {
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -27,24 +33,28 @@ const Cart = () => {
     });
     return uid;
   }
-  const uid = Getuserid();
-  // console.log(uid);
-  useEffect(() => {}, []);
+  const name = Getuserid();
+
   const getDocuments = async () => {
     const getData = collection(firestore, "cart " + uid);
     const name = await getDocs(getData);
     setCart(name.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
-  console.log(cart)
   getDocuments();
+  
   async function handleDelete(cart) {
     await deleteDoc(doc(firestore, "cart " + uid, cart.id));
     toast.success("products delete successfully");
   }
-  function handleEdit(cart) {
-    const Total = cart.price * quantity;
-    setTotal(Total);
+
+  function grandtotal() {
+    let x = 0;
+    cart.map((i) => {
+      return (x += i.price * i.quantity);
+    });
+    return x;
   }
+
   return (
     <div className="cart">
       <ToastContainer />
@@ -68,27 +78,20 @@ const Cart = () => {
               <Card className="dcard" key={id}>
                 <Image src={pizza} className="dimage" preview={preview}></Image>
                 <Meta className="meta" description={cart.name} />
-                <Typography.Title className="price">
-                  Rs. {cart.price}
-                </Typography.Title>
-                <Input
-                  className="input"
-                  name="quantity"
-                  type="number"
-                  min={1}
-                  defaultValue={1}
-                  onChange={(e) => setQuantity(e.target.value)}
-                />
-                <EditFilled
-                  className="EditFilled"
-                  onClick={() => handleEdit(cart, id)}
-                />
+                <div className="row">
+                  <Typography.Title className="price">
+                    Rs. {cart.price}
+                  </Typography.Title>
+                  <Typography.Title className="quantity">
+                    Quantity: {cart.quantity}
+                  </Typography.Title>
+                </div>
                 <DeleteTwoTone
                   className="ShoppingCartOutlined"
                   onClick={() => handleDelete(cart)}
                 />
-                <Typography.Paragraph className="paragraph">
-                 sub total : {total}
+                <Typography.Paragraph className="paragraph" id="subtotal">
+                  sub total : {cart.price * cart.quantity}
                 </Typography.Paragraph>
               </Card>
             );
@@ -97,7 +100,7 @@ const Cart = () => {
       </div>
       <div className="total">
         <Typography.Paragraph className="price">
-          cart total :
+          cart total : {grandtotal()}
         </Typography.Paragraph>
         <Link className="checkout" to="/checkout" total={grandtotal()}>
           Proceed To Checkout
@@ -114,4 +117,5 @@ const Cart = () => {
     </div>
   );
 };
+
 export default Cart;
