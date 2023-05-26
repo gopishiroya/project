@@ -24,7 +24,6 @@ const Update_profile = () => {
     return uid;
   }
   const uid = Getuserid();
-  console.log(uid);
 
   return (
     <div className='update_profile'>

@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import "./Checkout.scss";
 import Header from "../Header/Header";
 import { Typography, Select, Button } from "antd";
@@ -10,12 +10,15 @@ import {
   EnvironmentFilled,
 } from "@ant-design/icons";
 import Footer from "../Footer/Footer";
-import { auth } from "../../Firebase/FIrebase";
+import { auth, firestore } from "../../Firebase/FIrebase";
 import { useNavigate } from "react-router-dom";
+import { collection, getDocs, setDoc } from "firebase/firestore";
 
-const Checkout = () => {
+const Checkout = (props) => {
+  const [user, setUser] = useState([]);
+
   const navigate = useNavigate(null);
-
+  // console.log(props.total);
   function Getuserid() {
     const [uid, setuid] = useState(null);
     useEffect(() => {
@@ -31,10 +34,21 @@ const Checkout = () => {
   }
   const uid = Getuserid();
   console.log(uid);
+
+  useEffect(() => {
+    getUserData();
+  }, [])
+
+  const getUser = collection(firestore, "user");
+  const getUserData = async () => {
+    const result = await getDocs(getUser);
+    setUser(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+
   return (
     <div className="checkout">
       <div>
-        <Header  user={uid}/>
+        <Header user={uid} />
       </div>
       <div className="container1">
         <Typography.Title className="atitle">Checkout</Typography.Title>
@@ -52,20 +66,12 @@ const Checkout = () => {
         <div className="box">
           <div className="order">
             <Typography.Title className="item">Cart Items</Typography.Title>
-            <div className="name">
-              <Typography.Paragraph className="items">
-                pizza
-              </Typography.Paragraph>
-              <Typography.Paragraph className="price">
-                Rs. 100
-              </Typography.Paragraph>
-            </div>
             <div className="grandtotal">
               <Typography.Paragraph className="titems">
                 grand total :{" "}
               </Typography.Paragraph>
               <Typography.Paragraph className="tprice">
-                Rs. 100
+                Rs. {props.total}
               </Typography.Paragraph>
             </div>
             <Link className="vcart" to="/cart">
@@ -77,7 +83,7 @@ const Checkout = () => {
             <div className="display">
               <UserOutlined className="UserOutlined" />
               <Typography.Paragraph className="infoname">
-                Gopi
+                {user.name}
               </Typography.Paragraph>
             </div>
             <div className="phone">
@@ -89,11 +95,13 @@ const Checkout = () => {
             <div className="mail">
               <MailFilled className="MailFilled" />
               <Typography.Paragraph className="infomail">
-                gopi@gmail.com
+                {uid}
               </Typography.Paragraph>
             </div>
             <div className="update">
-              <Link className="updateinfo" to="/update_profile">Update Info</Link>
+              <Link className="updateinfo" to="/update_profile">
+                Update Info
+              </Link>
             </div>
           </div>
           <div className="address">
@@ -107,7 +115,9 @@ const Checkout = () => {
               </Typography.Paragraph>
             </div>
             <div className="updateaddress">
-              <Link className="uaddress" to="/update_address">Update Address</Link>
+              <Link className="uaddress" to="/update_address">
+                Update Address
+              </Link>
             </div>
           </div>
           <div className="inputField">
@@ -128,7 +138,7 @@ const Checkout = () => {
             />
           </div>
           <div className="Button">
-              <Button className="placeorder">Place Order</Button>
+            <Button className="placeorder">Place Order</Button>
           </div>
         </div>
       </div>

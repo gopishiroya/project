@@ -38,7 +38,6 @@ const Contect = () => {
     return uid;
   }
   const uid = Getuserid();
-  console.log(uid);
 
   function handleSubmit(e) {
     e.preventDefault();

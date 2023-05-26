@@ -1,34 +1,21 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./Cart.scss";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Typography, Card, Image, Input, Button } from "antd";
-<<<<<<< HEAD
-import {
-  EditFilled,
-  DeleteTwoTone,
-} from "@ant-design/icons";
+import { EditFilled, DeleteTwoTone } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import pizza from "../Image/pizza-1.png";
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { auth, firestore } from "../../Firebase/FIrebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-=======
-import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
-import { EyeFilled, ShoppingCartOutlined, EditFilled ,DeleteTwoTone} from "@ant-design/icons";
-import { Link, useNavigate } from "react-router-dom";
-import pizza from "../Image/pizza-1.png";
-import { auth ,firestore} from "../../Firebase/FIrebase";
->>>>>>> 88daca7840655731b11f65260a32910796bf2f60
 
 const { Meta } = Card;
 
 const Cart = () => {
   const [preview, setPreview] = useState(false);
   const [cart, setCart] = useState([]);
-  const [quantity, setQuantity] = useState(1);
-  const [total, setTotal] = useState([]);
 
   const navigate = useNavigate(null);
 
@@ -46,41 +33,27 @@ const Cart = () => {
     return uid;
   }
   const uid = Getuserid();
-  // console.log(uid);
 
-<<<<<<< HEAD
-  useEffect(() => {
-    
-  }, []);
-
-  const getData = collection(firestore, "cart" + uid);
-    const getDocuments = async () => {
-      const name = await getDocs(getData);
-      setCart(name.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
-    getDocuments();
-
+  const getDocuments = async () => {
+    const getData = collection(firestore, "cart " + uid);
+    const name = await getDocs(getData);
+    setCart(name.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+  getDocuments();
+  
   async function handleDelete(cart) {
-    await deleteDoc(doc(firestore, "cart" + uid, cart.id));
+    await deleteDoc(doc(firestore, "cart " + uid, cart.id));
     toast.success("products delete successfully");
   }
 
-  function handleEdit(cart) {
-   const Total = cart.price * quantity 
-   setTotal(Total)
-  } 
+  function grandtotal() {
+    let x = 0;
+    cart.map((i) => {
+      return (x += i.price * i.quantity);
+    });
+    return x;
+  }
 
-=======
-  
-  const getData = collection(firestore, "cart" + uid );
-  const getDocuments = async () => {
-    const result = await getDocs(getData);
-    setCart(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  };
-  console.log(cart);
-getDocuments()
-  
->>>>>>> 88daca7840655731b11f65260a32910796bf2f60
   return (
     <div className="cart">
       <ToastContainer />
@@ -104,24 +77,20 @@ getDocuments()
               <Card className="dcard" key={id}>
                 <Image src={pizza} className="dimage" preview={preview}></Image>
                 <Meta className="meta" description={cart.name} />
-                <Typography.Title className="price">
-                  Rs. {cart.price}
-                </Typography.Title>
-                <Input
-                  className="input"
-                  name="quantity"
-                  type="number"
-                  min={1}
-                  defaultValue={1}
-                  onChange={(e) => setQuantity(e.target.value)}
-                />
-                <EditFilled className="EditFilled" onClick={() => handleEdit(cart, id)} />
+                <div className="row">
+                  <Typography.Title className="price">
+                    Rs. {cart.price}
+                  </Typography.Title>
+                  <Typography.Title className="quantity">
+                    Quantity: {cart.quantity}
+                  </Typography.Title>
+                </div>
                 <DeleteTwoTone
                   className="ShoppingCartOutlined"
                   onClick={() => handleDelete(cart)}
                 />
-                <Typography.Paragraph className="paragraph">
-                  sub total : {total}
+                <Typography.Paragraph className="paragraph" id="subtotal">
+                  sub total : {cart.price * cart.quantity}
                 </Typography.Paragraph>
               </Card>
             );
@@ -130,9 +99,9 @@ getDocuments()
       </div>
       <div className="total">
         <Typography.Paragraph className="price">
-          cart total :
+          cart total : {grandtotal()}
         </Typography.Paragraph>
-        <Link className="checkout" to="/checkout">
+        <Link className="checkout" to="/checkout" total={grandtotal()}>
           Proceed To Checkout
         </Link>
       </div>

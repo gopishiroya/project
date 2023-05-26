@@ -12,25 +12,16 @@ import { ToastContainer, toast } from "react-toastify";
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import "react-toastify/dist/ReactToastify.css";
 const Header = (props) => {
-  
 
-<<<<<<< HEAD
   const [user, setUser] = useState([]);
-  const navigate = useNavigate();
 
-  // console.log(props.user);
-=======
-  // const [user,setUser]=useState(null)
->>>>>>> 88daca7840655731b11f65260a32910796bf2f60
   function handleLogout() {
     auth
       .signOut()
       .then(() => console.log("success"))
       .catch((error) => console.log(error));
-      toast.success("Logout");
-     
+      toast.success("Logout");    
   }
-  
   const text = (
     <Typography.Title className="usertext">
       Please Login First! 👇
@@ -48,24 +39,12 @@ const Header = (props) => {
   //   getDocuments();
   // }, [])
 
-<<<<<<< HEAD
-  const getData = collection(firestore, "user");
-  const getDocuments = async () => {
-    const result = await getDocs(getData);
-    setUser(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  };
-  // console.log(user.name);
-=======
-
   // const getData = collection(firestore, "user");
   // const getDocuments = async () => {
   //   const result = await getDocs(getData);
   //   setUser(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   // };
-  // console.log(user);
-
-  
->>>>>>> 88daca7840655731b11f65260a32910796bf2f60
+  // console.log(user.name);
   const text1 = (
     <Typography.Title className="usertext">{props.user}</Typography.Title>
   );

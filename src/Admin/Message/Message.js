@@ -10,8 +10,6 @@ import "react-toastify/dist/ReactToastify.css";
 const Message = () => {
   const [data, setData] = useState([]);
 
-  const postCollectionRef = collection(firestore, "contect");
-
   const handleDelete = async (data) => {
     await deleteDoc(doc(firestore, "contect", data.id));
     toast.success("delete successfully");
@@ -21,11 +19,12 @@ const Message = () => {
     getDocuments();
   }, [handleDelete]);
 
+  const postCollectionRef = collection(firestore, "contect");
   const getDocuments = async () => {
     const result = await getDocs(postCollectionRef);
     setData(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
-  
+
   return (
     <>
       <div>

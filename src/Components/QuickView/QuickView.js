@@ -18,7 +18,6 @@ const QuickView = () => {
   const navigate = useNavigate(null);
 
   const params = useParams();
-  console.log(params);
 
   function Getuserid() {
     const [uid, setuid] = useState(null);
@@ -34,13 +33,11 @@ const QuickView = () => {
     return uid;
   }
   const uid = Getuserid();
-  console.log(uid);
 
   useEffect(() => {
     getData(params.id).then((value) => setProducts(value.data()));
   }, []);
-  console.log(products);
-
+  
   return (
     <div className="quickview">
       <Header  user={uid} />

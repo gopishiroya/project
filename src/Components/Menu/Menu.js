@@ -18,7 +18,9 @@ const Menu = () => {
   const [preview, setPreview] = useState(false);
   const [products, setProducts] = useState([]);
   const [url, setUrl] = useState([]);
+
   const navigate = useNavigate(null);
+  
   function Getuserid() {
     const [uid, setuid] = useState(null);
     useEffect(() => {
@@ -33,8 +35,7 @@ const Menu = () => {
     return uid;
   }
   const uid = Getuserid();
-  console.log(uid);
-
+  
   const getData = collection(firestore, "products");
 
   useEffect(() => {
