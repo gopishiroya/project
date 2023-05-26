@@ -15,24 +15,25 @@ const QuickView = () => {
   
   const [preview, setPreview] = useState(false);
   const [products, setProducts] = useState("");
+  const [uid, setuid] = useState(null);
   const navigate = useNavigate(null);
 
   const params = useParams();
 
+  useEffect(() => {
+    Getuserid();
+  }, []);
   function Getuserid() {
-    const [uid, setuid] = useState(null);
-    useEffect(() => {
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          setuid(user.email);
-        } else {
-          navigate("/");
-        }
-      });
-    }, []);
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setuid(user.email);
+      } else {
+        navigate("/");
+      }
+    });
     return uid;
   }
-  const uid = Getuserid();
+  const name = Getuserid();
 
   useEffect(() => {
     getData(params.id).then((value) => setProducts(value.data()));
@@ -40,7 +41,7 @@ const QuickView = () => {
   
   return (
     <div className="quickview">
-      <Header  user={uid} />
+      <Header  user={name} />
       <div className="qdishes">
         <Typography.Title className="qtitle">QUICK VIEW</Typography.Title>
         <div className="qcontainer">

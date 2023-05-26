@@ -20,24 +20,25 @@ const Contect = () => {
   const [number, setNumber] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [uid, setuid] = useState(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate(null);
 
+  useEffect(() => {
+    Getuserid();
+  }, []);
   function Getuserid() {
-    const [uid, setuid] = useState(null);
-    useEffect(() => {
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          setuid(user.email);
-        } else {
-          navigate("/");
-        }
-      });
-    }, []);
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setuid(user.email);
+      } else {
+        navigate("/");
+      }
+    });
     return uid;
   }
-  const uid = Getuserid();
+  const userId = Getuserid();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -52,7 +53,7 @@ const Contect = () => {
   return (
     <div className="contect">
       <ToastContainer />
-      <Header user={uid}/>
+      <Header user={userId}/>
       <div className="phone">
         <Typography.Title className="ctitle">Contect Us</Typography.Title>
         <Link to="/" className="home">

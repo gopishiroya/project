@@ -16,23 +16,24 @@ const { Meta } = Card;
 const Cart = () => {
   const [preview, setPreview] = useState(false);
   const [cart, setCart] = useState([]);
+  const [uid, setuid] = useState(null);
 
   const navigate = useNavigate(null);
 
+  useEffect(() => {
+    Getuserid();
+  }, []);
   function Getuserid() {
-    const [uid, setuid] = useState(null);
-    useEffect(() => {
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          setuid(user.email);
-        } else {
-          navigate("/");
-        }
-      });
-    }, []);
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setuid(user.email);
+      } else {
+        navigate("/");
+      }
+    });
     return uid;
   }
-  const uid = Getuserid();
+  const name = Getuserid();
 
   const getDocuments = async () => {
     const getData = collection(firestore, "cart " + uid);
@@ -58,7 +59,7 @@ const Cart = () => {
     <div className="cart">
       <ToastContainer />
       <div>
-        <Header user={uid} />
+        <Header user={name} />
       </div>
       <div className="container1">
         <Typography.Title className="atitle">Shopping Cart</Typography.Title>

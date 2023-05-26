@@ -7,9 +7,8 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Badge, Button, Popover, Typography } from "antd";
-import { auth, firestore } from "../../Firebase/FIrebase";
+import { auth } from "../../Firebase/FIrebase";
 import { ToastContainer, toast } from "react-toastify";
-import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import "react-toastify/dist/ReactToastify.css";
 const Header = (props) => {
 

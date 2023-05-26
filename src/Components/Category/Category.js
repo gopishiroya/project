@@ -12,28 +12,28 @@ const { Meta } = Card;
 
 const Category = () => {
   const [preview, setPreview] = useState(false);
+  const [uid, setuid] = useState(null);
   const navigate = useNavigate(null);
 
+  useEffect(() => {
+    Getuserid();
+  }, []);
   function Getuserid() {
-    const [uid, setuid] = useState(null);
-    useEffect(() => {
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          setuid(user.email);
-        } else {
-          navigate("/");
-        }
-      });
-    }, []);
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setuid(user.email);
+      } else {
+        navigate("/");
+      }
+    });
     return uid;
   }
-  const uid = Getuserid();
-  console.log(uid);
+  const name = Getuserid();
 
   return (
     <div className="category">
       <div>
-        <Header user={uid}/>
+        <Header user={name}/>
       </div>
       <div className="foodcategory">
         <div className="foodtitle">

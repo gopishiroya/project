@@ -1,15 +1,14 @@
-import React,{ useEffect,useState} from 'react'
-import Header from '../Header/Header'
-import Footer from '../Footer/Footer'
-import { Form, Typography, Input } from 'antd'
-import { Link } from 'react-router-dom'
-import './UpdateAddress.scss'
-import { auth, firestore } from '../../Firebase/FIrebase'
-import { useNavigate } from 'react-router-dom'
-import { collection, getDocs } from 'firebase/firestore'
+import React, { useEffect, useState } from "react";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import { Form, Typography, Input } from "antd";
+import { Link } from "react-router-dom";
+import "./UpdateAddress.scss";
+import { auth, firestore } from "../../Firebase/FIrebase";
+import { useNavigate } from "react-router-dom";
+import { collection, getDocs } from "firebase/firestore";
 
 const UpdateAddress = () => {
-
   const [flatNo, setFlatNo] = useState("");
   const [buildingNo, setBuildingNo] = useState("");
   const [area, setArea] = useState("");
@@ -17,42 +16,47 @@ const UpdateAddress = () => {
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
   const [pin, setPin] = useState("");
-
+  const [data, setData] = useState([]);
+  const [uid, setuid] = useState(null);
+  
   const navigate = useNavigate(null);
 
+  useEffect(() => {
+    Getuserid();
+  }, []);
   function Getuserid() {
-    const [uid, setuid] = useState(null);
-    useEffect(() => {
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          setuid(user.email);
-        } else {
-          navigate("/");
-        }
-      });
-    }, []);
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setuid(user.email);
+      } else {
+        navigate("/");
+      }
+    });
     return uid;
   }
-  const uid = Getuserid();
+  const name = Getuserid();
 
   useEffect(() => {
     getDocuments();
-  }, [])
+  }, []);
 
   const getData = collection(firestore, "user");
   const getDocuments = async () => {
     const result = await getDocs(getData);
-    console.log(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    setData(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
   return (
-    <div className='updateaddress'>
+    <div className="updateaddress">
       <div>
-        <Header user={uid}/>
+        <Header user={name} />
       </div>
+      
       <div className="uForm">
         <Form className="uForm1">
-          <Typography.Title className="updateaddresstitle">YOUR ADDRESS</Typography.Title>
+          <Typography.Title className="updateaddresstitle">
+            YOUR ADDRESS
+          </Typography.Title>
           <div className="updateInputfield">
             <Input
               className="updateInput"
@@ -104,7 +108,9 @@ const UpdateAddress = () => {
               onChange={(e) => setPin(e.target.value)}
             />
             <div className="updateaddressnow">
-            <Link className='anow' to="/checkout">save address</Link>
+              <Link className="anow" to="/checkout">
+                save address
+              </Link>
             </div>
           </div>
         </Form>
@@ -113,7 +119,7 @@ const UpdateAddress = () => {
         <Footer />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UpdateAddress
+export default UpdateAddress;

@@ -28,7 +28,8 @@ const Home = () => {
   const [url, setUrl] = useState([]);
   const [count, setCount] = useState(0);
   const [quantity, setQuantity] = useState(1);
-
+  const [uid, setuid] = useState(null);
+  
   const getData = collection(firestore, "products");
   const navigate = useNavigate();
 
@@ -51,20 +52,20 @@ const Home = () => {
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
   
+  useEffect(() => {
+    Getuserid();
+  }, []);
   function Getuserid() {
-    const [uid, setuid] = useState(null);
-    useEffect(() => {
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          setuid(user.email);
-        } else {
-          navigate("/");
-        }
-      });
-    }, []);
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setuid(user.email);
+      } else {
+        navigate("/");
+      }
+    });
     return uid;
   }
-  const uid = Getuserid();
+  const name = Getuserid();
   
   async function handleChange(name) {
     if (uid !== null) {
@@ -89,7 +90,7 @@ const Home = () => {
     <>
       <div className="home">
         <div>
-          <Header count={count} user={uid} />
+          <Header count={count} user={name} />
         </div>
         <div className="slider">
           <Carousel autoplay>

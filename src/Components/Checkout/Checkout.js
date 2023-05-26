@@ -16,24 +16,24 @@ import { collection, getDocs, setDoc } from "firebase/firestore";
 
 const Checkout = (props) => {
   const [user, setUser] = useState([]);
+  const [uid, setuid] = useState(null);
 
   const navigate = useNavigate(null);
   // console.log(props.total);
+  useEffect(() => {
+    Getuserid();
+  }, []);
   function Getuserid() {
-    const [uid, setuid] = useState(null);
-    useEffect(() => {
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          setuid(user.email);
-        } else {
-          navigate("/");
-        }
-      });
-    }, []);
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setuid(user.email);
+      } else {
+        navigate("/");
+      }
+    });
     return uid;
   }
-  const uid = Getuserid();
-  console.log(uid);
+  const name = Getuserid();
 
   useEffect(() => {
     getUserData();
@@ -48,7 +48,7 @@ const Checkout = (props) => {
   return (
     <div className="checkout">
       <div>
-        <Header user={uid} />
+        <Header user={name} />
       </div>
       <div className="container1">
         <Typography.Title className="atitle">Checkout</Typography.Title>
