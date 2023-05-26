@@ -18,6 +18,7 @@ const { Meta } = Card;
 
 const About = () => {
   const [preview, setPreview] = useState(false);
+
   const navigate = useNavigate(null);
 
   function Getuserid() {

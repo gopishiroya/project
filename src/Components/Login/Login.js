@@ -23,7 +23,7 @@ const Login = (props) => {
     }
   }, [currentUser, navigate])
 
-  async function handleLogin(e) {
+  async function handleLogin() {
     e.preventDefault();
     dispatch(loginInitaiate(email, password));
     setEmail("");

@@ -87,6 +87,7 @@ export const PutDataInitaiate = (name, email, password, number) => {
   };
 };
 
+
 export const StorageInitaiate = (name, price, category, pic) => {
   return async function (dispatch) {
     const imageRef = ref(storage, `uploads/images/${pic.name}`);

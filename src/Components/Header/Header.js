@@ -13,7 +13,6 @@ import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import "react-toastify/dist/ReactToastify.css";
 const Header = (props) => {
   
-
   // const [user,setUser]=useState(null)
   function handleLogout() {
     auth

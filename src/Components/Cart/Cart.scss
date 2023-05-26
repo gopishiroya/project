@@ -2,7 +2,6 @@
   font-size: 25px;
   text-decoration: none;
 }
-
 @mixin card {
   position: relative;
   height: 40px;
@@ -18,7 +17,6 @@
   padding-bottom: 0px;
   margin-left: 20px;
 }
-
 .cart {
   .container1 {
     background-color: #333;
@@ -35,7 +33,7 @@
     }
     .home {
       @include link;
-      color: #efd330;
+      color: #EFD330;
       padding-left: 560px;
     }
     .labout {
@@ -101,7 +99,7 @@
           bottom: 56px;
           left: 201px;
           padding: 10px;
-          background-color: #efd330;
+          background-color: #EFD330;
           cursor: pointer;
         }
         .EditFilled:hover {
@@ -116,14 +114,14 @@
         }
         .ShoppingCartOutlined {
           @include card;
-          left: 110px;
-          bottom: 420px;
+          left: 132px;
+          bottom: 365px;
         }
         .paragraph {
           position: relative;
-          bottom: 104px;
+          bottom: 45px;
           font-size: 20px;
-          right: 48px;
+          right: 65px;
         }
       }
       // .eyefilled:hover,.ShoppingCartOutlined:hover {
@@ -153,7 +151,7 @@
       color: black;
       padding-top: 5px;
       padding-right: 15px;
-      background-color: #efd330;
+      background-color: #EFD330;
       margin: 10px;
       padding-left: 13px;
     }
@@ -165,7 +163,7 @@
     text-align: center;
     .delete {
       font-size: 20px;
-      background-color: #e74c3c;
+      background-color: #E74C3C;
       padding-bottom: 38px;
       padding-right: 25px;
       padding-left: 25px;
@@ -180,7 +178,7 @@
       text-decoration: none;
       font-size: 20px;
       color: black;
-      background-color: #efd330;
+      background-color: #EFD330;
       padding-right: 25px;
       padding-left: 25px;
       padding-top: 5px;

@@ -26,6 +26,7 @@ const Register = () => {
       navigate("/");
     }
   }, [currentUser, navigate]);
+  console.log(currentUser)
 
   function handleRegister(e) {
     e.preventDefault();

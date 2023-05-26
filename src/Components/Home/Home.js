@@ -13,9 +13,11 @@ import image1 from "../Image/home-img-1.png";
 import image2 from "../Image/home-img-2.png";
 import image3 from "../Image/home-img-3.jpg";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, firestore, storage } from "../../Firebase/FIrebase";
-import { addDoc, collection, getDocs,doc, getDoc } from "firebase/firestore";
+import { app, auth, firestore, storage } from "../../Firebase/FIrebase";
+import { addDoc, collection, getDocs,doc, getDoc, setDoc } from "firebase/firestore";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
+import { onAuthStateChanged } from "firebase/auth";
+
 const { Meta } = Card;
 
 const Home = () => {
@@ -25,11 +27,12 @@ const Home = () => {
   const [count, setCount] = useState(0);
   const getData = collection(firestore, "products");
   const navigate = useNavigate();
-  
+
 
   useEffect(() => {
     getDocuments();
   }, []);
+  
   const imageRef = ref(storage, "uploads/images/");
   useEffect(() => {
     listAll(imageRef).then((res) => {
@@ -49,7 +52,7 @@ const Home = () => {
     useEffect(() => {
       auth.onAuthStateChanged((user) => {
         if (user) {
-          setuid(user.email);
+          setuid(user.email); 
         } else {
           navigate("/");
         }
@@ -59,6 +62,7 @@ const Home = () => {
   }
   const uid = Getuserid();
   console.log(uid);
+
 
   async function handleChange(name) {
     if (uid !== null) {
@@ -71,6 +75,19 @@ const Home = () => {
       .then(() => console.log("success"))
       .catch((error) => console.log(error));
   }
+
+  // onAuthStateChanged(auth,(user)=>{
+  //   if(user){
+  //     const uid=user.uid
+  //     const name=user.name
+  //     console.log(uid)
+  //     console.log("hbjkhnik",name)
+  //   }
+  //   else{
+  //     console.log("error")
+  //   }
+  // })
+ 
   return (
     <>
       <div className="home">
