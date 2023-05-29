@@ -7,15 +7,17 @@ import { Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import "./UpdateProduct.scss";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { firestore, getData } from "../../Firebase/FIrebase";
+import { firestore, getData, storage } from "../../Firebase/FIrebase";
 import { doc, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const UpdateProduct = (props) => {
   const [preview, setPreview] = useState(false);
   const [products, setProducts] = useState("");
   const [pic, setPic] = useState("");
+  const [url, setUrl] = useState("");
 
   const navigate = useNavigate();
   const params = useParams();
@@ -23,7 +25,7 @@ const UpdateProduct = (props) => {
   useEffect(() => {
     getData(params.id).then((value) => setProducts(value.data()));
   }, []);
-  
+
   const prop = {
     name: "file",
     beforeUpload: (file) => {
@@ -32,13 +34,43 @@ const UpdateProduct = (props) => {
     },
   };
 
-  const path = doc(firestore, "products", params.id);
-  function handleUpdate(e) {
+  // useEffect(() => {
+
+  //   const imageRef = ref(storage, `uploads/images/${pic.name}`);
+  //   const uploadResult = uploadBytes(imageRef, pic);
+
+  //   const starsRef = ref(storage, `uploads/images/${pic.name}`);
+  //   getDownloadURL(starsRef)
+  //     .then((iurl) => {
+  //       setUrl(iurl);
+  //       console.log(url);
+  //     })
+  //     .catch((error) => console.log(error));
+  // }, [pic]);
+
+  useEffect(() => {
+    const starsRef = ref(storage, `uploads/images/${pic.name}`);
+    getDownloadURL(starsRef)
+      .then((iurl) => {
+        setUrl(iurl);
+        console.log(url);
+      })
+      .catch((error) => console.log(error));
+  }, [pic]);
+
+  
+  async function handleUpdate(e) {
     e.preventDefault();
+
+    const imageRef = ref(storage, `uploads/images/${pic.name}`);
+    const uploadResult = await uploadBytes(imageRef, pic);
+
+    const path = doc(firestore, "products", params.id);
     const data = {
       name: products.name,
       price: products.price,
       category: products.category,
+      ImageURL: url,
     };
     setDoc(path, data)
       .then((path) => console.log(path))
@@ -56,7 +88,7 @@ const UpdateProduct = (props) => {
         <Form className="form1">
           <div className="uImage">
             <Image
-              src={products?.imageURL}
+              src={products.ImageURL}
               preview={preview}
               className="images"
             />

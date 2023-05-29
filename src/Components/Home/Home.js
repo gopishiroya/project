@@ -14,7 +14,14 @@ import image2 from "../Image/home-img-2.png";
 import image3 from "../Image/home-img-3.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { app, auth, firestore, storage } from "../../Firebase/FIrebase";
-import { addDoc, collection, getDocs,doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  doc,
+  getDoc,
+  setDoc,
+} from "firebase/firestore";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 const { Meta } = Card;
 const Home = () => {
@@ -26,7 +33,6 @@ const Home = () => {
   const [uid, setuid] = useState(null);
   const getData = collection(firestore, "products");
   const navigate = useNavigate();
-
 
   useEffect(() => {
     getDocuments();
@@ -45,8 +51,7 @@ const Home = () => {
     const result = await getDocs(getData);
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
-  
-<<<<<<< HEAD
+
   // useEffect(() => {
   //   Getuserid();
   // }, []);
@@ -54,7 +59,7 @@ const Home = () => {
   //   useEffect(() => {
   //     auth.onAuthStateChanged((user) => {
   //       if (user) {
-  //         setuid(user.email); 
+  //         setuid(user.email);
   //       } else {
   //         navigate("/");
   //       }
@@ -74,23 +79,7 @@ const Home = () => {
       }
     });
   }, []);
-  
-=======
-  function Getuserid() {
-    useEffect(() => {
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          setuid(user.email);
-        } else {
-          navigate("/");
-        }
-      });
-    }, []);
-    return uid;
-  }
-  const name = Getuserid();
-  // console.log(name);
->>>>>>> c1e1834883aa45635ca93fbbb5d87e28fdb43ddc
+
   async function handleChange(name) {
     if (uid !== null) {
       console.log(products);
@@ -101,7 +90,7 @@ const Home = () => {
     addDoc(collection(firestore, "cart " + uid), {
       id: name.id,
       category: name.category,
-      // imageURL: name.imageURL,
+      imageURL: name.ImageURL,
       name: name.name,
       price: name.price,
       quantity: quantity,
@@ -109,18 +98,6 @@ const Home = () => {
       .then(() => console.log("success"))
       .catch((error) => console.log(error));
   }
-  // onAuthStateChanged(auth,(user)=>{
-  //   if(user){
-  //     const uid=user.uid
-  //     const name=user.name
-  //     console.log(uid)
-  //     console.log("hbjkhnik",name)
-  //   }
-  //   else{
-  //     console.log("error")
-  //   }
-  // })
-
 
   return (
     <>
@@ -203,7 +180,11 @@ const Home = () => {
             {products.map((products, id) => {
               return (
                 <Card className="dcard" key={id}>
-                  <Image src={url} className="dimage" preview={preview}></Image>
+                  <Image
+                    src={products.ImageURL}
+                    className="dimage"
+                    preview={preview}
+                  ></Image>
                   <Meta
                     className="meta"
                     title={products.category}
@@ -244,10 +225,3 @@ const Home = () => {
   );
 };
 export default Home;
-
-
-
-
-
-
-

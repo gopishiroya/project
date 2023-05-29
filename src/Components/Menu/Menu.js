@@ -20,7 +20,6 @@ const Menu = () => {
   const [quantity, setQuantity] = useState(1);
   const [count, setCount] = useState(0);
   const navigate = useNavigate(null);
-<<<<<<< HEAD
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -32,32 +31,10 @@ const Menu = () => {
     });
   }, []);
 
-=======
-  // useEffect(() => {
-  //   Getuserid();
-  // }, []);
-  function Getuserid() {
-    useEffect(() => {
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          setuid(user.email);
-        } else {
-          navigate("/");
-        }
-      });
-    }, []);
-    return uid;
-  }
-  const name = Getuserid();
->>>>>>> c1e1834883aa45635ca93fbbb5d87e28fdb43ddc
   const getData = collection(firestore, "products");
   useEffect(() => {
     getDocuments();
   }, []);
-<<<<<<< HEAD
-
-=======
->>>>>>> c1e1834883aa45635ca93fbbb5d87e28fdb43ddc
   const imageRef = ref(storage, "uploads/images/");
   useEffect(() => {
     listAll(imageRef).then((res) => {
@@ -72,10 +49,6 @@ const Menu = () => {
     const result = await getDocs(getData);
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
-<<<<<<< HEAD
-
-=======
->>>>>>> c1e1834883aa45635ca93fbbb5d87e28fdb43ddc
   async function handleCart(name) {
     if (uid !== null) {
       console.log(products);
@@ -96,11 +69,7 @@ const Menu = () => {
   }
   return (
     <div className="menu">
-<<<<<<< HEAD
       <Header user={uid} count={count} />
-=======
-      <Header user={name} count={count} />
->>>>>>> c1e1834883aa45635ca93fbbb5d87e28fdb43ddc
       <div className="menutitle">
         <Typography.Title className="mtitle">Our Menu</Typography.Title>
         <Link to="/" className="home">
@@ -116,7 +85,7 @@ const Menu = () => {
           {products.map((products, id) => {
             return (
               <Card className="dcard" key={id}>
-                <Image src={url} className="dimage" preview={preview}></Image>
+                <Image src={products.ImageURL} className="dimage" preview={preview}></Image>
                 <Meta
                   className="meta"
                   title={products.category}
