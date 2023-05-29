@@ -12,10 +12,9 @@ import {
 import Footer from "../Footer/Footer";
 import { auth, firestore } from "../../Firebase/FIrebase";
 import { useNavigate } from "react-router-dom";
-import { collection, getDocs, setDoc } from "firebase/firestore";
-import { useSelector } from "react-redux";
+import { collection, getDocs } from "firebase/firestore";
 
-const Checkout = (props) => {
+const Checkout = () => {
 
   const [cart, setCart] = useState([]);
 

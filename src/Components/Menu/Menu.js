@@ -85,7 +85,7 @@ const Menu = () => {
           {products.map((products, id) => {
             return (
               <Card className="dcard" key={id}>
-                <Image src={url} className="dimage" preview={preview}></Image>
+                <Image src={products.ImageURL} className="dimage" preview={preview}></Image>
                 <Meta
                   className="meta"
                   title={products.category}

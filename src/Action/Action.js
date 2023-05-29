@@ -1,4 +1,3 @@
-import React,{useEffect,useState} from "react";
 import * as types from "./ActionTypes";
 import { app, firestore, storage } from "../Firebase/FIrebase";
 import {
@@ -6,7 +5,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { addDoc, collection, getDocs} from "firebase/firestore";
+import { addDoc, collection} from "firebase/firestore";
 import { ref, uploadBytes } from "firebase/storage";
 
 const auth = getAuth(app);
@@ -90,7 +89,7 @@ export const StorageInitaiate = (name, price, category, pic) => {
       name,
       price,
       category,
-      imageURL: uploadResult.ref.fullPath,
+      imageURL: pic,
     })
       .then(() => dispatch(put_data_storage))
       .catch((error) => dispatch(put_data_storage(error)));

@@ -41,7 +41,7 @@ const QuickView = () => {
         <Typography.Title className="qtitle">QUICK VIEW</Typography.Title>
         <div className="qcontainer">
           <Card className="qcard">
-            <Image src={pizza} className="qimage" preview={preview}></Image>
+            <Image src={products.ImageURL} className="qimage" preview={preview}></Image>
             <Meta className="meta" title={products.category} description={products.name} />
             <Typography.Title className="qprice">Rs. {products.price}</Typography.Title>
             <Input className="qinput" type="number" defaultValue={1} min={1} />

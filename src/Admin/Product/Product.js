@@ -17,9 +17,15 @@ import { useDispatch } from "react-redux";
 import { StorageInitaiate } from "../../Action/Action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+} from "firebase/firestore";
 import { firestore, storage } from "../../Firebase/FIrebase";
-import { getDownloadURL, listAll, ref } from "firebase/storage";
+import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
 const { Meta } = Card;
 
 const Product = () => {
@@ -29,30 +35,18 @@ const Product = () => {
   const [category, setCategory] = useState("");
   const [pic, setPic] = useState("");
   const [products, setProducts] = useState([]);
-  const [url, setUrl] = useState([]);
+  const [url, setUrl] = useState("");
 
   useEffect(() => {
     getDocuments();
-  }, [handleAddProducts]);
-  
-  const imageRef = ref(storage, "uploads/images/");
-  useEffect(() => {
-    listAll(imageRef).then((res) => {
-      res.items.map((item) => {
-        return getDownloadURL(item).then((url) => {
-          setUrl(url);
-        });
-      });
-    });
-  }, []);
+  }, [pname, price, category, pic]);
 
   const getData = collection(firestore, "products");
   const getDocuments = async () => {
     const result = await getDocs(getData);
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
-
-  const dispatch = useDispatch();
+  
   const props = {
     name: "file",
     beforeUpload: (file) => {
@@ -61,20 +55,42 @@ const Product = () => {
     },
   };
 
-  function handleAddProducts(e) {
+  useEffect(() => {
+    const starsRef = ref(storage, `uploads/images/${pic.name}`);
+    getDownloadURL(starsRef)
+      .then((iurl) => {
+        setUrl(iurl);
+        console.log(url);
+      })
+      .catch((error) => console.log(error));
+  }, [pic]);
+
+  async function handleAddProducts(e) {
     e.preventDefault();
-    dispatch(StorageInitaiate(pname, price, category, url));
+
+    const imageRef = ref(storage, `uploads/images/${pic.name}`);
+    const uploadResult = await uploadBytes(imageRef, pic);
+
+    addDoc(collection(firestore, "products"), {
+      name: pname,
+      price: price,
+      category: category,
+      ImageURL: url,
+    })
+      .then(() => console.log("success"))
+      .catch(() => console.log("error"));
+
     setPname("");
     setPrice("");
     toast.success("product added successfully");
-    getDocuments();
   }
 
   async function handleDelete(products) {
     await deleteDoc(doc(firestore, "products", products.id));
     toast.success("products delete successfully");
+    getDocuments();
   }
- 
+
   return (
     <>
       <div>
@@ -150,7 +166,11 @@ const Product = () => {
           {products.map((products, id) => {
             return (
               <Card className="dcard" key={id}>
-                <Image src={products.imageURL} className="dimage" preview={preview}></Image>
+                <Image
+                  src={products.ImageURL}
+                  className="dimage"
+                  preview={preview}
+                ></Image>
                 <div className="row">
                   <Meta
                     className="meta"
