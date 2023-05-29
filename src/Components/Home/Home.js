@@ -31,6 +31,8 @@ const Home = () => {
   useEffect(() => {
     getDocuments();
   }, []);
+  
+
   const imageRef = ref(storage, "uploads/images/");
   useEffect(() => {
     listAll(imageRef).then((res) => {
@@ -46,24 +48,6 @@ const Home = () => {
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
   
-<<<<<<< HEAD
-  // useEffect(() => {
-  //   Getuserid();
-  // }, []);
-  // function Getuserid() {
-  //   useEffect(() => {
-  //     auth.onAuthStateChanged((user) => {
-  //       if (user) {
-  //         setuid(user.email); 
-  //       } else {
-  //         navigate("/");
-  //       }
-  //     });
-  //   }, []);
-  //   return uid;
-  // }
-  // const name = Getuserid();
-  // console.log(name);
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -74,23 +58,8 @@ const Home = () => {
       }
     });
   }, []);
+
   
-=======
-  function Getuserid() {
-    useEffect(() => {
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          setuid(user.email);
-        } else {
-          navigate("/");
-        }
-      });
-    }, []);
-    return uid;
-  }
-  const name = Getuserid();
-  // console.log(name);
->>>>>>> c1e1834883aa45635ca93fbbb5d87e28fdb43ddc
   async function handleChange(name) {
     if (uid !== null) {
       console.log(products);
@@ -109,19 +78,6 @@ const Home = () => {
       .then(() => console.log("success"))
       .catch((error) => console.log(error));
   }
-  // onAuthStateChanged(auth,(user)=>{
-  //   if(user){
-  //     const uid=user.uid
-  //     const name=user.name
-  //     console.log(uid)
-  //     console.log("hbjkhnik",name)
-  //   }
-  //   else{
-  //     console.log("error")
-  //   }
-  // })
-
-
   return (
     <>
       <div className="home">

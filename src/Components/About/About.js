@@ -20,8 +20,6 @@ const About = () => {
   const [preview, setPreview] = useState(false);
   const [uid, setuid] = useState(null)
   const navigate = useNavigate(null);
-  const [uid,setuid]=useState(null)
-
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
