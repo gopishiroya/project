@@ -13,13 +13,26 @@ import Footer from "../Footer/Footer";
 import { auth, firestore } from "../../Firebase/FIrebase";
 import { useNavigate } from "react-router-dom";
 import { collection, getDocs, setDoc } from "firebase/firestore";
+import { useLocation } from "react-router-dom";
 
 const Checkout = (props) => {
+
+  const [cart, setCart] = useState([]);
+
+  
+  function grandtotal() {
+    let x = 0;
+    cart.map((i) => {
+      return (x += i.price * i.quantity);
+    });
+    return x;
+  }
+  // console.log(grandtotal())
+
   const [user, setUser] = useState([]);
   const [uid, setuid] = useState(null);
 
   const navigate = useNavigate(null);
-  // console.log(props.total);
   useEffect(() => {
     Getuserid();
   }, []);
@@ -44,6 +57,12 @@ const Checkout = (props) => {
     const result = await getDocs(getUser);
     setUser(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
+  const getDocuments = async () => {
+    const getData = collection(firestore, "cart " + uid);
+    const name = await getDocs(getData);
+    setCart(name.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+  getDocuments();
 
   return (
     <div className="checkout">
@@ -71,7 +90,7 @@ const Checkout = (props) => {
                 grand total :{" "}
               </Typography.Paragraph>
               <Typography.Paragraph className="tprice">
-                Rs. {props.total}
+                Rs. {grandtotal()}
               </Typography.Paragraph>
             </div>
             <Link className="vcart" to="/cart">

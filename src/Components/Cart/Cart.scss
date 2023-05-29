@@ -90,32 +90,18 @@
             color: #999;
           }
         }
-        .EditFilled {
-          border: 2px solid black;
-          font-size: 20px;
-          position: relative;
-          bottom: 56px;
-          left: 201px;
-          padding: 10px;
-          background-color: #EFD330;
-          cursor: pointer;
-        }
         .ShoppingCartOutlined {
           @include card;
-          left: 132px;
-          bottom: 365px;
+          left: 123px;
+          bottom: 363px;
         }
         .paragraph {
           position: relative;
-          bottom: 45px;
-          font-size: 20px;
-          right: 65px;
+          bottom: 55px;
+          font-size: 24px;
+          right: 67px;
         }
       }
-      // .eyefilled:hover,.ShoppingCartOutlined:hover {
-      //   color: black;
-      //   border: 2px solid black;
-      // }
     }
   }
   .total {

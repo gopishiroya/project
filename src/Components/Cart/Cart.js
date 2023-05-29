@@ -2,24 +2,20 @@ import React, { useState, useEffect } from "react";
 import "./Cart.scss";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import { Typography, Card, Image, Input, Button } from "antd";
-import { EditFilled, DeleteTwoTone } from "@ant-design/icons";
+import { Typography, Card, Image, Button } from "antd";
+import { DeleteTwoTone } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import pizza from "../Image/pizza-1.png";
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { auth, firestore } from "../../Firebase/FIrebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 const { Meta } = Card;
-
 const Cart = () => {
   const [preview, setPreview] = useState(false);
   const [cart, setCart] = useState([]);
   const [uid, setuid] = useState(null);
-
-  const navigate = useNavigate(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
     Getuserid();
   }, []);
@@ -34,19 +30,16 @@ const Cart = () => {
     return uid;
   }
   const name = Getuserid();
-
   const getDocuments = async () => {
     const getData = collection(firestore, "cart " + uid);
     const name = await getDocs(getData);
     setCart(name.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
   getDocuments();
-  
   async function handleDelete(cart) {
     await deleteDoc(doc(firestore, "cart " + uid, cart.id));
     toast.success("products delete successfully");
   }
-
   function grandtotal() {
     let x = 0;
     cart.map((i) => {
@@ -54,7 +47,6 @@ const Cart = () => {
     });
     return x;
   }
-
   return (
     <div className="cart">
       <ToastContainer />
@@ -102,7 +94,7 @@ const Cart = () => {
         <Typography.Paragraph className="price">
           cart total : {grandtotal()}
         </Typography.Paragraph>
-        <Link className="checkout" to="/checkout" total={grandtotal()}>
+        <Link className="checkout" to="/checkout">
           Proceed To Checkout
         </Link>
       </div>
@@ -117,5 +109,4 @@ const Cart = () => {
     </div>
   );
 };
-
 export default Cart;

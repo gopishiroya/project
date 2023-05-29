@@ -23,7 +23,7 @@ const Login = () => {
     }
   }, [currentUser])
 
-  async function handleLogin() {
+  async function handleLogin(e) {
     e.preventDefault();
     dispatch(loginInitaiate(email, password));
     setEmail("");

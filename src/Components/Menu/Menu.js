@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Typography } from "antd";
@@ -11,9 +11,7 @@ import { firestore, storage } from "../../Firebase/FIrebase";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 import { auth } from "../../Firebase/FIrebase";
 import { useNavigate } from "react-router-dom";
-
 const { Meta } = Card;
-
 const Menu = () => {
   const [preview, setPreview] = useState(false);
   const [products, setProducts] = useState([]);
@@ -21,49 +19,42 @@ const Menu = () => {
   const [uid, setuid] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [count, setCount] = useState(0);
-
   const navigate = useNavigate(null);
-  
-  useEffect(() => {
-    Getuserid();
-  }, []);
+  // useEffect(() => {
+  //   Getuserid();
+  // }, []);
   function Getuserid() {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        setuid(user.email);
-      } else {
-        navigate("/");
-      }
-    });
+    useEffect(() => {
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          setuid(user.email);
+        } else {
+          navigate("/");
+        }
+      });
+    }, []);
     return uid;
   }
   const name = Getuserid();
-  
   const getData = collection(firestore, "products");
-
   useEffect(() => {
     getDocuments();
   }, []);
-  
   const imageRef = ref(storage, "uploads/images/");
   useEffect(() => {
     listAll(imageRef).then((res) => {
       res.items.map((item) => {
-        return (
-          getDownloadURL(item).then((url) => {
-            setUrl((prev) => [...prev, url]);
-          })
-        )
-      })
+        return getDownloadURL(item).then((url) => {
+          setUrl((prev) => [...prev, url]);
+        });
+      });
     });
   }, []);
-
   const getDocuments = async () => {
     const result = await getDocs(getData);
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
-
-  async function handleChange(name) {
+  async function handleCart(name) {
     if (uid !== null) {
       console.log(products);
     } else {
@@ -81,10 +72,9 @@ const Menu = () => {
       .then(() => console.log("success"))
       .catch((error) => console.log(error));
   }
-
   return (
     <div className="menu">
-      <Header count={count} user={name}/>
+      <Header user={name} count={count} />
       <div className="menutitle">
         <Typography.Title className="mtitle">Our Menu</Typography.Title>
         <Link to="/" className="home">
@@ -97,36 +87,35 @@ const Menu = () => {
       <div className="dishes">
         <Typography.Title className="dtitle">LATEST DISHES</Typography.Title>
         <div className="container">
-        {products.map((products, id) => {
-              return (
-                <Card className="dcard" key={id}>
-                  <Image src={url} className="dimage" preview={preview}></Image>
-                  <Meta
-                    className="meta"
-                    title={products.category}
-                    description={products.name}
-                  />
-                  <Typography.Title className="price">
-                    Rs. {products.price}
-                  </Typography.Title>
-                  <Input
-                    className="input"
-                    type="number"
-                    defaultValue={1}
-                    min={1}
-                    onChange={(e) => setQuantity(e.target.value)}
-                  />
-
-                  <Link to={"/quickview/" + products.id}>
-                    <EyeFilled className="eyefilled" />
-                  </Link>
-                  <ShoppingCartOutlined
-                    className="ShoppingCartOutlined"
-                    onClick={() => handleChange(products)}
-                  />
-                </Card>
-              );
-            })}
+          {products.map((products, id) => {
+            return (
+              <Card className="dcard" key={id}>
+                <Image src={url} className="dimage" preview={preview}></Image>
+                <Meta
+                  className="meta"
+                  title={products.category}
+                  description={products.name}
+                />
+                <Typography.Title className="price">
+                  Rs. {products.price}
+                </Typography.Title>
+                <Input
+                  className="input"
+                  type="number"
+                  defaultValue={1}
+                  min={1}
+                  onChange={(e) => setQuantity(e.target.value)}
+                />
+                <Link to={"/quickview/" + products.id}>
+                  <EyeFilled className="eyefilled" />
+                </Link>
+                <ShoppingCartOutlined
+                  className="ShoppingCartOutlined"
+                  onClick={() => handleCart(products)}
+                />
+              </Card>
+            );
+          })}
         </div>
       </div>
       <Footer />
