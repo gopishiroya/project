@@ -53,28 +53,6 @@ const Home = () => {
     const result = await getDocs(getData);
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
-<<<<<<< HEAD
-  
-=======
-
-  // useEffect(() => {
-  //   Getuserid();
-  // }, []);
-  // function Getuserid() {
-  //   useEffect(() => {
-  //     auth.onAuthStateChanged((user) => {
-  //       if (user) {
-  //         setuid(user.email);
-  //       } else {
-  //         navigate("/");
-  //       }
-  //     });
-  //   }, []);
-  //   return uid;
-  // }
-  // const name = Getuserid();
-  // console.log(name);
->>>>>>> a261b4f69817757a57148e36d8bec0c8a03ca897
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -86,10 +64,6 @@ const Home = () => {
     });
   }, []);
 
-<<<<<<< HEAD
-  
-=======
->>>>>>> a261b4f69817757a57148e36d8bec0c8a03ca897
   async function handleChange(name) {
     if (uid !== null) {
       console.log(products);
@@ -108,10 +82,6 @@ const Home = () => {
       .then(() => console.log("success"))
       .catch((error) => console.log(error));
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> a261b4f69817757a57148e36d8bec0c8a03ca897
   return (
     <>
       <div className="home">

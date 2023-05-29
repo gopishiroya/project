@@ -15,13 +15,8 @@ const Cart = () => {
   const [preview, setPreview] = useState(false);
   const [cart, setCart] = useState([]);
   const [uid, setuid] = useState(null);
-<<<<<<< HEAD
-  const navigate = useNavigate();
-=======
-
   const navigate = useNavigate();
 
->>>>>>> a261b4f69817757a57148e36d8bec0c8a03ca897
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -31,10 +26,6 @@ const Cart = () => {
       }
     });
   }, []);
-<<<<<<< HEAD
-=======
-
->>>>>>> a261b4f69817757a57148e36d8bec0c8a03ca897
   const getDocuments = async () => {
     const getData = collection(firestore, "cart " + uid);
     const name = await getDocs(getData);
