@@ -14,9 +14,6 @@ const Update_profile = () => {
   const navigate = useNavigate(null);
 
   useEffect(() => {
-    Getuserid();
-  }, []);
-  function Getuserid() {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setuid(user.email);
@@ -24,14 +21,12 @@ const Update_profile = () => {
         navigate("/");
       }
     });
-    return uid;
-  }
-  const name = Getuserid();
+  }, []);
 
   return (
     <div className='update_profile'>
       <div>
-        <Header user={name}/>
+        <Header user={uid}/>
       </div>
       <div className="Form">
         <Form className="Form1">

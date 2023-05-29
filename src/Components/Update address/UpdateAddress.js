@@ -22,9 +22,6 @@ const UpdateAddress = () => {
   const navigate = useNavigate(null);
 
   useEffect(() => {
-    Getuserid();
-  }, []);
-  function Getuserid() {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setuid(user.email);
@@ -32,9 +29,7 @@ const UpdateAddress = () => {
         navigate("/");
       }
     });
-    return uid;
-  }
-  const name = Getuserid();
+  }, []);
 
   useEffect(() => {
     getDocuments();
@@ -49,7 +44,7 @@ const UpdateAddress = () => {
   return (
     <div className="updateaddress">
       <div>
-        <Header user={name} />
+        <Header user={uid} />
       </div>
       
       <div className="uForm">

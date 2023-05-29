@@ -21,9 +21,6 @@ const QuickView = () => {
   const params = useParams();
 
   useEffect(() => {
-    Getuserid();
-  }, []);
-  function Getuserid() {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setuid(user.email);
@@ -31,9 +28,7 @@ const QuickView = () => {
         navigate("/");
       }
     });
-    return uid;
-  }
-  const name = Getuserid();
+  }, []);
 
   useEffect(() => {
     getData(params.id).then((value) => setProducts(value.data()));
@@ -41,7 +36,7 @@ const QuickView = () => {
   
   return (
     <div className="quickview">
-      <Header  user={name} />
+      <Header  user={uid} />
       <div className="qdishes">
         <Typography.Title className="qtitle">QUICK VIEW</Typography.Title>
         <div className="qcontainer">

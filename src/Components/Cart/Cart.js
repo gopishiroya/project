@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./Cart.scss";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-import { Typography, Card, Image, Input, Button } from "antd";
-import { EditFilled, DeleteTwoTone } from "@ant-design/icons";
+import { Typography, Card, Image, Button } from "antd";
+import { DeleteTwoTone } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import pizza from "../Image/pizza-1.png";
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
@@ -18,12 +18,9 @@ const Cart = () => {
   const [cart, setCart] = useState([]);
   const [uid, setuid] = useState(null);
 
-  const navigate = useNavigate(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    Getuserid();
-  }, []);
-  function Getuserid() {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setuid(user.email);
@@ -31,9 +28,7 @@ const Cart = () => {
         navigate("/");
       }
     });
-    return uid;
-  }
-  const name = Getuserid();
+  }, []);
 
   const getDocuments = async () => {
     const getData = collection(firestore, "cart " + uid);
@@ -41,7 +36,7 @@ const Cart = () => {
     setCart(name.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
   getDocuments();
-  
+
   async function handleDelete(cart) {
     await deleteDoc(doc(firestore, "cart " + uid, cart.id));
     toast.success("products delete successfully");
@@ -59,7 +54,7 @@ const Cart = () => {
     <div className="cart">
       <ToastContainer />
       <div>
-        <Header user={name} />
+        <Header user={uid} />
       </div>
       <div className="container1">
         <Typography.Title className="atitle">Shopping Cart</Typography.Title>
@@ -102,7 +97,7 @@ const Cart = () => {
         <Typography.Paragraph className="price">
           cart total : {grandtotal()}
         </Typography.Paragraph>
-        <Link className="checkout" to="/checkout" total={grandtotal()}>
+        <Link className="checkout" to="/checkout">
           Proceed To Checkout
         </Link>
       </div>

@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerInitaiate, PutDataInitaiate } from "../../Action/Action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { addDoc, collection } from "firebase/firestore";
+import { auth, firestore } from "../../Firebase/FIrebase";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -16,17 +18,26 @@ const Register = () => {
   const [number, setNumber] = useState("");
   const [password, setPassword] = useState("");
   const [cpassword, setCpassword] = useState("");
+  const [userId, setUserId] = useState(null);
 
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     if (currentUser) {
-      navigate("/");
+      // navigate("/");
+      console.log("currentuser", currentUser);
     }
   }, [currentUser, navigate]);
-  console.log(currentUser)
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUserId(user.uid);
+      }
+    });
+  }, []);
 
   function handleRegister() {
     if (password !== cpassword) {
@@ -42,7 +53,16 @@ const Register = () => {
     setPassword("");
     setCpassword("");
     toast.success("data added success");
-    dispatch(PutDataInitaiate(name, email, password, number));
+    // dispatch(PutDataInitaiate(name, email, password, number));
+    addDoc(collection(firestore, "user"), {
+      name: name,
+      email: email,
+      password: password,
+      number: number,
+      uid: userId
+    })
+      .then(() => console.log("success"))
+      .catch(() => console.log("error"));
   }
 
   return (

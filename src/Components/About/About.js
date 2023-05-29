@@ -18,12 +18,10 @@ const { Meta } = Card;
 
 const About = () => {
   const [preview, setPreview] = useState(false);
+  const [uid, setuid] = useState(null)
   const navigate = useNavigate(null);
 
   useEffect(() => {
-    Getuserid();
-  }, []);
-  function Getuserid() {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setuid(user.email);
@@ -31,13 +29,11 @@ const About = () => {
         navigate("/");
       }
     });
-    return uid;
-  }
-  const name = Getuserid();
+  }, []);
 
   return (
     <div className="about">
-      <Header  user={name}/>
+      <Header  user={uid}/>
       <div className="container1">
         <Typography.Title className="atitle">About Us</Typography.Title>
         <Link to="/" className="home">

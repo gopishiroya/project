@@ -12,7 +12,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Header = (props) => {
 
-  const [user, setUser] = useState([]);
   function handleLogout() {
     auth
       .signOut()
@@ -100,7 +99,7 @@ const Header = (props) => {
           
           <div className="cart">
             <Link to="/cart"> 
-            <Badge count={props.count} size="large" className="notification">
+            <Badge count={props.count}  size="large" className="notification">
               <ShoppingCartOutlined className="icon2" />
             </Badge></Link>
           </div>

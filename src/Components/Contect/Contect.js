@@ -26,9 +26,6 @@ const Contect = () => {
   const navigate = useNavigate(null);
 
   useEffect(() => {
-    Getuserid();
-  }, []);
-  function Getuserid() {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setuid(user.email);
@@ -36,9 +33,7 @@ const Contect = () => {
         navigate("/");
       }
     });
-    return uid;
-  }
-  const userId = Getuserid();
+  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -53,7 +48,7 @@ const Contect = () => {
   return (
     <div className="contect">
       <ToastContainer />
-      <Header user={userId}/>
+      <Header user={uid}/>
       <div className="phone">
         <Typography.Title className="ctitle">Contect Us</Typography.Title>
         <Link to="/" className="home">

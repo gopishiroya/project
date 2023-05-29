@@ -11,6 +11,11 @@ const User = () => {
 
   const [data, setData] = useState([]);
 
+  const handleDelete = async (data) => {
+    await deleteDoc(doc(firestore, "user", data.id));
+    toast.success("delete successfully");
+  };
+
   useEffect(() => {
     getDocuments();
   }, [handleDelete]);
@@ -19,11 +24,6 @@ const User = () => {
   const getDocuments = async () => {
     const result = await getDocs(postCollectionRef);
     setData(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  };
-
-  const handleDelete = async (data) => {
-    await deleteDoc(doc(firestore, "user", data.id));
-    toast.success("delete successfully");
   };
   
   return (

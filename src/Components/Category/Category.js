@@ -16,9 +16,6 @@ const Category = () => {
   const navigate = useNavigate(null);
 
   useEffect(() => {
-    Getuserid();
-  }, []);
-  function Getuserid() {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setuid(user.email);
@@ -26,14 +23,12 @@ const Category = () => {
         navigate("/");
       }
     });
-    return uid;
-  }
-  const name = Getuserid();
+  }, []);
 
   return (
     <div className="category">
       <div>
-        <Header user={name}/>
+        <Header user={uid}/>
       </div>
       <div className="foodcategory">
         <div className="foodtitle">

@@ -54,7 +54,7 @@ const contect_put_data = () => ({
 export const registerInitaiate = (email, password) => {
   return function (dispatch) {
     dispatch(registerStart());
-    createUserWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password) 
       .then((user) => dispatch(registerSuccess(user)))
       .catch((error) => dispatch(registerFail(error.message)));
   };

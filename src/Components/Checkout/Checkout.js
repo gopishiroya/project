@@ -13,17 +13,31 @@ import Footer from "../Footer/Footer";
 import { auth, firestore } from "../../Firebase/FIrebase";
 import { useNavigate } from "react-router-dom";
 import { collection, getDocs, setDoc } from "firebase/firestore";
+import { useSelector } from "react-redux";
 
 const Checkout = (props) => {
   const [user, setUser] = useState([]);
   const [uid, setuid] = useState(null);
+  const [cart, setCart] = useState([]);
 
   const navigate = useNavigate(null);
-  // console.log(props.total);
+
+  function grandtotal() {
+    let x = 0;
+    cart.map((i) => {
+      return (x += i.price * i.quantity);
+    });
+    return x;
+  }
+
+  const getDocuments = async () => {
+    const getData = collection(firestore, "cart " + uid);
+    const name = await getDocs(getData);
+    setCart(name.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+  getDocuments();
+
   useEffect(() => {
-    Getuserid();
-  }, []);
-  function Getuserid() {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setuid(user.email);
@@ -31,24 +45,25 @@ const Checkout = (props) => {
         navigate("/");
       }
     });
-    return uid;
-  }
-  const name = Getuserid();
+  }, []);
 
-  useEffect(() => {
-    getUserData();
-  }, [])
+  // const getUser = collection(firestore, "user");
+  // const getUserData = async () => {
+  //   const result = await getDocs(getUser);
+  //   setUser(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  // };
+  // getUserData();
 
-  const getUser = collection(firestore, "user");
-  const getUserData = async () => {
-    const result = await getDocs(getUser);
-    setUser(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  };
+  // const userid = auth.currentUser.uid;
+  // const useRef = collection(firestore ,"user").doc(userid);
+  // const doc = useRef.get();
+  // const userData = doc.data();
+  // console.log(userData);
 
   return (
     <div className="checkout">
       <div>
-        <Header user={name} />
+        <Header user={uid} />
       </div>
       <div className="container1">
         <Typography.Title className="atitle">Checkout</Typography.Title>
@@ -71,7 +86,7 @@ const Checkout = (props) => {
                 grand total :{" "}
               </Typography.Paragraph>
               <Typography.Paragraph className="tprice">
-                Rs. {props.total}
+                Rs. {grandtotal()}
               </Typography.Paragraph>
             </div>
             <Link className="vcart" to="/cart">

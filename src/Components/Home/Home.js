@@ -51,25 +51,34 @@ const Home = () => {
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
   
+  // useEffect(() => {
+  //   Getuserid();
+  // }, []);
+  // function Getuserid() {
+  //   useEffect(() => {
+  //     auth.onAuthStateChanged((user) => {
+  //       if (user) {
+  //         setuid(user.email); 
+  //       } else {
+  //         navigate("/");
+  //       }
+  //     });
+  //   }, []);
+  //   return uid;
+  // }
+  // const name = Getuserid();
+  // console.log(name);
+
   useEffect(() => {
-    Getuserid();
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setuid(user.email);
+      } else {
+        navigate("/");
+      }
+    });
   }, []);
-  function Getuserid() {
-    useEffect(() => {
-      auth.onAuthStateChanged((user) => {
-        if (user) {
-          setuid(user.email); 
-        } else {
-          navigate("/");
-        }
-      });
-    }, []);
-    return uid;
-  }
-  const uid = Getuserid();
-  console.log(uid);
-
-
+  
   async function handleChange(name) {
     if (uid !== null) {
       console.log(products);
@@ -80,7 +89,7 @@ const Home = () => {
     addDoc(collection(firestore, "cart " + uid), {
       id: name.id,
       category: name.category,
-      imageURL: name.imageURL,
+      // imageURL: name.imageURL,
       name: name.name,
       price: name.price,
       quantity: quantity,
@@ -105,7 +114,7 @@ const Home = () => {
     <>
       <div className="home">
         <div>
-          <Header count={count} user={name} />
+          <Header count={count} user={uid} />
         </div>
         <div className="slider">
           <Carousel autoplay>

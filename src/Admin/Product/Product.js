@@ -18,7 +18,7 @@ import { StorageInitaiate } from "../../Action/Action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
-import { firestore, getImage, storage } from "../../Firebase/FIrebase";
+import { firestore, storage } from "../../Firebase/FIrebase";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 const { Meta } = Card;
 
@@ -40,7 +40,7 @@ const Product = () => {
     listAll(imageRef).then((res) => {
       res.items.map((item) => {
         return getDownloadURL(item).then((url) => {
-          setUrl((prev) => [...prev, url]);
+          setUrl(url);
         });
       });
     });
@@ -63,11 +63,9 @@ const Product = () => {
 
   function handleAddProducts(e) {
     e.preventDefault();
-    dispatch(StorageInitaiate(pname, price, category, pic));
+    dispatch(StorageInitaiate(pname, price, category, url));
     setPname("");
     setPrice("");
-    // setPic("");
-    // setCategory("");
     toast.success("product added successfully");
     getDocuments();
   }
@@ -76,9 +74,6 @@ const Product = () => {
     await deleteDoc(doc(firestore, "products", products.id));
     toast.success("products delete successfully");
   }
-
-  // console.log(products);
-  // console.log(url);
  
   return (
     <>
@@ -155,7 +150,7 @@ const Product = () => {
           {products.map((products, id) => {
             return (
               <Card className="dcard" key={id}>
-                <Image src={url} className="dimage" preview={preview}></Image>
+                <Image src={products.imageURL} className="dimage" preview={preview}></Image>
                 <div className="row">
                   <Meta
                     className="meta"
