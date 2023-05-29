@@ -16,9 +16,21 @@ import { collection, getDocs, setDoc } from "firebase/firestore";
 import { useSelector } from "react-redux";
 
 const Checkout = (props) => {
+
+  const [cart, setCart] = useState([]);
+
+  
+  function grandtotal() {
+    let x = 0;
+    cart.map((i) => {
+      return (x += i.price * i.quantity);
+    });
+    return x;
+  }
+  // console.log(grandtotal())
+
   const [user, setUser] = useState([]);
   const [uid, setuid] = useState(null);
-  const [cart, setCart] = useState([]);
 
   const navigate = useNavigate(null);
 

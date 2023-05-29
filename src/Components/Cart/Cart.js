@@ -10,16 +10,18 @@ import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { auth, firestore } from "../../Firebase/FIrebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 const { Meta } = Card;
-
 const Cart = () => {
   const [preview, setPreview] = useState(false);
   const [cart, setCart] = useState([]);
   const [uid, setuid] = useState(null);
+<<<<<<< HEAD
 
   const navigate = useNavigate();
 
+=======
+  const navigate = useNavigate();
+>>>>>>> c1e1834883aa45635ca93fbbb5d87e28fdb43ddc
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -28,20 +30,28 @@ const Cart = () => {
         navigate("/");
       }
     });
+<<<<<<< HEAD
   }, []);
 
+=======
+    return uid;
+  }
+  const name = Getuserid();
+>>>>>>> c1e1834883aa45635ca93fbbb5d87e28fdb43ddc
   const getDocuments = async () => {
     const getData = collection(firestore, "cart " + uid);
     const name = await getDocs(getData);
     setCart(name.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
   getDocuments();
+<<<<<<< HEAD
 
+=======
+>>>>>>> c1e1834883aa45635ca93fbbb5d87e28fdb43ddc
   async function handleDelete(cart) {
     await deleteDoc(doc(firestore, "cart " + uid, cart.id));
     toast.success("products delete successfully");
   }
-
   function grandtotal() {
     let x = 0;
     cart.map((i) => {
@@ -49,7 +59,6 @@ const Cart = () => {
     });
     return x;
   }
-
   return (
     <div className="cart">
       <ToastContainer />
@@ -112,5 +121,4 @@ const Cart = () => {
     </div>
   );
 };
-
 export default Cart;

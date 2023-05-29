@@ -16,10 +16,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { app, auth, firestore, storage } from "../../Firebase/FIrebase";
 import { addDoc, collection, getDocs,doc, getDoc, setDoc } from "firebase/firestore";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
-import { onAuthStateChanged } from "firebase/auth";
-
 const { Meta } = Card;
-
 const Home = () => {
   const [preview, setPreview] = useState(false);
   const [products, setProducts] = useState([]);
@@ -27,14 +24,13 @@ const Home = () => {
   const [count, setCount] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [uid, setuid] = useState(null);
-  
   const getData = collection(firestore, "products");
   const navigate = useNavigate();
+
 
   useEffect(() => {
     getDocuments();
   }, []);
-  
   const imageRef = ref(storage, "uploads/images/");
   useEffect(() => {
     listAll(imageRef).then((res) => {
@@ -45,12 +41,12 @@ const Home = () => {
       });
     });
   }, []);
-
   const getDocuments = async () => {
     const result = await getDocs(getData);
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
   
+<<<<<<< HEAD
   // useEffect(() => {
   //   Getuserid();
   // }, []);
@@ -79,6 +75,22 @@ const Home = () => {
     });
   }, []);
   
+=======
+  function Getuserid() {
+    useEffect(() => {
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          setuid(user.email);
+        } else {
+          navigate("/");
+        }
+      });
+    }, []);
+    return uid;
+  }
+  const name = Getuserid();
+  // console.log(name);
+>>>>>>> c1e1834883aa45635ca93fbbb5d87e28fdb43ddc
   async function handleChange(name) {
     if (uid !== null) {
       console.log(products);
@@ -97,7 +109,6 @@ const Home = () => {
       .then(() => console.log("success"))
       .catch((error) => console.log(error));
   }
-
   // onAuthStateChanged(auth,(user)=>{
   //   if(user){
   //     const uid=user.uid
@@ -109,7 +120,8 @@ const Home = () => {
   //     console.log("error")
   //   }
   // })
- 
+
+
   return (
     <>
       <div className="home">
@@ -207,7 +219,6 @@ const Home = () => {
                     min={1}
                     onChange={(e) => setQuantity(e.target.value)}
                   />
-
                   <Link to={"/quickview/" + products.id}>
                     <EyeFilled className="eyefilled" />
                   </Link>
@@ -233,3 +244,10 @@ const Home = () => {
   );
 };
 export default Home;
+
+
+
+
+
+
+

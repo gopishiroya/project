@@ -15,7 +15,11 @@ const User = () => {
     await deleteDoc(doc(firestore, "user", data.id));
     toast.success("delete successfully");
   };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> c1e1834883aa45635ca93fbbb5d87e28fdb43ddc
   useEffect(() => {
     getDocuments();
   }, [handleDelete]);
@@ -25,6 +29,10 @@ const User = () => {
     const result = await getDocs(postCollectionRef);
     setData(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
+<<<<<<< HEAD
+=======
+
+>>>>>>> c1e1834883aa45635ca93fbbb5d87e28fdb43ddc
   
   return (
     <>

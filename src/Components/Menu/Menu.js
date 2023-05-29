@@ -11,9 +11,7 @@ import { firestore, storage } from "../../Firebase/FIrebase";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 import { auth } from "../../Firebase/FIrebase";
 import { useNavigate } from "react-router-dom";
-
 const { Meta } = Card;
-
 const Menu = () => {
   const [preview, setPreview] = useState(false);
   const [products, setProducts] = useState([]);
@@ -21,8 +19,8 @@ const Menu = () => {
   const [uid, setuid] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [count, setCount] = useState(0);
-
   const navigate = useNavigate(null);
+<<<<<<< HEAD
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -34,12 +32,32 @@ const Menu = () => {
     });
   }, []);
 
+=======
+  // useEffect(() => {
+  //   Getuserid();
+  // }, []);
+  function Getuserid() {
+    useEffect(() => {
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          setuid(user.email);
+        } else {
+          navigate("/");
+        }
+      });
+    }, []);
+    return uid;
+  }
+  const name = Getuserid();
+>>>>>>> c1e1834883aa45635ca93fbbb5d87e28fdb43ddc
   const getData = collection(firestore, "products");
-
   useEffect(() => {
     getDocuments();
   }, []);
+<<<<<<< HEAD
 
+=======
+>>>>>>> c1e1834883aa45635ca93fbbb5d87e28fdb43ddc
   const imageRef = ref(storage, "uploads/images/");
   useEffect(() => {
     listAll(imageRef).then((res) => {
@@ -50,12 +68,14 @@ const Menu = () => {
       });
     });
   }, []);
-
   const getDocuments = async () => {
     const result = await getDocs(getData);
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
+<<<<<<< HEAD
 
+=======
+>>>>>>> c1e1834883aa45635ca93fbbb5d87e28fdb43ddc
   async function handleCart(name) {
     if (uid !== null) {
       console.log(products);
@@ -74,10 +94,13 @@ const Menu = () => {
       .then(() => console.log("success"))
       .catch((error) => console.log(error));
   }
-
   return (
     <div className="menu">
+<<<<<<< HEAD
       <Header user={uid} count={count} />
+=======
+      <Header user={name} count={count} />
+>>>>>>> c1e1834883aa45635ca93fbbb5d87e28fdb43ddc
       <div className="menutitle">
         <Typography.Title className="mtitle">Our Menu</Typography.Title>
         <Link to="/" className="home">

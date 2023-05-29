@@ -1,3 +1,4 @@
+import React,{useEffect,useState} from "react";
 import * as types from "./ActionTypes";
 import { app, firestore, storage } from "../Firebase/FIrebase";
 import {
@@ -51,6 +52,17 @@ const contect_put_data = () => ({
 })
 
 
+export const PutDataInitaiate = (name, email, password, number) => {
+  return function (dispatch) {
+    addDoc(collection(firestore, "user"), {
+      name, email, password, number
+    })
+      .then(() => dispatch(put_data))
+      .catch((error) => dispatch(put_data(error)));
+  };
+};
+
+
 export const registerInitaiate = (email, password) => {
   return function (dispatch) {
     dispatch(registerStart());
@@ -66,16 +78,6 @@ export const loginInitaiate = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((user) => dispatch(loginSuccess(user)))
       .catch((error) => dispatch(loginFail(error.message)));
-  };
-};
-
-export const PutDataInitaiate = (name, email, password, number) => {
-  return function (dispatch) {
-    addDoc(collection(firestore, "user"), {
-      name, email, password, number
-    })
-      .then(() => dispatch(put_data))
-      .catch((error) => dispatch(put_data(error)));
   };
 };
 
