@@ -38,7 +38,6 @@ const Home = () => {
     getDocuments();
   }, []);
   
-
   const imageRef = ref(storage, "uploads/images/");
   useEffect(() => {
     listAll(imageRef).then((res) => {

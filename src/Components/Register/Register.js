@@ -26,7 +26,7 @@ const Register = () => {
 
   useEffect(() => {
     if (currentUser) {
-      // navigate("/");
+      navigate("/");
       console.log("currentuser", currentUser);
     }
   }, [currentUser, navigate]);
@@ -58,11 +58,12 @@ const Register = () => {
       name: name,
       email: email,
       password: password,
-      number: number,
-      uid: userId
+      number: number
     })
       .then(() => console.log("success"))
       .catch(() => console.log("error"));
+
+  
   }
 
   return (

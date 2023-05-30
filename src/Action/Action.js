@@ -51,15 +51,6 @@ const contect_put_data = () => ({
 })
 
 
-export const PutDataInitaiate = (name, email, password, number) => {
-  return function (dispatch) {
-    addDoc(collection(firestore, "user"), {
-      name, email, password, number
-    })
-      .then(() => dispatch(put_data))
-      .catch((error) => dispatch(put_data(error)));
-  };
-};
 
 
 export const registerInitaiate = (email, password) => {
