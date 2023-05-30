@@ -17,6 +17,10 @@ import { collection, getDocs } from "firebase/firestore";
 const Checkout = () => {
 
   const [cart, setCart] = useState([]);
+  const [user, setUser] = useState([]);
+  const [uid, setuid] = useState(null);
+
+  const navigate = useNavigate(null);
 
   
   function grandtotal() {
@@ -28,18 +32,9 @@ const Checkout = () => {
   }
   // console.log(grandtotal())
 
-  const [user, setUser] = useState([]);
-  const [uid, setuid] = useState(null);
+  
 
-  const navigate = useNavigate(null);
-
-  function grandtotal() {
-    let x = 0;
-    cart.map((i) => {
-      return (x += i.price * i.quantity);
-    });
-    return x;
-  }
+ 
 
   const getDocuments = async () => {
     const getData = collection(firestore, "cart " + uid);
@@ -51,25 +46,14 @@ const Checkout = () => {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        setuid(user.email);
+        setuid(user.displayName);
       } else {
         navigate("/");
       }
     });
   }, []);
 
-  // const getUser = collection(firestore, "user");
-  // const getUserData = async () => {
-  //   const result = await getDocs(getUser);
-  //   setUser(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  // };
-  // getUserData();
-
-  // const userid = auth.currentUser.uid;
-  // const useRef = collection(firestore ,"user").doc(userid);
-  // const doc = useRef.get();
-  // const userData = doc.data();
-  // console.log(userData);
+  
 
   return (
     <div className="checkout">

@@ -34,7 +34,7 @@ const Register = () => {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        setUserId(user.uid);
+        setUserId(user.displayName);
       }
     });
   }, []);

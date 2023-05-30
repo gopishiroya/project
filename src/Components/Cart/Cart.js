@@ -20,7 +20,7 @@ const Cart = () => {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        setuid(user.email);
+        setuid(user.displayName);
       } else {
         navigate("/");
       }
