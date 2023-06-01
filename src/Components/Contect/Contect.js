@@ -7,7 +7,6 @@ import "./Contect.scss";
 import contect from "../Image/contact-img.svg";
 import { useState,useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { contectPutDataInitaiate } from "../../Action/Action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
@@ -39,7 +38,6 @@ const Contect = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // dispatch(contectPutDataInitaiate(name, number, email, message));
     addDoc(collection(firestore, "contect"), {
       name:name, 
       number:number,
