@@ -15,7 +15,6 @@ const Cart = () => {
   const [preview, setPreview] = useState(false);
   const [cart, setCart] = useState([]);
   const [uid, setuid] = useState(null);
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +26,6 @@ const Cart = () => {
       }
     });
   }, []);
-
   const getDocuments = async () => {
     const getData = collection(firestore, "cart " + uid);
     const name = await getDocs(getData);
@@ -109,3 +107,10 @@ const Cart = () => {
   );
 };
 export default Cart;
+
+
+
+
+
+
+

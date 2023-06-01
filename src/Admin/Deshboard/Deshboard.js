@@ -51,7 +51,7 @@ setproduct( snapshot.data().count);
           <div className="container">
             <Card className="card">
               <Meta className="meta" title="WELCOME!" />
-              <Typography.Paragraph className="Paragraph">Ekta</Typography.Paragraph>    
+              <Typography.Paragraph className="Paragraph">-</Typography.Paragraph>    
               <Link to="/Updateprofile" className="link">Update Profile</Link>
             </Card>
             <Card className="card">
@@ -61,12 +61,12 @@ setproduct( snapshot.data().count);
             </Card>
             <Card className="card">
               <Meta className="meta" title="Total Orders" />
-              <Typography.Paragraph className="Paragraph">2</Typography.Paragraph>
+              <Typography.Paragraph className="Paragraph">-</Typography.Paragraph>
               <Link className="link">See Orders</Link>
             </Card>
             <Card className="card">
               <Meta className="meta" title="Total Admins" />
-              <Typography.Paragraph className="Paragraph">2</Typography.Paragraph>
+              <Typography.Paragraph className="Paragraph">-</Typography.Paragraph>
               <Link to="/Totaladmin" className="link">See Admins</Link>
             </Card>
             <Card className="card">
@@ -81,12 +81,12 @@ setproduct( snapshot.data().count);
             </Card>
             <Card className="card">
               <Meta className="meta" title="Pending Orders" />
-              <Typography.Paragraph className="Paragraph">2</Typography.Paragraph>
+              <Typography.Paragraph className="Paragraph">-</Typography.Paragraph>
               <Link className="link">See Orders</Link>
             </Card>
             <Card className="card">
               <Meta className="meta" title="Compalted Orders" />
-              <Typography.Paragraph className="Paragraph">5</Typography.Paragraph>
+              <Typography.Paragraph className="Paragraph">-</Typography.Paragraph>
               <Link className="link">See Orders</Link>  
             </Card>
           </div>

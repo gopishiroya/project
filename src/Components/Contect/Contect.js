@@ -11,7 +11,9 @@ import { contectPutDataInitaiate } from "../../Action/Action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../Firebase/FIrebase";
+import { auth,firestore } from "../../Firebase/FIrebase";
+import { addDoc, collection } from "firebase/firestore";
+
 
 const { TextArea } = Input;
 const Contect = () => {
@@ -28,7 +30,7 @@ const Contect = () => {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        setuid(user.email);
+        setuid(user.displayName);
       } else {
         navigate("/");
       }
@@ -37,7 +39,15 @@ const Contect = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(contectPutDataInitaiate(name, number, email, message));
+    // dispatch(contectPutDataInitaiate(name, number, email, message));
+    addDoc(collection(firestore, "contect"), {
+      name:name, 
+      number:number,
+      email:email,
+      message:message
+    })
+      .then(() => console.log("success"))
+      .catch((error) => console.log(error));
     toast.success("data added successfully");
     setName("");
     setNumber("");

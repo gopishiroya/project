@@ -4,14 +4,17 @@
     border: 2px solid black;
     width: 530px;
     margin-left: 400px;
+
     .formtitle {
       text-align: center;
       font-size: 30px;
       margin-top: 15px;
       margin-bottom: 20px;
     }
+
     .inputfield {
       width: 200px;
+
       .input {
         border: 2px solid black;
         border-radius: 0px;
@@ -22,8 +25,13 @@
         font-size: 20px;
       }
     }
+
     .loginbutton {
       text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+
       .loginbtn {
         font-size: 20px;
         color: black;
@@ -31,17 +39,44 @@
         padding: 2px 25px 35px 25px;
         margin-bottom: 15px;
       }
+
+      .google {
+        display: flex;
+        gap: 5px;
+        font-size: 20px;
+        padding-top: 9px;
+        color: #4285F4;
+        border: 1px solid black;
+        border-radius: 10px;
+        height: 30px;
+        cursor: pointer;
+        width: 115px;
+        padding-left: 35px;
+        .logingoogle{
+          // font-size: large;
+        }
+      }
+
+      // .logingoogle{
+      //   font-size: 20px;
+      //   padding-top: 12px;
+      //   color: ;
+      //   border: 1px solid black;
+      // }
       .loginbtn:hover {
         letter-spacing: 2px;
       }
     }
+
     .lparagraph {
       font-size: 20px;
       margin-left: 97px;
       color: #777;
+
       .llink {
         color: black;
       }
+
       .llink:hover {
         text-decoration: underline;
       }

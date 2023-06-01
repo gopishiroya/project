@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import { Form, Typography, Input, Button } from "antd";
+import { GoogleOutlined } from "@ant-design/icons";
 import "./Login.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,12 +13,12 @@ import { auth } from "../../Firebase/FIrebase";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [uid,setuid]=useState(null)
 
   const navigate = useNavigate();
 
   function handleLogin(e) {
     e.preventDefault();
-    // dispatch(loginInitaiate(email, password));
     signInWithEmailAndPassword(auth, email, password)
     .then((user) => console.log(user))
     .catch((error) => console.log(error.message));
@@ -30,7 +31,7 @@ const Login = () => {
   return (
     <div className="login">
       <div>
-        <Header />
+        <Header user={uid}/>
       </div>
       <ToastContainer />
       <div className="form">

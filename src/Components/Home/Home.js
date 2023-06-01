@@ -37,6 +37,7 @@ const Home = () => {
   useEffect(() => {
     getDocuments();
   }, []);
+  
   const imageRef = ref(storage, "uploads/images/");
   useEffect(() => {
     listAll(imageRef).then((res) => {
@@ -51,24 +52,6 @@ const Home = () => {
     const result = await getDocs(getData);
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
-
-  // useEffect(() => {
-  //   Getuserid();
-  // }, []);
-  // function Getuserid() {
-  //   useEffect(() => {
-  //     auth.onAuthStateChanged((user) => {
-  //       if (user) {
-  //         setuid(user.email);
-  //       } else {
-  //         navigate("/");
-  //       }
-  //     });
-  //   }, []);
-  //   return uid;
-  // }
-  // const name = Getuserid();
-  // console.log(name);
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
