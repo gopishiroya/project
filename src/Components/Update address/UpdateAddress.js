@@ -6,8 +6,7 @@ import { Link } from "react-router-dom";
 import "./UpdateAddress.scss";
 import { auth, firestore } from "../../Firebase/FIrebase";
 import { useNavigate } from "react-router-dom";
-import { addDoc, collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
-import { CodeSandboxCircleFilled } from "@ant-design/icons";
+import { collection, doc, getDoc, setDoc } from "firebase/firestore";
 
 const UpdateAddress = () => {
   const [flatNo, setFlatNo] = useState("");
@@ -34,14 +33,11 @@ const UpdateAddress = () => {
     });
   }, []);
 
-  
-
   async function getCurrentUserData() {
     const docRef = doc(firestore, "user", userId);
     const docsnap = await getDoc(docRef);
     if(docsnap.exists()) {
       setCurrentUserData(docsnap.data());
-      // console.log(currentUserData)
     }
     else {
       console.log("error");

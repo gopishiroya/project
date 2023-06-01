@@ -17,10 +17,8 @@ import {
   collection,
   doc,
   getDoc,
-  getDocFromCache,
   getDocs,
 } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
 
 const Checkout = () => {
   const [cart, setCart] = useState([]);

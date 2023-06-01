@@ -19,6 +19,8 @@ const Cart = () => {
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
+      // need to explain how to use it "onAuthStateChanged"
+      console.log('users ===data', user)
       if (user) {
         setuid(user.displayName);
       } else {

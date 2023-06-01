@@ -13,21 +13,16 @@ import image1 from "../Image/home-img-1.png";
 import image2 from "../Image/home-img-2.png";
 import image3 from "../Image/home-img-3.jpg";
 import { Link, useNavigate } from "react-router-dom";
-import { app, auth, firestore, storage } from "../../Firebase/FIrebase";
+import { auth, firestore } from "../../Firebase/FIrebase";
 import {
   addDoc,
   collection,
-  getDocs,
-  doc,
-  getDoc,
-  setDoc,
+  getDocs
 } from "firebase/firestore";
-import { getDownloadURL, listAll, ref } from "firebase/storage";
 const { Meta } = Card;
 const Home = () => {
   const [preview, setPreview] = useState(false);
   const [products, setProducts] = useState([]);
-  const [url, setUrl] = useState([]);
   const [count, setCount] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [uid, setuid] = useState(null);
@@ -38,16 +33,6 @@ const Home = () => {
     getDocuments();
   }, []);
   
-  const imageRef = ref(storage, "uploads/images/");
-  useEffect(() => {
-    listAll(imageRef).then((res) => {
-      res.items.map((item) => {
-        return getDownloadURL(item).then((url) => {
-          setUrl((prev) => [...prev, url]);
-        });
-      });
-    });
-  }, []);
   const getDocuments = async () => {
     const result = await getDocs(getData);
     setProducts(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -63,7 +48,7 @@ const Home = () => {
     });
   }, []);
 
-  async function handleChange(name) {
+  function handleChange(name) {
     if (uid !== null) {
       console.log("success");
     } else {
