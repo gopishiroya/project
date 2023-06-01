@@ -73,7 +73,7 @@ const Home = () => {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        setuid(user.email);
+        setuid(user.displayName);
       } else {
         navigate("/");
       }
@@ -82,7 +82,7 @@ const Home = () => {
 
   async function handleChange(name) {
     if (uid !== null) {
-      console.log(products);
+      console.log("success");
     } else {
       navigate("/login");
     }
@@ -98,7 +98,6 @@ const Home = () => {
       .then(() => console.log("success"))
       .catch((error) => console.log(error));
   }
-
   return (
     <>
       <div className="home">

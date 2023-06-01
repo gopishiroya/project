@@ -5,12 +5,11 @@ import Footer from "../Footer/Footer";
 import { Form, Typography, Input, Button } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import "./Register.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { registerInitaiate, PutDataInitaiate } from "../../Action/Action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, setDoc } from "firebase/firestore";
 import { auth, firestore } from "../../Firebase/FIrebase";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -20,24 +19,17 @@ const Register = () => {
   const [cpassword, setCpassword] = useState("");
   const [userId, setUserId] = useState(null);
 
-  const dispatch = useDispatch();
-  const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (currentUser) {
-      // navigate("/");
-      console.log("currentuser", currentUser);
-    }
-  }, [currentUser, navigate]);
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setUserId(user.uid);
+        // console.log(user.uid);
       }
     });
   }, []);
+  const uid = userId;
 
   function handleRegister() {
     if (password !== cpassword) {
@@ -46,23 +38,27 @@ const Register = () => {
     if (password >= 6) {
       return toast.error("password atlist 6 character");
     }
-    dispatch(registerInitaiate(email, password));
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((user) => {
+        updateProfile(user.user, { displayName: name, phoneNumber: number });
+        const ref = doc(firestore, "user", user.user.uid);
+        const docRef = setDoc(ref, {
+          name: name,
+          email: email,
+          password: password,
+          phone: number
+        })
+          .then(() => console.log("success"))
+          .catch(() => console.log("error"));
+      })
+      .catch((error) => console.log(error.message));
     setName("");
     setEmail("");
     setNumber("");
     setPassword("");
     setCpassword("");
     toast.success("data added success");
-    // dispatch(PutDataInitaiate(name, email, password, number));
-    addDoc(collection(firestore, "user"), {
-      name: name,
-      email: email,
-      password: password,
-      number: number,
-      uid: userId
-    })
-      .then(() => console.log("success"))
-      .catch(() => console.log("error"));
+    navigate("/");
   }
 
   return (

@@ -59,7 +59,7 @@ const Menu = () => {
     addDoc(collection(firestore, "cart " + uid), {
       id: name.id,
       category: name.category,
-      imageURL: name.imageURL,
+      imageURL: name.ImageURL,
       name: name.name,
       price: name.price,
       quantity: quantity,

@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 import "./UpdateAddress.scss";
 import { auth, firestore } from "../../Firebase/FIrebase";
 import { useNavigate } from "react-router-dom";
-import { collection, getDocs } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { CodeSandboxCircleFilled } from "@ant-design/icons";
 
 const UpdateAddress = () => {
   const [flatNo, setFlatNo] = useState("");
@@ -16,30 +17,51 @@ const UpdateAddress = () => {
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
   const [pin, setPin] = useState("");
-  const [data, setData] = useState([]);
   const [uid, setuid] = useState(null);
+  const [userId, setUserId] = useState("");
+  const [currentUserData, setCurrentUserData] = useState("");
   
   const navigate = useNavigate(null);
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        setuid(user.email);
+        setuid(user.displayName);
+        setUserId(user.uid);
       } else {
         navigate("/");
       }
     });
   }, []);
 
-  useEffect(() => {
-    getDocuments();
-  }, []);
+  
 
-  const getData = collection(firestore, "user");
-  const getDocuments = async () => {
-    const result = await getDocs(getData);
-    setData(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  };
+  async function getCurrentUserData() {
+    const docRef = doc(firestore, "user", userId);
+    const docsnap = await getDoc(docRef);
+    if(docsnap.exists()) {
+      setCurrentUserData(docsnap.data());
+      // console.log(currentUserData)
+    }
+    else {
+      console.log("error");
+    }
+  }
+  getCurrentUserData();
+
+  function handleAddress() {
+    const docRef = collection(firestore, "user");
+    const ref = setDoc(doc(docRef, userId), {
+      name: currentUserData.name,
+      phone: currentUserData.phone,
+      email: currentUserData.email,
+      password: currentUserData.password,
+      address: `${flatNo}, ${buildingNo}, ${area}, ${city}, ${state}, ${country}, ${pin}`
+    })
+      .then(() => console.log("success"))
+      .catch((error) => console.log(error));
+      console.log(ref);
+  }
 
   return (
     <div className="updateaddress">
@@ -103,7 +125,7 @@ const UpdateAddress = () => {
               onChange={(e) => setPin(e.target.value)}
             />
             <div className="updateaddressnow">
-              <Link className="anow" to="/checkout">
+              <Link className="anow" to="/checkout" onClick={handleAddress}>
                 save address
               </Link>
             </div>

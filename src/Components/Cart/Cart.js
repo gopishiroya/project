@@ -21,7 +21,7 @@ const Cart = () => {
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
-        setuid(user.email);
+        setuid(user.displayName);
       } else {
         navigate("/");
       }
@@ -34,6 +34,7 @@ const Cart = () => {
     setCart(name.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
   getDocuments();
+
   async function handleDelete(cart) {
     await deleteDoc(doc(firestore, "cart " + uid, cart.id));
     toast.success("products delete successfully");

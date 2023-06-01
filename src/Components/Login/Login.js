@@ -4,31 +4,27 @@ import Footer from "../Footer/Footer";
 import { Form, Typography, Input, Button } from "antd";
 import "./Login.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { loginInitaiate } from "../../Action/Action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../Firebase/FIrebase";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const dispatch = useDispatch();
-  const { currentUser } = useSelector((state) => state.user)
   const navigate = useNavigate();
-  
-  useEffect(() => {
-    if(currentUser) {
-      navigate("/");
-    }
-  }, [currentUser])
 
-  async function handleLogin(e) {
+  function handleLogin(e) {
     e.preventDefault();
-    dispatch(loginInitaiate(email, password));
+    // dispatch(loginInitaiate(email, password));
+    signInWithEmailAndPassword(auth, email, password)
+    .then((user) => console.log(user))
+    .catch((error) => console.log(error.message));
     setEmail("");
     setPassword("");
     toast.success("Login successfully");
+    navigate("/");
   }
 
   return (
@@ -62,7 +58,7 @@ const Login = () => {
           <div className="loginbutton">
             <Button type="primary" htmlType="submit" className="loginbtn" onClick={handleLogin}>
               Login Now
-            </Button>
+            </Button >
           </div>
           <Typography.Paragraph className="lparagraph">
             don't have an account?{" "}

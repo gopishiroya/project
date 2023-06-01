@@ -12,26 +12,36 @@ import {
 import Footer from "../Footer/Footer";
 import { auth, firestore } from "../../Firebase/FIrebase";
 import { useNavigate } from "react-router-dom";
-import { collection, getDocs } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocFromCache,
+  getDocs,
+} from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 const Checkout = () => {
-
   const [cart, setCart] = useState([]);
-
-  
-  function grandtotal() {
-    let x = 0;
-    cart.map((i) => {
-      return (x += i.price * i.quantity);
-    });
-    return x;
-  }
-  // console.log(grandtotal())
-
-  const [user, setUser] = useState([]);
   const [uid, setuid] = useState(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [currentUserData, setCurrentUserData] = useState("");
 
-  const navigate = useNavigate(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setuid(user.displayName);
+        setEmail(user.email);
+        setName(user.uid);
+      } else {
+        navigate("/");
+      }
+    });
+  }, []);
 
   function grandtotal() {
     let x = 0;
@@ -39,7 +49,7 @@ const Checkout = () => {
       return (x += i.price * i.quantity);
     });
     return x;
-  }
+  };
 
   const getDocuments = async () => {
     const getData = collection(firestore, "cart " + uid);
@@ -48,28 +58,27 @@ const Checkout = () => {
   };
   getDocuments();
 
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        setuid(user.email);
-      } else {
-        navigate("/");
-      }
-    });
-  }, []);
+  async function getCurrentUserData() {
+    const docRef = doc(firestore, "user", name);
+    const docsnap = await  getDoc(docRef);
+    if(docsnap.exists()) {
+      setCurrentUserData(docsnap.data());      
+    }
+    else {
+      console.log("error");
+    }
+  }
+  getCurrentUserData();
 
-  // const getUser = collection(firestore, "user");
-  // const getUserData = async () => {
-  //   const result = await getDocs(getUser);
-  //   setUser(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  // };
-  // getUserData();
-
-  // const userid = auth.currentUser.uid;
-  // const useRef = collection(firestore ,"user").doc(userid);
-  // const doc = useRef.get();
-  // const userData = doc.data();
-  // console.log(userData);
+  function handleOrder() {
+    addDoc(collection(firestore, "order"), {
+      userId: name,
+      name: currentUserData.name,
+      
+    })
+      .then(() => console.log("success"))
+      .catch((error) => console.log(error));
+  }
 
   return (
     <div className="checkout">
@@ -109,25 +118,20 @@ const Checkout = () => {
             <div className="display">
               <UserOutlined className="UserOutlined" />
               <Typography.Paragraph className="infoname">
-                {user.name}
+                {uid}
               </Typography.Paragraph>
             </div>
             <div className="phone">
               <PhoneFilled className="PhoneFilled" />
               <Typography.Paragraph className="infophone">
-                9638527410
+                {currentUserData.phone}
               </Typography.Paragraph>
             </div>
             <div className="mail">
               <MailFilled className="MailFilled" />
               <Typography.Paragraph className="infomail">
-                {uid}
+                {email}
               </Typography.Paragraph>
-            </div>
-            <div className="update">
-              <Link className="updateinfo" to="/update_profile">
-                Update Info
-              </Link>
             </div>
           </div>
           <div className="address">
@@ -137,12 +141,12 @@ const Checkout = () => {
             <div className="map">
               <EnvironmentFilled className="EnvironmentFilled" />
               <Typography.Paragraph className="paddress">
-                please enter your address
+                {currentUserData.address}
               </Typography.Paragraph>
             </div>
             <div className="updateaddress">
               <Link className="uaddress" to="/update_address">
-                Update Address
+                Enter your Address
               </Link>
             </div>
           </div>
@@ -154,17 +158,13 @@ const Checkout = () => {
                 {
                   value: "Cash on delivery",
                   label: "Cash on delivery",
-                },
-                {
-                  value: "Online payment",
-                  label: "Online payment",
-                },
+                }
               ]}
               aria-required
             />
           </div>
           <div className="Button">
-            <Button className="placeorder">Place Order</Button>
+            <Button className="placeorder" onClick={handleOrder}>Place Order</Button>
           </div>
         </div>
       </div>

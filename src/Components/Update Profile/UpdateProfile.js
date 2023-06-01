@@ -42,12 +42,6 @@ const Update_profile = () => {
               type="email"
               placeholder="Enter your email"
             />
-            <Input
-              className="Input"
-              type="tel"
-              placeholder="Enter your phone number"
-              maxLength={10}
-            />
             <Input.Password
               className="Input"
               type="text"
