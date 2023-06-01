@@ -13,6 +13,7 @@ import Update_profile from "./Components/Update Profile/UpdateProfile";
 import UpdateAddress from "./Components/Update address/UpdateAddress";
 import Category from "./Components/Category/Category";
 import Profile from './Components/Profile/Profile';
+import Order from './Components/order/Order';
 // --------
 import  Deshboard  from './Admin/Deshboard/Deshboard';
 import Product from './Admin/Product/Product';
@@ -22,6 +23,7 @@ import Message from './Admin/Message/Message';
 import Updateprofile from './Admin/Updateprofile/Updateprofile';  
 import QuickView from './Components/QuickView/QuickView';
 import UpdateProduct from './Admin/UpdateProduct/UpdateProduct';
+import Orders from './Admin/Order/Orders';
 
 function App() {
   return (
@@ -41,6 +43,7 @@ function App() {
         <Route path="/category" element={<Category />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/quickview/:id' element={<QuickView />} />
+        <Route path='/order' element={<Order />}/>
 
         {/* -------- */}
         <Route path='/deshboard' element={<Deshboard />} />
@@ -50,7 +53,7 @@ function App() {
         <Route path='/Message' element={<Message/>}/>
         <Route path='/Updateprofile' element={<Updateprofile/>}/>
         <Route path='/updateproducts/:id' element={<UpdateProduct />}/>
-
+        <Route path='/orders' element={<Orders />}/>
       </Routes>
     </div>
   );

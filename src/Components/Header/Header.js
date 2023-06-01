@@ -31,16 +31,6 @@ const Header = (props) => {
     </div>
   );
 
-  // useEffect(() => {
-  //   getDocuments();
-  // }, [])
-
-  // const getData = collection(firestore, "user");
-  // const getDocuments = async () => {
-  //   const result = await getDocs(getData);
-  //   setUser(result.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  // };
-  // console.log(user.name);
   const text1 = (
     <Typography.Title className="usertext">{props.user}</Typography.Title>
   );
@@ -67,7 +57,7 @@ const Header = (props) => {
         <Link className="pages" to="/menu">
           Menu
         </Link>
-        <Link className="pages">Orders</Link>
+        <Link className="pages" to="/order">Orders</Link>
         <Link className="pages" to="/contect">
           Contact
         </Link>

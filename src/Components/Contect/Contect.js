@@ -7,7 +7,11 @@ import "./Contect.scss";
 import contect from "../Image/contact-img.svg";
 import { useState,useEffect } from "react";
 import { useDispatch } from "react-redux";
+<<<<<<< HEAD
 import { contectPutDataInitaiate } from "../../Action/Action";
+=======
+// import { contectPutDataInitaiate } from "../../Action/Action";
+>>>>>>> 0165cf989c8339a1edc26424a07e1fff18608242
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
@@ -34,6 +38,7 @@ const Contect = () => {
   }, []);
   function handleSubmit(e) {
     e.preventDefault();
+<<<<<<< HEAD
     dispatch(contectPutDataInitaiate(name, number, email, message));
     // addDoc(collection(firestore, "contect"), {
     //   name:name,
@@ -43,6 +48,17 @@ const Contect = () => {
     // })
     //   .then(() => console.log("success"))
     //   .catch((error) => console.log(error));
+=======
+    // dispatch(contectPutDataInitaiate(name, number, email, message));
+    addDoc(collection(firestore, "contect"), {
+      name:name, 
+      number:number,
+      email:email,
+      message:message
+    })
+      .then(() => console.log("success"))
+      .catch((error) => console.log(error));
+>>>>>>> 0165cf989c8339a1edc26424a07e1fff18608242
     toast.success("data added successfully");
     setName("");
     setNumber("");
