@@ -62,7 +62,7 @@ setproduct( snapshot.data().count);
             <Card className="card">
               <Meta className="meta" title="Total Orders" />
               <Typography.Paragraph className="Paragraph">-</Typography.Paragraph>
-              <Link className="link">See Orders</Link>
+              <Link to="/orders" className="link">See Orders</Link>
             </Card>
             <Card className="card">
               <Meta className="meta" title="Total Admins" />

@@ -30,6 +30,11 @@ const Checkout = () => {
   const [currentUserData, setCurrentUserData] = useState("");
 
   const navigate = useNavigate();
+  const date=new Date()
+  let day=date.getDate()
+  let month=date.getMonth()+1
+  let year=date.getFullYear()
+  let currentDate=`${day}-${month}-${year}`
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -74,7 +79,11 @@ const Checkout = () => {
     addDoc(collection(firestore, "order"), {
       userId: name,
       name: currentUserData.name,
-      
+      number:currentUserData.phone,
+      email:currentUserData.email,
+      address:currentUserData.address,
+      total:grandtotal(),
+      date:currentDate
     })
       .then(() => console.log("success"))
       .catch((error) => console.log(error));
