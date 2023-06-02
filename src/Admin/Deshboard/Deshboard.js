@@ -12,23 +12,26 @@ const Deshboard = () => {
   const [user,setuser]=useState([])
   const [message,setmessage]=useState([])
   const [product,setproduct]=useState([])
+  const [order,setorder]=useState([])
    
   useEffect(()=>{
     messagecount()
-  },[])
+  })
+  useEffect(()=>{
+    ordercount()
+  })
    
   useEffect(()=>{
     usercount()
-  },[])
+  })
   useEffect(()=>{
     productcount()
-  },[])
+  })
 async function messagecount(){
   const coll = collection(firestore, "contect");
 const snapshot =await getCountFromServer(coll);
 setmessage( snapshot.data().count);
 }
- 
 async function usercount(){
   const coll = collection(firestore, "user");
 const snapshot =await getCountFromServer(coll);
@@ -38,6 +41,11 @@ async function productcount(){
   const coll = collection(firestore, "products");
 const snapshot =await getCountFromServer(coll);
 setproduct( snapshot.data().count);
+}
+async function ordercount(){
+  const coll = collection(firestore, "order");
+const snapshot =await getCountFromServer(coll);
+setorder( snapshot.data().count);
 }
   return (
     <>
@@ -61,7 +69,7 @@ setproduct( snapshot.data().count);
             </Card>
             <Card className="card">
               <Meta className="meta" title="Total Orders" />
-              <Typography.Paragraph className="Paragraph">-</Typography.Paragraph>
+              <Typography.Paragraph className="Paragraph">{order}</Typography.Paragraph>
               <Link to="/orders" className="link">See Orders</Link>
             </Card>
             <Card className="card">
@@ -78,16 +86,6 @@ setproduct( snapshot.data().count);
               <Meta className="meta" title="User Messages" />
               <Typography.Paragraph className="Paragraph">{message}</Typography.Paragraph>
               <Link to="/Message" className="link">See Messages</Link>
-            </Card>
-            <Card className="card">
-              <Meta className="meta" title="Pending Orders" />
-              <Typography.Paragraph className="Paragraph">-</Typography.Paragraph>
-              <Link className="link">See Orders</Link>
-            </Card>
-            <Card className="card">
-              <Meta className="meta" title="Compalted Orders" />
-              <Typography.Paragraph className="Paragraph">-</Typography.Paragraph>
-              <Link className="link">See Orders</Link>  
             </Card>
           </div>
         </div>

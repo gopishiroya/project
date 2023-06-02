@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import "./Header.scss";
 import {
   SearchOutlined,
@@ -11,6 +11,7 @@ import { auth } from "../../Firebase/FIrebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Header = (props) => {
+
 
   function handleLogout() {
     auth
@@ -92,8 +93,8 @@ const Header = (props) => {
             <Badge count={props.count}  size="large" className="notification">
               <ShoppingCartOutlined className="icon2" />
             </Badge></Link>
-          </div>
-          <SearchOutlined className="icon3" />
+          </div>   
+          {/* <SearchOutlined className="icon3" /> */}
         </div>
       </div>
     </>

@@ -18,8 +18,9 @@
         .container {
             padding: 0 60px;
             margin-top: 22px;
+            margin-left: 45px;
             .card {
-                width: 291px;
+                width: 365px;
                 height: 200px;
                 display: inline-flex;
                 text-align: center;
@@ -34,7 +35,6 @@
                         font-size: 1.5rem;
                         color: #34495e;
                         padding: 5px;
-                        width: 230px;
                         padding-bottom: 16px;
                     }
                 }
@@ -55,7 +55,7 @@
                     font-size: 16px;
                     background-color: #6b58c8;
                     color: white;
-                    padding: 10px 62px;
+                    padding: 10px 95px;
                     border-radius: 5px;
                     border: 1px solid black;
                 }
