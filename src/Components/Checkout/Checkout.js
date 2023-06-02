@@ -15,10 +15,12 @@ import { useNavigate } from "react-router-dom";
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
 } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 const Checkout = () => {
   const [cart, setCart] = useState([]);
@@ -28,11 +30,11 @@ const Checkout = () => {
   const [currentUserData, setCurrentUserData] = useState("");
 
   const navigate = useNavigate();
-  const date=new Date()
-  let day=date.getDate()
-  let month=date.getMonth()+1
-  let year=date.getFullYear()
-  let currentDate=`${day}-${month}-${year}`
+  const date = new Date();
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+  let currentDate = `${day}-${month}-${year}`;
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -52,7 +54,7 @@ const Checkout = () => {
       return (x += i.price * i.quantity);
     });
     return x;
-  };
+  }
 
   const getDocuments = async () => {
     const getData = collection(firestore, "cart " + uid);
@@ -63,28 +65,29 @@ const Checkout = () => {
 
   async function getCurrentUserData() {
     const docRef = doc(firestore, "user", name);
-    const docsnap = await  getDoc(docRef);
-    if(docsnap.exists()) {
-      setCurrentUserData(docsnap.data());      
-    }
-    else {
+    const docsnap = await getDoc(docRef);
+    if (docsnap.exists()) {
+      setCurrentUserData(docsnap.data());
+    } else {
       console.log("error");
     }
   }
   getCurrentUserData();
 
-  function handleOrder() {
+  async function handleOrder() {
     addDoc(collection(firestore, "order"), {
       userId: name,
       name: currentUserData.name,
-      number:currentUserData.phone,
-      email:currentUserData.email,
-      address:currentUserData.address,
-      total:grandtotal(),
-      date:currentDate
+      number: currentUserData.phone,
+      email: currentUserData.email,
+      address: currentUserData.address,
+      total: grandtotal(),
+      date: currentDate,
     })
       .then(() => console.log("success"))
       .catch((error) => console.log(error));
+    toast.success("order successfully");
+    await deleteDoc(doc(firestore, "cart " + uid));
   }
 
   return (
@@ -165,13 +168,15 @@ const Checkout = () => {
                 {
                   value: "Cash on delivery",
                   label: "Cash on delivery",
-                }
+                },
               ]}
               aria-required
             />
           </div>
           <div className="Button">
-            <Button className="placeorder" onClick={handleOrder}>Place Order</Button>
+            <Button className="placeorder" onClick={handleOrder}>
+              Place Order
+            </Button>
           </div>
         </div>
       </div>

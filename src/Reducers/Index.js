@@ -2,27 +2,25 @@ import * as types from "../Action/ActionTypes";
 
 const initialState = {
   loading: false,
-  currentUser: null,
   error: null,
+  data: [],
 };
 
 const userReducer = (state = initialState, action) => {
+  console.log(action)
   switch (action.type) {
-    case types.REGISTER_START:
-    case types.LOGIN_START:
+    case types.CONTECT_PUT_DATA_START:
       return {
         ...state,
         loading: true,
       };
-    case types.REGISTER_SUCCESS:
-    case types.LOGIN_SUCCESS:
+    case types.CONTECT_PUT_DATA_SUCCESS:
       return {
         ...state,
         loading: false,
-        currentUser: action.payload,
+        data: action.payload
       };
-    case types.REGISTER_FAIL:
-    case types.LOGIN_FAIL:
+    case types.CONTECT_PUT_DATA_FAIL:
       return {
         ...state,
         loading: false,

@@ -1,0 +1,119 @@
+action.js
+
+const registerStart = () => ({
+  type: types.REGISTER_START,
+});
+
+const registerSuccess = (user) => ({
+  type: types.REGISTER_SUCCESS,
+  payload: user,
+});
+
+const registerFail = (error) => ({
+  type: types.REGISTER_FAIL,
+  payload: error,
+});
+
+const loginStart = () => ({
+  type: types.LOGIN_START,
+});
+
+const loginSuccess = (user) => ({
+  type: types.LOGIN_SUCCESS,
+  payload: user,
+});
+
+const loginFail = (error) => ({
+  type: types.LOGIN_FAIL,
+  payload: error,
+});
+
+const put_data = () => ({
+  type: types.PUT_DATA,
+});
+
+const put_data_storage = () => ({
+  type: types.STORAGE,
+});
+
+export const PutDataInitaiate = (name, email, password, number) => {
+  return function (dispatch) {
+    addDoc(collection(firestore, "user"), {
+      name, email, password, number
+    })
+      .then(() => dispatch(put_data))
+      .catch((error) => dispatch(put_data(error)));
+  };
+};
+
+
+export const registerInitaiate = (email, password) => {
+  return function (dispatch) {
+    dispatch(registerStart());
+    createUserWithEmailAndPassword(auth, email, password) 
+      .then((user) => dispatch(registerSuccess(user)))
+      .catch((error) => dispatch(registerFail(error.message)));
+  };
+};
+
+export const loginInitaiate = (email, password) => {
+  return function (dispatch) {
+    dispatch(loginStart());
+    signInWithEmailAndPassword(auth, email, password)
+      .then((user) => dispatch(loginSuccess(user)))
+      .catch((error) => dispatch(loginFail(error.message)));
+  };
+};
+
+
+export const StorageInitaiate = (name, price, category, pic) => {
+  return async function (dispatch) {
+    const imageRef = ref(storage, `uploads/images/${pic.name}`);
+    const uploadResult = await uploadBytes(imageRef, pic);
+    return await addDoc(collection(firestore, "products"), {
+      name,
+      price,
+      category,
+      imageURL: pic,
+    })
+      .then(() => dispatch(put_data_storage))
+      .catch((error) => dispatch(put_data_storage(error)));
+  };
+};
+
+ActionTypes
+
+export const REGISTER_START = "REGISTER_START";
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
+export const REGISTER_FAIL = "REGISTER_FAIL";
+
+export const LOGIN_START = "LOGIN_START";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAIL = "LOGIN_FAIL";
+
+export const PUT_DATA = "PUT_DATA";
+
+export const STORAGE = "STORAGE";
+
+index.js
+
+case types.REGISTER_START:
+    case types.LOGIN_START:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.REGISTER_SUCCESS:
+    case types.LOGIN_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        currentUser: action.payload,
+      };
+    case types.REGISTER_FAIL:
+    case types.LOGIN_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
