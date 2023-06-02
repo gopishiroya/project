@@ -25,11 +25,9 @@ const Register = () => {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setUserId(user.uid);
-        // console.log(user.uid);
       }
     });
   }, []);
-  const uid = userId;
 
   function handleRegister() {
     if (password !== cpassword) {
@@ -48,7 +46,7 @@ const Register = () => {
           password: password,
           phone: number
         })
-          .then(() => console.log("success"))
+          .then(() => console.log(docRef))
           .catch(() => console.log("error"));
       })
       .catch((error) => console.log(error.message));
@@ -57,7 +55,6 @@ const Register = () => {
     setNumber("");
     setPassword("");
     setCpassword("");
-    toast.success("data added success");
     navigate("/");
   }
 

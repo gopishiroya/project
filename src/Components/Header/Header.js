@@ -11,14 +11,12 @@ import { auth } from "../../Firebase/FIrebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Header = (props) => {
-
-
   function handleLogout() {
     auth
       .signOut()
       .then(() => console.log("success"))
       .catch((error) => console.log(error));
-      toast.success("Logout");    
+    toast.success("Logout");
   }
   const text = (
     <Typography.Title className="usertext">
@@ -45,7 +43,7 @@ const Header = (props) => {
   );
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       <div className="header">
         <Link className="title" to="/">
           yum-yum 😋
@@ -65,7 +63,7 @@ const Header = (props) => {
         </Link>
 
         <div className="icon">
-        {props.user && (
+          {props.user && (
             <Popover
               placement="bottomRight"
               className="icon1"
@@ -87,7 +85,7 @@ const Header = (props) => {
               <UserOutlined className="icon1" />
             </Popover>
           )}
-          
+
           <div className="cart">
             <Link to="/cart"> 
             <Badge count={props.count}  size="large" className="notification">
@@ -95,6 +93,7 @@ const Header = (props) => {
             </Badge></Link>
           </div>   
           {/* <SearchOutlined className="icon3" /> */}
+            
         </div>
       </div>
     </>

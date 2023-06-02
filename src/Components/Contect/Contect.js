@@ -6,15 +6,13 @@ import { Link } from "react-router-dom";
 import "./Contect.scss";
 import contect from "../Image/contact-img.svg";
 import { useState,useEffect } from "react";
-import { useDispatch } from "react-redux";
-// import { contectPutDataInitaiate } from "../../Action/Action";
+import { useDispatch, useSelector } from "react-redux";
+import { contectPutDataInitaiate } from "../../Action/Action";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { auth,firestore } from "../../Firebase/FIrebase";
 import { addDoc, collection } from "firebase/firestore";
-
-
 const { TextArea } = Input;
 const Contect = () => {
   const [preview, setPreview] = useState(false);
@@ -36,25 +34,24 @@ const Contect = () => {
       }
     });
   }, []);
-
+  
   function handleSubmit(e) {
     e.preventDefault();
-    // dispatch(contectPutDataInitaiate(name, number, email, message));
-    addDoc(collection(firestore, "contect"), {
-      name:name, 
-      number:number,
-      email:email,
-      message:message
-    })
-      .then(() => console.log("success"))
-      .catch((error) => console.log(error));
+    dispatch(contectPutDataInitaiate(name, number, email, message));
+    // addDoc(collection(firestore, "contect"), {
+    //   name:name,
+    //   number:number,
+    //   email:email,
+    //   message:message
+    // })
+    //   .then(() => console.log("success"))
+    //   .catch((error) => console.log(error));
     toast.success("data added successfully");
     setName("");
     setNumber("");
     setEmail("");
     setMessage("");
   }
-
   return (
     <div className="contect">
       <ToastContainer />
@@ -128,5 +125,4 @@ const Contect = () => {
     </div>
   );
 };
-
 export default Contect;
