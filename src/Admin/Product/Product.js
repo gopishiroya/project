@@ -58,14 +58,12 @@ const Product = () => {
     getDownloadURL(starsRef)
       .then((iurl) => {
         setUrl(iurl);
-        console.log(url);
       })
       .catch((error) => console.log(error));
   }, [pic]);
+  // console.log(url);
 
-  async function handleAddProducts(e) {
-    e.preventDefault();
-
+  async function handleAddProducts() {
     const imageRef = ref(storage, `uploads/images/${pic.name}`);
     const uploadResult = await uploadBytes(imageRef, pic);
 
@@ -93,8 +91,8 @@ const Product = () => {
     <>
       <div>
         <Header />
+        <ToastContainer />
       </div>
-      <ToastContainer />
       <div className="productform">
         <Form className="form1">
           <Typography.Title className="formtitle">

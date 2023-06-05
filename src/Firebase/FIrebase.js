@@ -15,6 +15,12 @@ const firebaseConfig = {
   storageBucket: "food-85eed.appspot.com",
   messagingSenderId: "230561124659",
   appId: "1:230561124659:web:8d0277cc5de559ef0fee46",
+  // apiKey: "AIzaSyB_sggQ4voh1A8ci7ZULMzlNvHKVnINDFI",
+  // authDomain: "order-944c3.firebaseapp.com",
+  // projectId: "order-944c3",
+  // storageBucket: "order-944c3.appspot.com",
+  // messagingSenderId: "398817238399",
+  // appId: "1:398817238399:web:4b8d63484dcd6af23c4e4a"
 };
 export const app = initializeApp(firebaseConfig);
 export const firestore = getFirestore(app);
