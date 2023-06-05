@@ -22,6 +22,7 @@ const firebaseConfig = {
   storageBucket: "project-36842.appspot.com",
   messagingSenderId: "533557296954",
   appId: "1:533557296954:web:9cd82673cae968370ada03"
+
 };
 export const app = initializeApp(firebaseConfig);
 export const firestore = getFirestore(app);

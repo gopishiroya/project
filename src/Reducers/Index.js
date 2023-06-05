@@ -1,30 +1,20 @@
 import * as types from "../Action/ActionTypes";
 
 const initialState = {
-  loading: false,
-  error: null,
-  data: [],
+  contect: [],
 };
 
 const userReducer = (state = initialState, action) => {
-  console.log(action)
   switch (action.type) {
-    case types.CONTECT_PUT_DATA_START:
-      return {
-        ...state,
-        loading: true,
-      };
     case types.CONTECT_PUT_DATA_SUCCESS:
       return {
         ...state,
-        loading: false,
-        data: action.payload
+        contect: action.payload,
       };
-    case types.CONTECT_PUT_DATA_FAIL:
+    case types.CONTECT_GET_DATA_SUCCESS:
       return {
         ...state,
-        loading: false,
-        error: action.payload,
+        contect: action.payload,
       };
     default:
       return state;

@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-const UpdateProduct = (props) => {
+const UpdateProduct = () => {
   const [preview, setPreview] = useState(false);
   const [products, setProducts] = useState("");
   const [pic, setPic] = useState("");

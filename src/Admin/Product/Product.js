@@ -23,7 +23,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { firestore, storage } from "../../Firebase/FIrebase";
-import { getDownloadURL,  ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
 const { Meta } = Card;
 
 const Product = () => {
@@ -38,15 +38,6 @@ const Product = () => {
   useEffect(() => {
     getDocuments();
   }, [pname, price, category, pic]);
-  
-  useEffect(() => {
-    const starsRef = ref(storage, `images/${pic.name}`);
-    getDownloadURL(starsRef)
-      .then((iurl) => {
-        setUrl(iurl);
-      })
-      .catch((error) => console.log(error));
-  }, [pic]);
 
   const getData = collection(firestore, "products");
   const getDocuments = async () => {
@@ -58,20 +49,23 @@ const Product = () => {
     name: "file",
     beforeUpload: (file) => {
       setPic(file);
-      return;
+      return false;
     },
   };
 
-  
+  useEffect(() => {
+    const starsRef = ref(storage, `uploads/images/${pic.name}`);
+    getDownloadURL(starsRef)
+      .then((iurl) => {
+        setUrl(iurl);
+      })
+      .catch((error) => console.log(error));
+  }, [pic]);
+  // console.log(url);
 
-  async function HandleAddProducts(e) {
-
-    e.preventDefault();
-
-    
-
-    const imageRef = ref(storage, `images/${pic.name}`);
-     uploadBytes(imageRef, pic);
+  async function handleAddProducts() {
+    const imageRef = ref(storage, `uploads/images/${pic.name}`);
+    const uploadResult = await uploadBytes(imageRef, pic);
 
     addDoc(collection(firestore, "products"), {
       name: pname,
@@ -97,8 +91,8 @@ const Product = () => {
     <>
       <div>
         <Header />
+        <ToastContainer />
       </div>
-      <ToastContainer />
       <div className="productform">
         <Form className="form1">
           <Typography.Title className="formtitle">
@@ -157,7 +151,7 @@ const Product = () => {
           <Button
             htmlType="submit"
             className="productbtn"
-            onClick={HandleAddProducts}
+            onClick={handleAddProducts}
           >
             Add Products
           </Button>
@@ -166,7 +160,6 @@ const Product = () => {
       <div className="product">
         <div className="container">
           {products.map((products, id) => {
-           
             return (
               <Card className="dcard" key={id}>
                 <Image

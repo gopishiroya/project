@@ -16,9 +16,12 @@ import {
   addDoc,
   collection,
   deleteDoc,
+  deleteField,
   doc,
   getDoc,
   getDocs,
+  setDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { toast } from "react-toastify";
 
@@ -88,18 +91,18 @@ const Checkout = () => {
       .then(() => console.log("success"))
       .catch((error) => console.log(error));
 
-// const docRef = doc(collection(firestore, "contect"));
-// deleteDoc(docRef)
-// .then(() => {
-//     console.log("Entire Document has been deleted successfully.")
-// })
-// .catch(error => {
-//     console.log(error);
-// })
-
-   
-  // await deleteDoc(doc(firestore, "cart "+uid,"DC"));
-    toast.success("order successfully");  
+    toast.success("order successfully");
+    // collection(firestore, "cart " + uid).get()
+    //   .then((querySnapshot) => {
+    //     querySnapshot.forEach((doc) => {
+    //       // doc.ref.delete();
+    //       console.log(doc);
+    //     });
+    //   })
+    //   .catch(() => console.log("error"));
+    // deleteDoc(doc(firestore, "cart " + uid))
+    //   .then(() => console.log("success"))
+    //   .catch(() => console.log("error"));
   }
 
   return (
