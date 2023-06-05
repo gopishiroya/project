@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "./Order.scss";
 import Header from "../Header/Header";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Typography,Card, Button } from "antd";
 import { Link } from "react-router-dom";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs } from "firebase/firestore";
 import { firestore } from "../../Firebase/FIrebase";
 
 const Orders = () => {
@@ -20,14 +21,19 @@ const Orders = () => {
       };
       getDocuments();
 
+      async function handleDelete(order) {
+        await deleteDoc(doc(firestore, "order", order.id));
+        toast.success("products delete successfully");
+      }
+
   return (
     <div className="order">
       <div>
         <Header />
       </div>
       
-      <div className="dishes">
-        <Typography.Title className="dtitle">LATEST DISHES</Typography.Title>
+      <div className="title">
+        <Typography.Title className="dtitle">Placed Orders</Typography.Title>
       </div>
       <div className="main">
       {order.map((order, id) => {
@@ -40,7 +46,7 @@ const Orders = () => {
                 <Typography.Paragraph className="name">Address : {order.address}</Typography.Paragraph>
                 <Typography.Paragraph className="name">Total amount : {order.total}</Typography.Paragraph>
                 <Typography.Paragraph className="name">Date : {order.date}</Typography.Paragraph>
-                <Button>Delete</Button>
+                <Button className="delete" onClick={() => handleDelete(order)}>Delete</Button>
               </Card>
             );
           })}

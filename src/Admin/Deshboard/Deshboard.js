@@ -9,6 +9,7 @@ import { firestore } from "../../Firebase/FIrebase";
 const { Meta } = Card;
 
 const Deshboard = () => {
+<<<<<<< HEAD
   const [user, setuser] = useState([]);
   const [message, setmessage] = useState([]);
   const [product, setproduct] = useState([]);
@@ -39,6 +40,46 @@ const Deshboard = () => {
     const snapshot = await getCountFromServer(coll);
     setproduct(snapshot.data().count);
   }
+=======
+  const [user,setuser]=useState([])
+  const [message,setmessage]=useState([])
+  const [product,setproduct]=useState([])
+  const [order,setorder]=useState([])
+   
+  useEffect(()=>{
+    messagecount()
+  })
+  useEffect(()=>{
+    ordercount()
+  })
+   
+  useEffect(()=>{
+    usercount()
+  })
+  useEffect(()=>{
+    productcount()
+  })
+async function messagecount(){
+  const coll = collection(firestore, "contect");
+const snapshot =await getCountFromServer(coll);
+setmessage( snapshot.data().count);
+}
+async function usercount(){
+  const coll = collection(firestore, "user");
+const snapshot =await getCountFromServer(coll);
+setuser( snapshot.data().count);
+}
+async function productcount(){
+  const coll = collection(firestore, "products");
+const snapshot =await getCountFromServer(coll);
+setproduct( snapshot.data().count);
+}
+async function ordercount(){
+  const coll = collection(firestore, "order");
+const snapshot =await getCountFromServer(coll);
+setorder( snapshot.data().count);
+}
+>>>>>>> 55ac95e789a12b7703d30b790fa977468e6ab99a
   return (
     <>
       <div>
@@ -68,12 +109,17 @@ const Deshboard = () => {
             </Card>
             <Card className="card">
               <Meta className="meta" title="Total Orders" />
+<<<<<<< HEAD
               <Typography.Paragraph className="Paragraph">
                 -
               </Typography.Paragraph>
               <Link to="/orders" className="link">
                 See Orders
               </Link>
+=======
+              <Typography.Paragraph className="Paragraph">{order}</Typography.Paragraph>
+              <Link to="/orders" className="link">See Orders</Link>
+>>>>>>> 55ac95e789a12b7703d30b790fa977468e6ab99a
             </Card>
             <Card className="card">
               <Meta className="meta" title="Total Admins" />
@@ -102,6 +148,7 @@ const Deshboard = () => {
                 See Messages
               </Link>
             </Card>
+<<<<<<< HEAD
             <Card className="card">
               <Meta className="meta" title="Pending Orders" />
               <Typography.Paragraph className="Paragraph">
@@ -116,6 +163,8 @@ const Deshboard = () => {
               </Typography.Paragraph>
               <Link className="link">See Orders</Link>
             </Card>
+=======
+>>>>>>> 55ac95e789a12b7703d30b790fa977468e6ab99a
           </div>
         </div>
       </div>

@@ -67,7 +67,11 @@ const Cart = () => {
           {cart.map((cart, id) => {
             return (
               <Card className="dcard" key={id}>
-                <Image src={cart.imageURL} className="dimage" preview={preview}></Image>
+                <Image
+                  src={cart.imageURL}
+                  className="dimage"
+                  preview={preview}
+                ></Image>
                 <Meta className="meta" description={cart.name} />
                 <div className="row">
                   <Typography.Title className="price">

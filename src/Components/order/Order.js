@@ -35,7 +35,7 @@ const Order = () => {
         </Link>
       </div>
       <div className="dishes">
-        <Typography.Title className="dtitle">LATEST DISHES</Typography.Title>
+        <Typography.Title className="dtitle">Your Orders</Typography.Title>
       </div>
       <div className="main">
       {order.map((order, id) => {

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import "./Header.scss";
 import {
   SearchOutlined,
@@ -87,13 +87,13 @@ const Header = (props) => {
           )}
 
           <div className="cart">
-            <Link to="/cart">
-              <Badge count={props.count} size="large" className="notification">
-                <ShoppingCartOutlined className="icon2" />
-              </Badge>
-            </Link>
-          </div>
-          <SearchOutlined className="icon3" />
+            <Link to="/cart"> 
+            <Badge count={props.count}  size="large" className="notification">
+              <ShoppingCartOutlined className="icon2" />
+            </Badge></Link>
+          </div>   
+          {/* <SearchOutlined className="icon3" /> */}
+            
         </div>
       </div>
     </>
