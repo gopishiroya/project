@@ -47,6 +47,7 @@ const Checkout = () => {
       }
     });
   }, []);
+  
 
   function grandtotal() {
     let x = 0;
@@ -86,8 +87,19 @@ const Checkout = () => {
     })
       .then(() => console.log("success"))
       .catch((error) => console.log(error));
-    toast.success("order successfully");
-    await deleteDoc(doc(firestore, "cart " + uid));
+
+// const docRef = doc(collection(firestore, "contect"));
+// deleteDoc(docRef)
+// .then(() => {
+//     console.log("Entire Document has been deleted successfully.")
+// })
+// .catch(error => {
+//     console.log(error);
+// })
+
+   
+  // await deleteDoc(doc(firestore, "cart "+uid,"DC"));
+    toast.success("order successfully");  
   }
 
   return (

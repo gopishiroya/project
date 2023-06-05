@@ -8,31 +8,43 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../Firebase/FIrebase";
+import { auth, firestore } from "../../Firebase/FIrebase";
+import { addDoc, collection } from "firebase/firestore";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [uid,setuid]=useState(null)
-
   const navigate = useNavigate();
 
   function handleLogin(e) {
-    e.preventDefault();
+    // if(email==='admin' && password===password){
+    //   addDoc(collection(firestore, "admin"), {
+    //     email: email,
+    //     password: password,
+    //   })
+    //     .then(() => console.log("success"))
+    //     .catch((error) => console.log(error));
+    //   navigate("/deshboard")
+    // }
+    // else{
     signInWithEmailAndPassword(auth, email, password)
     .then((user) => console.log(user))
     .catch((error) => console.log(error.message));
     setEmail("");
     setPassword("");
     navigate("/");
+    // }
+    
   }
 
   return (
     <div className="login">
       <div>
         <Header user={uid}/>
+        <ToastContainer />
       </div>
-      <ToastContainer />
+     
       <div className="form">
         <Form className="form1">
           <Typography.Title className="formtitle">LOGIN NOW</Typography.Title>

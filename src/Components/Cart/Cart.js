@@ -48,9 +48,9 @@ const Cart = () => {
   }
   return (
     <div className="cart">
-      <ToastContainer />
       <div>
         <Header user={uid} />
+        <ToastContainer />
       </div>
       <div className="container1">
         <Typography.Title className="atitle">Shopping Cart</Typography.Title>

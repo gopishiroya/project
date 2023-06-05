@@ -23,7 +23,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { firestore, storage } from "../../Firebase/FIrebase";
-import { getDownloadURL, listAll, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL,  ref, uploadBytes } from "firebase/storage";
 const { Meta } = Card;
 
 const Product = () => {
@@ -38,6 +38,15 @@ const Product = () => {
   useEffect(() => {
     getDocuments();
   }, [pname, price, category, pic]);
+  
+  useEffect(() => {
+    const starsRef = ref(storage, `images/${pic.name}`);
+    getDownloadURL(starsRef)
+      .then((iurl) => {
+        setUrl(iurl);
+      })
+      .catch((error) => console.log(error));
+  }, [pic]);
 
   const getData = collection(firestore, "products");
   const getDocuments = async () => {
@@ -49,25 +58,20 @@ const Product = () => {
     name: "file",
     beforeUpload: (file) => {
       setPic(file);
-      return false;
+      return;
     },
   };
 
-  useEffect(() => {
-    const starsRef = ref(storage, `uploads/images/${pic.name}`);
-    getDownloadURL(starsRef)
-      .then((iurl) => {
-        setUrl(iurl);
-        console.log(url);
-      })
-      .catch((error) => console.log(error));
-  }, [pic]);
+  
 
-  async function handleAddProducts(e) {
+  async function HandleAddProducts(e) {
+
     e.preventDefault();
 
-    const imageRef = ref(storage, `uploads/images/${pic.name}`);
-    const uploadResult = await uploadBytes(imageRef, pic);
+    
+
+    const imageRef = ref(storage, `images/${pic.name}`);
+     uploadBytes(imageRef, pic);
 
     addDoc(collection(firestore, "products"), {
       name: pname,
@@ -153,7 +157,7 @@ const Product = () => {
           <Button
             htmlType="submit"
             className="productbtn"
-            onClick={handleAddProducts}
+            onClick={HandleAddProducts}
           >
             Add Products
           </Button>
@@ -162,6 +166,7 @@ const Product = () => {
       <div className="product">
         <div className="container">
           {products.map((products, id) => {
+           
             return (
               <Card className="dcard" key={id}>
                 <Image
